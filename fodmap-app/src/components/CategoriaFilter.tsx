@@ -2,8 +2,23 @@ import React from 'react';
 import '../styles/App.css'
 import '../styles/legendStyle.css'
 
-export const CategoriaFilter = ({ setSelectedGroup }) => {
-    const handleGroupChange = (event) => {
+/*
+CategoriaFilterProps es una interfaz que describe las props que CategoriaFilter espera recibir. 
+setSelectedGroup es una función que toma un string y no devuelve nada (void).
+*/ 
+
+interface CategoriaFilterProps {
+    setSelectedGroup: React.Dispatch<React.SetStateAction<string>>;
+}
+
+// (event: React.ChangeEvent<HTMLSelectElement>)
+
+/** 
+ * React.ChangeEvent<HTMLSelectElement> indica que event es un evento de cambio en un elemento <select> HTML. 
+ * event.target.value es de tipo string, que es lo que setSelectedGroup espera recibir.
+*/
+export const CategoriaFilter:React.FC<CategoriaFilterProps> = ({ setSelectedGroup }) => {
+    const handleGroupChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedGroup(event.target.value);
     };
 
