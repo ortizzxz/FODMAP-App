@@ -7,32 +7,55 @@ import { useEffect } from 'react';
 import { FoodBuscador } from './FoodBuscador';
 import { GrupoFilter } from './GrupoFilter';
 import { CategoriaFilter } from './CategoriaFilter';
+import React from 'react';
 
-export const ProductApp = () => {
+export const ProductApp: React.FC = () => {
 
-    const [alimentos, setAlimentos] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedGroup, setSelectedGroup] = useState('');
+                                                       /* Interface */ 
 
-    const getFood = async () => {
+    interface Alimento {
+        nombre: string;
+        grupo: string;
+        indice: string;
+    }
+
+    interface ApiResponse {
+        _embedded: {
+            alimentoes: Alimento[];
+        };
+    }
+
+                                                        /*  CONST   */
+
+    const [alimentos, setAlimentos] = useState<Alimento[]>([]); // from jsx to tsx useState<Alimento[]> 
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [selectedGroup, setSelectedGroup] = useState<string>('');
+
+    
+    const getFood = async (): Promise<void> => {
+
         const result = await findAll();
 
-        console.log(result.data._embedded.alimentoes); // Verifica la estructura de los datos
-        setAlimentos(result.data._embedded.alimentoes); // nombre de la tabla, no de la entidad.
+        if (result && result.data._embedded) {
+            
+            console.log(result.data._embedded.alimentoes); // Verifica la estructura de los datos
+            setAlimentos(result.data._embedded.alimentoes); // nombre de la tabla, no de la entidad.
+        }
+
+    }
+    
+    const normalizeString = (str: string) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
+    
+    const filteredAlimentos = alimentos.filter(alimento =>
+    normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
+        (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLocaleLowerCase())
+    );
 
     useEffect(() => {
         getFood();
     }, []);
-
-    const normalizeString = (str) => {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    };
-
-    const filteredAlimentos = alimentos.filter(alimento =>
-        normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
-        (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLocaleLowerCase())
-    );
 
     return (
         <>

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/App.css'
-import '../styles/legendStyle.css'
+import '../styles/legendStyle.css' 
 
 /*
 CategoriaFilterProps es una interfaz que describe las props que CategoriaFilter espera recibir. 

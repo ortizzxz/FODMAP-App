@@ -2,8 +2,13 @@ import React from 'react';
 import '../styles/App.css'
 import '../styles/legendStyle.css'
 
-export const GrupoFilter = ({ setSelectedGroup }) => {
-    const handleGroupChange = (event) => {
+interface GrupoFilterProps {
+    setSelectedGroup: (term: string) => void;
+};
+
+export const GrupoFilter:React.FC<GrupoFilterProps> = ({ setSelectedGroup }) => {
+
+    const handleGroupChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedGroup(event.target.value);
     };
 
