@@ -11,6 +11,13 @@ interface Alimento {
     indice: string;
 };
 
+interface EmbeddedAlimento {
+    _embedded: {
+        alimentoes: Alimento[];
+    };
+}
+
+
 // tipiado para especificar que la funcion retorna null 
     // (): null 
 
@@ -19,10 +26,10 @@ export const listProduct = (): null => {
 };
     
 // tipiado para especificar que la funcion retorna una promesa de un axio response de un alimento o nulo  
-export const findAll = async (): Promise< AxiosResponse<Alimento[]> | null > => { 
+export const findAll = async (): Promise< AxiosResponse<EmbeddedAlimento> | null > => { 
     
     try {
-        const response = await axios.get(URL);
+        const response = await axios.get<EmbeddedAlimento>(URL);
         return response;    
     } catch (error) {
         console.log(error);
