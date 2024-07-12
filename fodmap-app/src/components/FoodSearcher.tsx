@@ -1,6 +1,4 @@
 import { FoodDetails } from "./FoodDetails"
-import '../styles/App.css'
-import '../styles/legendStyle.css'
 import React from "react";
 
 interface Alimento {

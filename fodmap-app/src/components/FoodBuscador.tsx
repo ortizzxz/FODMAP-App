@@ -1,6 +1,4 @@
 import React from 'react';
-import '../styles/App.css'
-import '../styles/legendStyle.css'
 
 // interfaz para las props del componente
 interface FoodBuscadorProps {
@@ -12,11 +10,13 @@ interface FoodBuscadorProps {
 // tipiamos la const foodbuscador 
 export const FoodBuscador: React.FC<FoodBuscadorProps>  = ({ setSearchTerm }) => {
     return (
-        <input
-            type="text"
+        <div className='flex justify-center items-center'>
+            <input
+            className=' w-2/5 rounded-md mb-4 h-8 bg-white border-black border-1 text-center text-lg'
+            type="text" 
             placeholder="Buscar alimento..."
-            id="searchBar"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
-        />
+            />
+        </div>
     );
 };

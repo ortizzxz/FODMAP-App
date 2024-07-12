@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { findAll } from '../services/foodService';
-import '../styles/App.css'
-import '../styles/legendStyle.css'
 import { FoodSearcher } from './FoodSearcher'
 import { useEffect } from 'react';
 import { FoodBuscador } from './FoodBuscador';
@@ -59,37 +57,41 @@ export const ProductApp: React.FC = () => {
 
     return (
         <>
-            <div className='agrupacion'>
+        <div className="min-h-screen flex bg-gray-50 font-sans">
 
-                <h1>Filtrar búsqueda</h1>
+        <div className="mt-16 ml-6 mr-8 mb-16 w-1/5  border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6">
+
+
+                <h1 className='text-2xl text-center mb-2'>Filtrar búsqueda</h1>
 
                 <hr />
 
-                <h2>Grupo de alimento...</h2>
+                <h2 className='text-xl text-center p-2'>Grupo de alimento</h2>
                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
 
                 <hr />
 
-                <h2>Categoría...</h2>
+                <h2 className='text-xl text-center p-2'>Categoría</h2>
                 <CategoriaFilter setSelectedGroup={setSelectedGroup} />
 
                 <hr />
             </div>
 
-            <div className='container'>
+            <div className="mt-16 ml-6 mr-8 mb-16 w-4/6 border-2 border-gray-100 rounded-lg shadow-2xl bg-white
+                            p-6">
                 <div>
-                    <h1>Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className='text-2xl text-center pb-2' >Búsqueda de Alimentos FODMAP</h1>
                 </div>
 
                 <div>
                     <FoodBuscador setSearchTerm={setSearchTerm} />
                 </div>
 
-                <div className='legend'>
+                <div>
                     <FoodSearcher alimento={filteredAlimentos} />
                 </div>
             </div>
-
+        </div>
         </>
     );
 

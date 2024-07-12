@@ -1,6 +1,4 @@
 import React from 'react';
-import '../styles/App.css'
-import '../styles/legendStyle.css' 
 
 /*
 CategoriaFilterProps es una interfaz que describe las props que CategoriaFilter espera recibir. 
@@ -23,8 +21,9 @@ export const CategoriaFilter:React.FC<CategoriaFilterProps> = ({ setSelectedGrou
     };
 
     return (
-        <div className='grupoFiltro'>
-            <select onChange={handleGroupChange}>
+        <div >
+            <select className='w-full rounded-lg mb-4 h-8 bg-white border-black border-1 text-center text-lg'
+             onChange={handleGroupChange}>
                 <option value="">Todas las categorías</option>
                 <option value="frutas">Frutas</option>
                 <option value="legumbres">Legumbres</option>
