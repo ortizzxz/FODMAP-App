@@ -1,6 +1,4 @@
 import React from 'react';
-import '../styles/App.css'
-import '../styles/legendStyle.css'
 
 // interfaz para las props del componente
 interface FoodBuscadorProps {
