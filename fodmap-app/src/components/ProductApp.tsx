@@ -66,12 +66,12 @@ export const ProductApp: React.FC = () => {
 
                 <hr />
 
-                <h2>Grupo de alimento...</h2>
+                <h2 className='text-xl text-center p-2'>Grupo de alimento</h2>
                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
 
                 <hr />
 
-                <h2>Categoría...</h2>
+                <h2 className='text-xl text-center p-2'>Categoría</h2>
                 <CategoriaFilter setSelectedGroup={setSelectedGroup} />
 
                 <hr />
