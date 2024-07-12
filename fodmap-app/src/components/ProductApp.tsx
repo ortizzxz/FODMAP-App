@@ -77,9 +77,10 @@ export const ProductApp: React.FC = () => {
                 <hr />
             </div>
 
-            <div className="mt-16 ml-6 mr-8 mb-16 w-4/6 border-2 border-gray-100 rounded-lg shadow-2xl bg-white">
+            <div className="mt-16 ml-6 mr-8 mb-16 w-4/6 border-2 border-gray-100 rounded-lg shadow-2xl bg-white
+                            p-6">
                 <div>
-                    <h1>Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className='text-2xl text-center pb-2' >Búsqueda de Alimentos FODMAP</h1>
                 </div>
 
                 <div>
