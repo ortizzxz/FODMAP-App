@@ -1,9 +1,7 @@
-import { FoodDetails } from "./FoodDetails"
+import { FoodDetails } from "./FoodDetails";
 import React from "react";
 import classNames from "classnames";
-
-import '../styles/scrollbarCustom.css'
-
+import '../styles/scrollbarCustom.css';
 
 interface Alimento {
     nombre: string;
@@ -11,25 +9,20 @@ interface Alimento {
     indice: string;
 }
 
-interface FoodSearcherProps{
+interface FoodSearcherProps {
     alimento: Alimento[];
 }
 
 export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
-
     return (
-        <div  className={classNames('legend', 'overflow-auto', 'max-h-96')}>
-            {alimento.map(a => {
-                
-                return <div className="inline-flex  min-h-32 max-h-32">
-                    
-                    <FoodDetails alimento={a} key={a.nombre}/>
-                
-                </div>
-            })}
+        <div className="container mx-auto p-4">
+            <div className={classNames('legend', 'grid', 'grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-3', 'gap-2', 'overflow-auto', 'max-h-96', 'scrollbar-custom')}>
+                {alimento.map(a => (
+                    <div key={a.nombre} className="flex justify-center">
+                        <FoodDetails alimento={a} />
+                    </div>
+                ))}
+            </div>
         </div>
-    )
-
-}   
-
-
+    );
+};
