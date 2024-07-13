@@ -21,7 +21,7 @@ export const CategoriaFilter:React.FC<CategoriaFilterProps> = ({ setSelectedGrou
     };
 
     return (
-        <div >
+        <div className='max-h-96 min-h-96 overflow-x-hidden'>
             <select className='w-full rounded-lg mb-4 h-8 bg-white border-black border-1 text-center text-lg'
              onChange={handleGroupChange}>
                 <option value="">Todas las categorías</option>
