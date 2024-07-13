@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { findAll } from '../services/foodService';
-import { FoodSearcher } from './FoodSearcher';
+import { FoodSearcher } from './FoodContainer';
 import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoriaFilter';
@@ -46,19 +46,23 @@ export const ProductApp: React.FC = () => {
     return (
         <div className="h-screen flex flex-col sm:flex-row bg-gray-50 font-sans">
             {/* Sidebar */}
-            <div className="altura w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
+            <div className="lg:block hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
-                <hr />
+
+                <hr className='m-3 object-center w-34'/>
+
                 <h2 className="text-xl text-center p-2">Grupo de alimento</h2>
                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
-                <hr />
+
+                <hr className='m-3 object-center w-34'/>
+
                 <h2 className="text-xl text-center p-2">Categoría</h2>
                 <CategoriaFilter setSelectedGroup={setSelectedGroup} />
-                <hr />
+
             </div>
 
             {/* Main Content */}
-            <div className="altura w-4/6 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
+            <div className="h-screen lg:altura lg:w-4/6 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center pb-2">Búsqueda de Alimentos FODMAP</h1>
                 <div>
                     <FoodBuscador setSearchTerm={setSearchTerm} />

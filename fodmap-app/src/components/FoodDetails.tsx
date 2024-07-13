@@ -34,7 +34,7 @@ export const FoodDetails: React.FC<FoodBuscadorProps> = ({ alimento, className }
     };
 
     return (
-        <div className={classNames('product', getIndiceClass(alimento.indice), className, "border-1 rounded-md w-full sm:w-72 p-4 m-2 text-center shadow-xl")}>
+        <div className={classNames('product', getIndiceClass(alimento.indice), className, "border-1 rounded-md w-full p-4 m-2 text-center shadow-xl")}>
             <h3 className="text-xl">{alimento.nombre}</h3>
             <p className="text-md">Indice FODMAP: {capitalizeFirstLetter(alimento.indice)}</p>
         </div>
