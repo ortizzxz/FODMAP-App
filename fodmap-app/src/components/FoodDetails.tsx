@@ -1,30 +1,29 @@
 import React from "react";
+import classNames from "classnames";
+import '../styles/backgroundCustomColor.css'
 
-
-//interfaz Alimento
+// Interfaz Alimento
 interface Alimento {
     nombre: string;
     indice: string;
-};
+}
 
-// interfaz fooddetail 
+// Interfaz FoodBuscadorProps
 interface FoodBuscadorProps {
     alimento: Alimento;
-    className?: string; // -> esto para que no de error en FoodSearcher 
-};
+    className?: string; // -> esto para que no dé error en FoodSearcher
+}
 
 export const FoodDetails: React.FC<FoodBuscadorProps> = ({ alimento, className }) => {
 
-    const getIndiceClass = (indice: string): string => { // explicacion de porque (indice: type): type -> 
-                                                        // es un tipiado para que la funcion tome un string como argumento y que tambien
-                                                        // devuelva un string como salida
+    const getIndiceClass = (indice: string): string => {
         switch (indice.toLowerCase()) {
             case 'alto':
-                return 'high';
+                return 'high'; // Cambia este color según tus necesidades
             case 'medio':
-                return 'medium';
+                return 'medium'; // Cambia este color según tus necesidades
             case 'bajo':
-                return 'low';
+                return 'low'; // Cambia este color según tus necesidades
             default:
                 return '';
         }
@@ -33,14 +32,11 @@ export const FoodDetails: React.FC<FoodBuscadorProps> = ({ alimento, className }
     const capitalizeFirstLetter = (string: string): string => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
-    
 
     return (
-        <div className={`product ${getIndiceClass(alimento.indice)}`}>
-            <h3>{alimento.nombre}</h3>
-            <p>Indice FODMAP: {capitalizeFirstLetter(alimento.indice)}</p>
+        <div className={classNames('product', getIndiceClass(alimento.indice), className="border-2 border-black rounded-lg w-72 p-4 ml-6 mb-4 text-center shadow-xl")}>
+            <h3 className="text-xl">{alimento.nombre}</h3>
+            <p className="text-md ">Indice FODMAP: {capitalizeFirstLetter(alimento.indice)}</p>
         </div>
     );
 };
-
-// PROP TYPE 

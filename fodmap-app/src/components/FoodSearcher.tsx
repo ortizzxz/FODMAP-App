@@ -1,5 +1,9 @@
 import { FoodDetails } from "./FoodDetails"
 import React from "react";
+import classNames from "classnames";
+
+import '../styles/scrollbarCustom.css'
+
 
 interface Alimento {
     nombre: string;
@@ -14,12 +18,14 @@ interface FoodSearcherProps{
 export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
 
     return (
-        <div id="productGrid">
-            {alimento.map(a => { // AQUI SE MAPEA FOR EACH ALIMENTO
-                return <FoodDetails alimento={a} 
-                                    key={a.nombre} 
-                                    className={`product ${a.grupo}`} 
-                        />
+        <div  className={classNames('legend', 'overflow-auto', 'max-h-96')}>
+            {alimento.map(a => {
+                
+                return <div className="inline-flex  min-h-32 max-h-32">
+                    
+                    <FoodDetails alimento={a} key={a.nombre}/>
+                
+                </div>
             })}
         </div>
     )
