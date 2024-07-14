@@ -12,6 +12,7 @@ interface Alimento {
     nombre: string;
     grupo: string;
     indice: string;
+    tipo: string;
 }
 
 export const ProductApp: React.FC = () => {

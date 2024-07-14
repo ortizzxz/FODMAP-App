@@ -7,6 +7,7 @@ interface Alimento {
     nombre: string;
     grupo: string;
     indice: string;
+    tipo: string;
 }
 
 interface FoodSearcherProps {
