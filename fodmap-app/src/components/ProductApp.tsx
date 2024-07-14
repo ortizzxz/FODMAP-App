@@ -3,7 +3,7 @@ import { findAll } from '../services/foodService';
 import { FoodSearcher } from './FoodContainer';
 import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
-import { CategoriaFilter } from './CategoriaFilter';
+import { CategoriaFilter } from './CategoryFilter';
 import React from 'react';
 import '../styles/heightCustom.css'
 
