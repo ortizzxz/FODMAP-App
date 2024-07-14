@@ -7,6 +7,7 @@ import { CategoriaFilter } from './CategoriaFilter';
 import React from 'react';
 import '../styles/heightCustom.css'
 
+
 interface Alimento {
     nombre: string;
     grupo: string;
@@ -45,6 +46,7 @@ export const ProductApp: React.FC = () => {
 
     return (
         <div className="h-screen flex flex-col sm:flex-row bg-gray-50 font-sans">
+
             {/* Sidebar */}
             <div className="lg:block hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
@@ -71,6 +73,22 @@ export const ProductApp: React.FC = () => {
                     <FoodSearcher alimento={filteredAlimentos} />
                 </div>
             </div>
+
+            {/* RIGHT BAR KINDA FOOTER */}
+            <div className='hidden lg:block lg:w-1/12 mt-20 pr-6'>
+                <div>   
+                    <a href="https://www.aircury.es/" target='_blank'>
+                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" />
+                    </a>
+                </div>
+                
+                <div>   
+                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
+                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='mt-4'/>
+                    </a>
+                </div>
+            </div>
+
         </div>
     );
 };
