@@ -17,6 +17,11 @@ export const CategoriaFilter:React.FC<CategoriaFilterProps> = ({ setSelectedCate
                 <option value="">Todos las categorías</option>
                 <option value="legumbres hortalizas">Legumbres y Hortalizas</option>
                 <option value="frutas">Frutas</option>
+                <option value="cereales">Cereales</option>
+                <option value="lácteos">Lácteos</option>
+                <option value="pescados carnes huevos ultraprocesado">Pescados y Carnes</option>
+                <option value="edulcorantes">Edulcorantes</option>
+                <option value="frutos secos y aceites alcohol">Otros</option>
             </select>
         </div>
     );

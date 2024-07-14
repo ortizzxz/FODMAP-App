@@ -49,7 +49,6 @@ export const ProductApp: React.FC = () => {
 
     useEffect(() => {
         console.log('Categoria: ', selectedCategory);
-        console.log('Grupo: ', selectedCategory);
     }, [selectedGroup, selectedCategory, alimentos]);
 
     return (
