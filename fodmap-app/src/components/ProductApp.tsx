@@ -40,7 +40,7 @@ export const ProductApp: React.FC = () => {
     const filteredAlimentos = alimentos.filter(alimento =>
         normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
         (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
-        (selectedCategory === '' || alimento.tipo.toLowerCase() === selectedCategory.toLowerCase())
+        (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
     );
 
     useEffect(() => {
