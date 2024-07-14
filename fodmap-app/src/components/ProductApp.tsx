@@ -10,15 +10,16 @@ import '../styles/heightCustom.css'
 
 interface Alimento {
     nombre: string;
+    tipo: string;
     grupo: string;
     indice: string;
-    tipo: string;
 }
 
 export const ProductApp: React.FC = () => {
     const [alimentos, setAlimentos] = useState<Alimento[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedGroup, setSelectedGroup] = useState<string>('');
+    const [selectedCategory, setSelectedCategory] = useState<string>('');
 
     const getFood = async (): Promise<void> => {
         try {
@@ -38,12 +39,18 @@ export const ProductApp: React.FC = () => {
 
     const filteredAlimentos = alimentos.filter(alimento =>
         normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
-        (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLocaleLowerCase())
+        (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
+        (selectedCategory === '' || alimento.tipo.toLowerCase() === selectedCategory.toLowerCase())
     );
 
     useEffect(() => {
         getFood();
     }, []);
+
+    useEffect(() => {
+        console.log('Categoria: ', selectedCategory);
+        console.log('Grupo: ', selectedCategory);
+    }, [selectedGroup, selectedCategory, alimentos]);
 
     return (
         <div className="h-screen flex flex-col sm:flex-row bg-gray-50 font-sans">
@@ -60,8 +67,7 @@ export const ProductApp: React.FC = () => {
                 <hr className='m-3 object-center w-34'/>
 
                 <h2 className="text-xl text-center p-2">Categoría</h2>
-                <CategoriaFilter setSelectedGroup={setSelectedGroup} />
-
+                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
             </div>
 
             {/* Main Content */}
