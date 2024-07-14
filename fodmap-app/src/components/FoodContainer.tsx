@@ -5,9 +5,9 @@ import '../styles/scrollbarCustom.css';
 
 interface Alimento {
     nombre: string;
+    tipo: string;
     grupo: string;
     indice: string;
-    tipo: string;
 }
 
 interface FoodSearcherProps {
