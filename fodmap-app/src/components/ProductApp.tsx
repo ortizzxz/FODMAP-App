@@ -53,23 +53,6 @@ export const ProductApp: React.FC = () => {
 
     return (
         <div className="h-screen flex flex-col sm:flex-row bg-gray-50 font-sans">
-            
-            {/* Top bar for mobile screens */}
-            <div className='lg:hidden md:hidden h-1/6 w-full flex border-2 border-red-700'>
-
-                <div className=" ">   
-                    <a href="https://www.aircury.es/" target='_blank'>
-                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" />
-                    </a>
-                </div>
-                
-                <div className=''>   
-                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
-                        <img src="/imgs/GitHub_Logo.png" alt="GitHub"/>
-                    </a>
-                </div>
-
-            </div>
 
             {/* Sidebar */}
             <div className="lg:block hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
@@ -87,7 +70,7 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="lg:altura lg:w-4/6 lg:mt-16 md:mt-16 mt-2 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
+            <div className="lg:altura lg:w-4/6 lg:mt-16 md:mt-16 mt-1 ml-6 mr-8 mb-2 md:mb-16 lg:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center pb-2">Búsqueda de Alimentos FODMAP</h1>
                 <div>
                     <FoodBuscador setSearchTerm={setSearchTerm} />
@@ -110,6 +93,23 @@ export const ProductApp: React.FC = () => {
                         <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='mt-4'/>
                     </a>
                 </div>
+            </div>
+
+            {/* Bottom bar for mobile screens */}
+            <div className='lg:hidden md:hidden h-20 w-full flex '>
+
+                <div className="w-1/2">   
+                    <a href="https://www.aircury.es/" target='_blank'> 
+                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" className='w-3/6 h-full ml-10' />
+                    </a>
+                </div>
+                
+                <div  className='w-1/2 '>   
+                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
+                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='w-full'/>
+                    </a>
+                </div>
+
             </div>
 
         </div>
