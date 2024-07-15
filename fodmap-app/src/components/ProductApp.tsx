@@ -70,7 +70,7 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="lg:altura lg:w-4/6 lg:mt-16 md:mt-16 mt-1 ml-6 mr-8 mb-2 md:mb-16 lg:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
+            <div className="lg:altura altura-mobile lg:w-4/6 lg:mt-16 md:mt-16 mt-1 ml-6 mr-8 mb-2 md:mb-16 lg:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center pb-2">Búsqueda de Alimentos FODMAP</h1>
                 <div>
                     <FoodBuscador setSearchTerm={setSearchTerm} />
@@ -96,17 +96,19 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Bottom bar for mobile screens */}
-            <div className='lg:hidden md:hidden h-20 w-full flex '>
+            <div className='lg:hidden md:hidden h-12 w-full flex  justify-center items-center'>
 
-                <div className="w-1/2">   
+                <div className="flex justify-center items-center w-1/2 p-4">   
                     <a href="https://www.aircury.es/" target='_blank'> 
-                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" className='w-3/6 h-full ml-10' />
+                        <img src="" alt="Aircury LTD" 
+                        className='' />
                     </a>
                 </div>
                 
-                <div  className='w-1/2 '>   
+                <div  className="flex justify-center items-center w-1/2 p-4 h-full">   
                     <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
-                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='w-full'/>
+                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" 
+                        className='h-full'/>
                     </a>
                 </div>
 
