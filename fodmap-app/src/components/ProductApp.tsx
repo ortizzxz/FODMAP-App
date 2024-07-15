@@ -70,7 +70,7 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="lg:altura altura-mobile lg:w-4/6 lg:mt-16 md:mt-16 mt-1 ml-6 mr-8 mb-2 md:mb-16 lg:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
+            <div className="lg:altura altura-mobile lg:w-4/6 lg:mt-16 md:mt-16 sm:mt-2 ml-6 mr-8 mb-2 md:mb-16 lg:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center pb-2">Búsqueda de Alimentos FODMAP</h1>
                 <div>
                     <FoodBuscador setSearchTerm={setSearchTerm} />
