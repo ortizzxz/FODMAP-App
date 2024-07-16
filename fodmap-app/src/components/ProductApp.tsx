@@ -76,15 +76,22 @@ export const ProductApp: React.FC = () => {
                 <div className='mt-[10%]'>
                     <h1 className="text-3xl text-center pb-3 custom-text-dark">Búsqueda de Alimentos FODMAP</h1>
 
-                    <div className='ml-[35%] w-[30%] rounded-md custom-searchbar-background '>
+                    <div className='ml-[35%] w-[30%] rounded-md custom-searchbar-background'>
 
-                        <div className='flex p-1'>
-                            <div className='w-3/4 '>  
+                        <div className='flex p-1 '>
+
+                            <div className='w-3/4 flex'>  
                                 <FoodBuscador setSearchTerm={setSearchTerm}/>
                             </div>
-                            <button className='w-1/4 custom-text-light custom-border-light border-1'>
-                                Filtros
-                            </button>
+
+                            <button id='boton' className='w-1/4 custom-text-light custom-border-light block border-1'>Filtros</button>
+
+                        <div className='botonFiltro '>
+                                <div>
+                                    <h1>HOLA</h1>
+                                    <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                </div>
+                        </div>
                         </div>
 
                     </div>    

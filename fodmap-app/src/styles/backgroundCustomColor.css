@@ -34,3 +34,13 @@ input[type="text"]::-webkit-input-placeholder {
 input[type="text"]:valid {
     color: #ccf8f5;
 }
+
+
+.botonFiltro {
+    display: none;
+}
+  
+#boton:focus + .botonFiltro,
+#boton:focus-within + .botonFiltro {
+  display: block;
+}
