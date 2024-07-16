@@ -1,12 +1,36 @@
-.low {
-    background-color: #c1fd9e; /* Verde */
+.custom-background {
+    background-color: #ccf8f5;
 }
 
-.medium {
-    background-color: #fffd69; /* Amarillo */
+.custom-body-background {
+    background-color: #1c3c65;
 }
 
-.high {
-    background-color: #ff8282; /* Rojo */
+.custom-text-dark{
+    color: #1c3c65;
 }
 
+.custom-text-light{
+    color: #ccf8f5;
+}
+
+.custom-border{
+    border-color: #1c3c65;
+
+}
+
+.custom-border-light{
+    border-color: #ccf8f5;
+}
+
+.custom-searchbar-background{
+     background-color: #1c3c65;
+}
+
+input[type="text"]::-webkit-input-placeholder {
+    color: #ccf8f5;
+}
+
+input[type="text"]:valid {
+    color: #ccf8f5;
+}

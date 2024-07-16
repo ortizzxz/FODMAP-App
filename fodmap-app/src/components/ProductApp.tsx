@@ -6,6 +6,7 @@ import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
 import React from 'react';
 import '../styles/heightCustom.css'
+import '../styles/backgroundCustomColor.css'
 
 
 interface Alimento {
@@ -52,10 +53,10 @@ export const ProductApp: React.FC = () => {
     }, [selectedGroup, selectedCategory, alimentos]);
 
     return (
-        <div className="h-screen flex flex-col sm:flex-row bg-gray-50 font-sans">
+        <div className="h-screen flex flex-col sm:flex-row custom-body-background font-sans">
 
             {/* Sidebar */}
-            <div className="lg:block hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
+            <div className="hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
 
                 <hr className='m-3 object-center w-34'/>
@@ -70,18 +71,34 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content  h-[80%] */}
-            <div className="lg:altura sm:altura-mobile lg:w-4/6 lg:mt-16 md:mt-16 ml-6 mr-8 lg:mb-16 sm:mb-2 md:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
-                <h1 className="text-2xl text-center pb-2">Búsqueda de Alimentos FODMAP</h1>
-                <div>
-                    <FoodBuscador setSearchTerm={setSearchTerm} />
+            <div className="custom-background m-2 w-full flex-col">
+                
+                <div className='mt-[10%]'>
+                    <h1 className="text-3xl text-center pb-3 custom-text-dark">Búsqueda de Alimentos FODMAP</h1>
+
+                    <div className='ml-[35%] w-[30%] rounded-md custom-searchbar-background '>
+
+                        <div className='flex p-1'>
+                            <div className='w-3/4 '>  
+                                <FoodBuscador setSearchTerm={setSearchTerm}/>
+                            </div>
+                            <button className='w-1/4 custom-text-light custom-border-light border-1'>
+                                Filtros
+                            </button>
+                        </div>
+
+                    </div>    
+                    
                 </div>
-                <div>
+            
+                <div className='w-full '>
                     <FoodSearcher alimento={filteredAlimentos} />
                 </div>
+
             </div>
 
             {/* RIGHT BAR KINDA FOOTER */}
-            <div className='hidden lg:block lg:w-1/12 mt-20 pr-6'>
+            <div className='hidden lg:w-1/12 mt-20 pr-6'>
                 <div>   
                     <a href="https://www.aircury.es/" target='_blank'>
                         <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" />
