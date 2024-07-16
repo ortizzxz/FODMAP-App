@@ -55,8 +55,12 @@ export const ProductApp: React.FC = () => {
         setShowFilters(!showFilters);
     };
 
+    const hideFilters = () => {
+        setShowFilters(false);
+    };
+
     return (
-        <div className="h-screen flex flex-col sm:flex-row custom-body-background font-sans">
+        <div className="h-screen flex flex-col sm:flex-row  font-sans">
             {/* Sidebar */}
             <div className="hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
@@ -69,12 +73,12 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="custom-background m-2 w-full flex-col relative">
+            <div className="main-background m-2 rounded-xl w-full flex-col relative">
                 <div className='mt-[10%]'>
                     <h1 className="text-3xl text-center pb-3 custom-text-dark">Búsqueda de Alimentos FODMAP</h1>
                     <div className='relative ml-[35%] w-[30%] rounded-md custom-searchbar-background'>
                         <div className='flex p-1'>
-                            <div className='w-3/4 flex'>
+                            <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={setSearchTerm}/>
                             </div>
                             <button 
@@ -85,7 +89,7 @@ export const ProductApp: React.FC = () => {
                             </button>
                         </div>
                         {showFilters && (
-                            <div className="custom-border-light custom-body-background border-1 rounded absolute top-[65%] left-[47%] w-1/2 ml-2 mt-2 p-4 shadow-lg z-10">
+                            <div className="custom-border-light custom-body-background border-1 rounded absolute top-[65%] left-[47%] w-1/2 ml-2 mt-2 p-4 shadow-lg z-10 transition-transform duration-300 transfrom scale-100">
                                 <h2 className="text-xl mb-2 text-center custom-text">Grupo de alimento</h2>
                                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
                                 <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>

@@ -1,41 +1,64 @@
-.custom-background {
-    background-color: #ccf8f5;
+.main-text{
+    color: #007BFF;
 }
 
-    
-.custom-body-background {
-    background-color: #1c3c65;
+.secondary-text{
+    color: #66B2FF 
 }
 
-.custom-text{
-    color:#ccf8f5
+.third-text{ 
+    color: 0056B3;
 }
 
-.custom-text-dark{
-    color: #1c3c65;
+.main-background {
+    background-color: #F1F3F9;
 }
 
-.custom-text-light{
-    color: #ccf8f5;
+.blue-background{
+    background-color: #DDEFFF;
 }
 
-.custom-border{
-    border-color: #1c3c65;
-
+.blue-border{
+    border-color: #0056B3;
 }
 
-.custom-border-light{
-    border-color: #ccf8f5;
+.gray-border {
+    border-color: #6C757D;
 }
 
-.custom-searchbar-background{
-     background-color: #1c3c65;
-}
+/*
+Primario (Azul Principal)
 
-input[type="text"]::-webkit-input-placeholder {
-    color: #ccf8f5;
-}
+Hex: #007BFF
+RGB: 0, 123, 255
+Uso: Elementos principales como botones, enlaces, y encabezados.
 
-input[type="text"]:valid {
-    color: #ccf8f5;
-}
+Secundario (Azul Claro)
+Hex: #66B2FF
+RGB: 102, 178, 255
+Uso: Elementos secundarios, hover states, y componentes destacados.
+
+Terciario (Azul Oscuro)
+Hex: #0056B3
+RGB: 0, 86, 179
+Uso: Encabezados secundarios, texto en fondos claros, y bordes.
+
+Complementario (Gris Claro)
+Hex: #F1F3F5
+RGB: 241, 243, 245
+Uso: Fondos de página, secciones y componentes para proporcionar contraste.
+
+Acercamiento (Gris Medio)
+Hex: #6C757D
+RGB: 108, 117, 125
+Uso: Texto secundario, iconos y bordes.
+
+Acercamiento (Blanco Puro)
+Hex: #FFFFFF
+RGB: 255, 255, 255
+Uso: Texto en fondos oscuros, fondos de secciones claras.
+
+Acercamiento (Azul Suave)
+Hex: #DDEFFF
+RGB: 221, 239, 255
+Uso: Fondos de tarjetas, bloques de contenido y áreas destacadas.*/
