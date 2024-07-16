@@ -2,8 +2,13 @@
     background-color: #ccf8f5;
 }
 
+    
 .custom-body-background {
     background-color: #1c3c65;
+}
+
+.custom-text{
+    color:#ccf8f5
 }
 
 .custom-text-dark{
@@ -33,27 +38,4 @@ input[type="text"]::-webkit-input-placeholder {
 
 input[type="text"]:valid {
     color: #ccf8f5;
-}
-
-
-.botonFiltro {
-    display: none;
-}
-  
-#boton:focus + .botonFiltro,
-#boton:focus-within + .botonFiltro {
-  display: block;
-}
-
-.botonFiltro {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.botonFiltro.show {
-  display: block;
 }
