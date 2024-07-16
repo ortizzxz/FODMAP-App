@@ -21,6 +21,7 @@ export const ProductApp: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedGroup, setSelectedGroup] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('');
+    const [showFilters, setShowFilters] = useState<boolean>(false);
 
     const getFood = async (): Promise<void> => {
         try {
@@ -51,6 +52,10 @@ export const ProductApp: React.FC = () => {
     useEffect(() => {
         console.log('Categoria: ', selectedCategory);
     }, [selectedGroup, selectedCategory, alimentos]);
+
+    const toggleFilters = () => {
+        setShowFilters(!showFilters);
+    };
 
     return (
         <div className="h-screen flex flex-col sm:flex-row custom-body-background font-sans">
@@ -84,18 +89,23 @@ export const ProductApp: React.FC = () => {
                                 <FoodBuscador setSearchTerm={setSearchTerm}/>
                             </div>
 
-                            <button id='boton' className='w-1/4 custom-text-light custom-border-light block border-1'>Filtros</button>
-
-                        <div className='botonFiltro '>
-                                <div>
-                                    <h1>HOLA</h1>
-                                    <GrupoFilter setSelectedGroup={setSelectedGroup} />
-                                </div>
+                            <button 
+                                id='boton' 
+                                className='w-1/4 custom-text-light custom-border-light block border-1' 
+                                onClick={toggleFilters}>
+                                    Filtros
+                            </button>
                         </div>
-                        </div>
+                        {showFilters && (
+                            <div className='mt-4 p-4 bg-white border rounded shadow-lg'>
+                                <h2 className='text-xl mb-2'>Grupo de Alimentos</h2>
+                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                <h2 className='text-xl mt-4 mb-2'>Categoría</h2>
+                                <CategoriaFilter setSelectedCategory={setSelectedCategory}/>
+                            </div>
+                        )}
 
                     </div>    
-                    
                 </div>
             
                 <div className='w-full '>
