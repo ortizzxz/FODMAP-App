@@ -1,22 +1,12 @@
-/* Custom scrollbar styles */
-.legend::-webkit-scrollbar {
-    width: 12px; /* Ancho de la barra de desplazamiento vertical */
+.scroll-container::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra de desplazamiento */
 }
-
-.legend::-webkit-scrollbar-track {
-    background: #ffffff; /* Color del fondo de la barra de desplazamiento */
-    border-radius: 10px;
-}
-
-.legend::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color de la barra de desplazamiento */
-    border-radius: 10px;
-    border: 3px solid #f1f1f1; /* Espacio entre la barra y el track */
-}
-
-.legend::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Color de la barra de desplazamiento al pasar el mouse */
-}
-
-
-
+  
+  .scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 5px; /* Borde redondeado del pulgar */
+  }
+  
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #191616; /* Color de fondo de la barra de desplazamiento */
+    margin-top: 10px;
+  }

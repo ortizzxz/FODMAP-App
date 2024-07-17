@@ -20,6 +20,7 @@ export const ProductApp: React.FC = () => {
     const [selectedGroup, setSelectedGroup] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('');
     const [showFilters, setShowFilters] = useState<boolean>(false);
+    const [hasResults, setHasResults] = useState<boolean>(false); 
 
     const getFood = async (): Promise<void> => {
         try {
@@ -36,19 +37,21 @@ export const ProductApp: React.FC = () => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
 
-    const filteredAlimentos = alimentos.filter(alimento =>
-        normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
-        (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
-        (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
-    );
+    const filteredAlimentos = searchTerm
+        ? alimentos.filter(alimento =>
+            normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
+            (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
+            (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
+        )
+        : [];
 
     useEffect(() => {
         getFood();
     }, []);
 
     useEffect(() => {
-        console.log('Categoria: ', selectedCategory);
-    }, [selectedGroup, selectedCategory, alimentos]);
+        setHasResults(filteredAlimentos.length > 0);
+    }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
 
     const toggleFilters = () => {
         setShowFilters(!showFilters);
@@ -72,9 +75,9 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="bg-main m-1 rounded-xl w-full flex-col relative" >
-                <div className='mt-[10%]'>
-                    <h1 className="text-3xl text-center pb-3 text-second">Búsqueda de Alimentos FODMAP</h1>
+            <div className="bg-main m-1 rounded-xl w-full flex-col relative">
+                <div >
+                    <h1 className="text-3xl text-center pb-3 text-second mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
                     
                     <div className='relative ml-[35%] w-[30%] rounded-md bg-third'>
                         <div className='flex p-1'>
@@ -89,7 +92,7 @@ export const ProductApp: React.FC = () => {
                             </button>
                         </div>
                         {showFilters && (
-                            <div className="custom-border-light custom-body-background border-1 rounded absolute top-[65%] left-[47%] w-1/2 ml-2 mt-2 p-4 shadow-lg z-10 transition-transform duration-300 transfrom scale-100">
+                            <div className="bg-third border-1 rounded absolute top-[-120%] left-[96%] w-1/2 ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
                                 <h2 className="text-xl mb-2 text-center custom-text">Grupo de alimento</h2>
                                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
                                 <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
@@ -98,9 +101,15 @@ export const ProductApp: React.FC = () => {
                         )}
                     </div>
                 </div>
-                <div className='w-full'>
-                    <FoodSearcher alimento={filteredAlimentos} />
+                <div className='w-full h-[55%]'>
+                    {hasResults ? ( 
+                        <FoodSearcher alimento={filteredAlimentos} />
+                    ) : (
+                        <h2 className='text-xl text-second text-center mt-[5%]'>¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...</h2>
+                    )}
                 </div>
+
+                
             </div>
 
             {/* RIGHT BAR KINDA FOOTER */}
