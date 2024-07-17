@@ -5,12 +5,16 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'cm-blue': '#2f3643',
-      'cm-white': '#f2eef0',
+      'main': '#191616',
+      'second': '#dbdfe5',
+      'third': '#a59e92',
     },
     extend: {
       fontFamily: {
         sans: ['Raleway', 'sans-serif'],
+      },
+      placeholderColor: {
+        'custom-placeholder': '#191616',
       },
     },
   },

@@ -5,7 +5,6 @@ import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
 import React from 'react';
-import '../styles/heightCustom.css';
 import '../styles/backgroundCustomColor.css';
 
 interface Alimento {
@@ -60,7 +59,7 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col sm:flex-row  font-sans">
+        <div className="h-screen bg-[gray] flex flex-col sm:flex-row font-sans">
             {/* Sidebar */}
             <div className="hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
                 <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
@@ -73,16 +72,17 @@ export const ProductApp: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="main-background m-2 rounded-xl w-full flex-col relative">
+            <div className="bg-main m-1 rounded-xl w-full flex-col relative" >
                 <div className='mt-[10%]'>
-                    <h1 className="text-3xl text-center pb-3 main-text">Búsqueda de Alimentos FODMAP</h1>
-                    <div className='relative ml-[35%] w-[30%] rounded-md custom-searchbar-background'>
+                    <h1 className="text-3xl text-center pb-3 text-second">Búsqueda de Alimentos FODMAP</h1>
+                    
+                    <div className='relative ml-[35%] w-[30%] rounded-md bg-third'>
                         <div className='flex p-1'>
                             <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={setSearchTerm}/>
                             </div>
                             <button 
-                                className='w-1/4 custom-text-light custom-border-light block border-1'
+                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main  focus:border-main focus-within::bg-[#a59e95] active:bg-[#af9987]'
                                 onClick={toggleFilters}
                             >
                                 Filtros
