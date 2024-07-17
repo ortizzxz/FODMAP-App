@@ -1,5 +1,5 @@
 .main-text{
-    color: #007BFF;
+    color: #264653;
 }
 
 .secondary-text{
@@ -7,7 +7,7 @@
 }
 
 .third-text{ 
-    color: 0056B3;
+    color: #0056B3;
 }
 
 .main-background {
@@ -29,27 +29,27 @@
 /*
 Primario (Azul Principal)
 
-Hex: #007BFF
+Hex: #264653
 RGB: 0, 123, 255
 Uso: Elementos principales como botones, enlaces, y encabezados.
 
 Secundario (Azul Claro)
-Hex: #66B2FF
+Hex: #2A9D8F
 RGB: 102, 178, 255
 Uso: Elementos secundarios, hover states, y componentes destacados.
 
 Terciario (Azul Oscuro)
-Hex: #0056B3
+Hex: #E9C46A
 RGB: 0, 86, 179
 Uso: Encabezados secundarios, texto en fondos claros, y bordes.
 
 Complementario (Gris Claro)
-Hex: #F1F3F5
+Hex: #F4F1DE
 RGB: 241, 243, 245
 Uso: Fondos de página, secciones y componentes para proporcionar contraste.
 
 Acercamiento (Gris Medio)
-Hex: #6C757D
+Hex: #8D99AE
 RGB: 108, 117, 125
 Uso: Texto secundario, iconos y bordes.
 

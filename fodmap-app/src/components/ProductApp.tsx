@@ -75,7 +75,7 @@ export const ProductApp: React.FC = () => {
             {/* Main Content */}
             <div className="main-background m-2 rounded-xl w-full flex-col relative">
                 <div className='mt-[10%]'>
-                    <h1 className="text-3xl text-center pb-3 custom-text-dark">Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className="text-3xl text-center pb-3 main-text">Búsqueda de Alimentos FODMAP</h1>
                     <div className='relative ml-[35%] w-[30%] rounded-md custom-searchbar-background'>
                         <div className='flex p-1'>
                             <div className='w-3/4 flex' onClick={hideFilters}>
