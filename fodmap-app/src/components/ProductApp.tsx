@@ -102,12 +102,13 @@ export const ProductApp: React.FC = () => {
                     )}
                 </div>
 
-                <footer>
-                    <a href="">
+                {/* FOOTER */}
+                <footer className="w-full bg-main text-second text-center py-4">
+                    <a href="" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
 
-                    <a href="">
+                    <a href="" className="mx-2 hover:text-third transition duration-300">
                         Aircury
                     </a>
                 </footer>
