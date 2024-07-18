@@ -1,12 +1,20 @@
-.low {
-    background-color: #c1fd9e; /* Verde */
-}
-
-.medium {
-    background-color: #fffd69; /* Amarillo */
-}
-
-.high {
-    background-color: #ff8282; /* Rojo */
-}
-
+/* scrollbarCustom.css */
+/* Estilos para la barra de desplazamiento */
+/* Estilos para Chrome, Safari, Edge y otros */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+  

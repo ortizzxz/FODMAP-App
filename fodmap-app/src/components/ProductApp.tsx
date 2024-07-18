@@ -5,8 +5,7 @@ import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
 import React from 'react';
-import '../styles/heightCustom.css'
-
+import '../styles/backgroundCustomColor.css';
 
 interface Alimento {
     nombre: string;
@@ -20,11 +19,12 @@ export const ProductApp: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedGroup, setSelectedGroup] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('');
+    const [showFilters, setShowFilters] = useState<boolean>(false);
+    const [hasResults, setHasResults] = useState<boolean>(false); 
 
     const getFood = async (): Promise<void> => {
         try {
             const result = await findAll();
-
             if (result && result.data._embedded) {
                 setAlimentos(result.data._embedded.alimentoes);
             }
@@ -37,80 +37,80 @@ export const ProductApp: React.FC = () => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
 
-    const filteredAlimentos = alimentos.filter(alimento =>
-        normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
-        (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
-        (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
-    );
+    const filteredAlimentos = searchTerm
+        ? alimentos.filter(alimento =>
+            normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
+            (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
+            (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
+        )
+        : [];
 
     useEffect(() => {
         getFood();
     }, []);
 
     useEffect(() => {
-        console.log('Categoria: ', selectedCategory);
-    }, [selectedGroup, selectedCategory, alimentos]);
+        setHasResults(filteredAlimentos.length > 0);
+    }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
+
+    const toggleFilters = () => {
+        setShowFilters(!showFilters);
+    };
+
+    const hideFilters = () => {
+        setShowFilters(false);
+    };
 
     return (
-        <div className="h-screen flex flex-col sm:flex-row bg-gray-50 font-sans">
+        <div className="h-screen bg-[#272222] flex flex-col font-sans">
 
-            {/* Sidebar */}
-            <div className="lg:block hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
-                <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
+            {/* Main Content */}
+            <div className="bg-main m-1 rounded-md flex flex-col flex-grow justify-between">
 
-                <hr className='m-3 object-center w-34'/>
-
-                <h2 className="text-xl text-center p-2">Grupo de alimento</h2>
-                <GrupoFilter setSelectedGroup={setSelectedGroup} />
-
-                <hr className='m-3 object-center w-34'/>
-
-                <h2 className="text-xl text-center p-2">Categoría</h2>
-                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-            </div>
-
-            {/* Main Content  h-[80%] */}
-            <div className="lg:altura sm:altura-mobile lg:w-4/6 lg:mt-16 md:mt-16 ml-6 mr-8 lg:mb-16 sm:mb-2 md:mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
-                <h1 className="text-2xl text-center pb-2">Búsqueda de Alimentos FODMAP</h1>
                 <div>
-                    <FoodBuscador setSearchTerm={setSearchTerm} />
+                    <h1 className="text-3xl text-center pb-3 text-second mt-[10%]">Búsqueda de Alimentos FODMAP</h1>
+                    
+                    <div className='relative ml-[35%] w-[30%] rounded-md bg-third'>
+                        <div className='flex p-1'>
+                            <div className='w-3/4 flex' onClick={hideFilters}>
+                                <FoodBuscador setSearchTerm={setSearchTerm}/>
+                            </div>
+                            <button 
+                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within::bg-[#a59e95] active:bg-[#af9987]'
+                                onClick={toggleFilters}
+                            >
+                                Filtros
+                            </button>
+                        </div>
+                        {showFilters && (
+                            <div className="bg-third border-1 rounded absolute top-[-120%] left-[96%] w-1/2 ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
+                                <h2 className="text-xl mb-2 text-center custom-text">Grupo de alimento</h2>
+                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
+                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                            </div>
+                        )}
+                    </div>
+                    
                 </div>
-                <div>
-                    <FoodSearcher alimento={filteredAlimentos} />
-                </div>
-            </div>
 
-            {/* RIGHT BAR KINDA FOOTER */}
-            <div className='hidden lg:block lg:w-1/12 mt-20 pr-6'>
-                <div>   
-                    <a href="https://www.aircury.es/" target='_blank'>
-                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" />
-                    </a>
+                <div className='w-full flex-grow overflow-auto'>
+                    {hasResults ? ( 
+                        <FoodSearcher alimento={filteredAlimentos} />
+                    ) : (
+                        <h2 className='text-xl text-second text-center mt-[5%]'>¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...</h2>
+                    )}
                 </div>
-                
-                <div>   
-                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
-                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='mt-4'/>
-                    </a>
-                </div>
-            </div>
 
-            {/* Bottom bar for mobile screens */}
-            <div className='lg:hidden md:hidden h-12 w-full flex  justify-center items-center'>
-
-                <div className="flex justify-center items-center w-1/2 p-4">   
-                    <a href="https://www.aircury.es/" target='_blank'> 
-                        <img src="" alt="Aircury LTD" 
-                        className='' />
+                {/* Footer */}
+                <footer className="w-full bg-main text-second text-center py-4 mt-auto">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
+                        GitHub
                     </a>
-                </div>
-                
-                <div  className="flex justify-center items-center w-1/2 p-4 h-full">   
-                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
-                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" 
-                        className='h-full'/>
+                    <a href="https://www.aircury.es" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
+                        Aircury
                     </a>
-                </div>
+                </footer>
 
             </div>
 

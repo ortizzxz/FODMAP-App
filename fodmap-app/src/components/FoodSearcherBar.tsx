@@ -10,11 +10,11 @@ interface FoodBuscadorProps {
 // tipiamos la const foodbuscador 
 export const FoodBuscador: React.FC<FoodBuscadorProps>  = ({ setSearchTerm }) => {
     return (
-        <div className='flex justify-center items-center'>
+        <div className='w-full pr-2 justify-center items-center'>
             <input
-            className='w-screen lg:w-2/5 rounded-md h-10 bg-white border-black border-1 p-2 text-lg'
+            className='w-full rounded-md h-14 bg-third p-2 text-lg placeholder-custom-placeholder'
             type="text" 
-            placeholder="Buscar alimento..."
+            placeholder="Buscar alimento..." 
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
             />
         </div>
