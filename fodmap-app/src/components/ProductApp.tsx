@@ -62,13 +62,13 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen bg-[#272222] flex flex-col font-sans">
+        <div className="h-full bg-[#272222] flex flex-col font-sans">
 
             {/* Main Content */}
-            <div className="bg-main m-1 rounded-md flex flex-col flex-grow justify-between">
+            <div className="bg-main m-1 mb-1 rounded-3xl flex flex-col flex-grow justify-between p-2 h-full">
 
                 <div>
-                    <h1 className="text-3xl text-center pb-3 text-second mt-[10%]">Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className="text-3xl text-center pb-3 text-second mt-10">Búsqueda de Alimentos FODMAP</h1>
                     
                     <div className='relative ml-[35%] w-[30%] rounded-md bg-third'>
                         <div className='flex p-1'>
@@ -107,7 +107,7 @@ export const ProductApp: React.FC = () => {
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
-                    <a href="https://www.aircury.es" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
+                    <a href="https://www.aircury.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         Aircury
                     </a>
                 </footer>

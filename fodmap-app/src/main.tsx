@@ -1,17 +1,12 @@
+// main.tsx o index.tsx (dependiendo de tu configuración)
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import Sidebar from './components/Sidebar'; // Ajusta la ruta según tu estructura de archivos
 import './index.css';
-import { ProductApp } from './components/ProductApp';
 
-// Asegurarnos de que el elemento con id 'root' existe y es del tipo correcto
-const rootElement = document.getElementById('root');
-
-if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(
+ReactDOM.render(
     <React.StrictMode>
-      <ProductApp />
-    </React.StrictMode>
-  );
-} else {
-  console.error('Elemento con id "root" no encontrado.');
-}
+        <Sidebar />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
