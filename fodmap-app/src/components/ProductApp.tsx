@@ -62,13 +62,13 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen bg-[gray] flex flex-col sm:flex-row font-sans">
+        <div className="h-screen bg-[#272222] flex flex-col font-sans">
 
             {/* Main Content */}
-            <div className="bg-main m-1 rounded-xl w-full flex-col relative">
+            <div className="bg-main m-1 rounded-md flex flex-col flex-grow justify-between">
 
-                <div >
-                    <h1 className="text-3xl text-center pb-3 text-second mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
+                <div>
+                    <h1 className="text-3xl text-center pb-3 text-second mt-[10%]">Búsqueda de Alimentos FODMAP</h1>
                     
                     <div className='relative ml-[35%] w-[30%] rounded-md bg-third'>
                         <div className='flex p-1'>
@@ -76,7 +76,7 @@ export const ProductApp: React.FC = () => {
                                 <FoodBuscador setSearchTerm={setSearchTerm}/>
                             </div>
                             <button 
-                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main  focus:border-main focus-within::bg-[#a59e95] active:bg-[#af9987]'
+                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within::bg-[#a59e95] active:bg-[#af9987]'
                                 onClick={toggleFilters}
                             >
                                 Filtros
@@ -94,7 +94,7 @@ export const ProductApp: React.FC = () => {
                     
                 </div>
 
-                <div className='w-full h-[55%]'>
+                <div className='w-full flex-grow overflow-auto'>
                     {hasResults ? ( 
                         <FoodSearcher alimento={filteredAlimentos} />
                     ) : (
@@ -102,13 +102,12 @@ export const ProductApp: React.FC = () => {
                     )}
                 </div>
 
-                {/* FOOTER */}
-                <footer className="w-full bg-main text-second text-center py-4">
-                    <a href="" className="mx-2 hover:text-third transition duration-300">
+                {/* Footer */}
+                <footer className="w-full bg-main text-second text-center py-4 mt-auto">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
-
-                    <a href="" className="mx-2 hover:text-third transition duration-300">
+                    <a href="https://www.aircury.es" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         Aircury
                     </a>
                 </footer>
