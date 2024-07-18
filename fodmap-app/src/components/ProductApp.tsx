@@ -63,19 +63,10 @@ export const ProductApp: React.FC = () => {
 
     return (
         <div className="h-screen bg-[gray] flex flex-col sm:flex-row font-sans">
-            {/* Sidebar */}
-            <div className="hidden lg:altura lg:w-1/5 mt-16 ml-6 mr-8 mb-16 border-2 border-gray-100 rounded-lg shadow-2xl bg-white p-6 overflow-hidden">
-                <h1 className="text-2xl text-center mb-2">Filtrar búsqueda</h1>
-                <hr className='m-3 object-center w-34'/>
-                <h2 className="text-xl text-center p-2">Grupo de alimento</h2>
-                <GrupoFilter setSelectedGroup={setSelectedGroup} />
-                <hr className='m-3 object-center w-34'/>
-                <h2 className="text-xl text-center p-2">Categoría</h2>
-                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-            </div>
 
             {/* Main Content */}
             <div className="bg-main m-1 rounded-xl w-full flex-col relative">
+
                 <div >
                     <h1 className="text-3xl text-center pb-3 text-second mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
                     
@@ -100,7 +91,9 @@ export const ProductApp: React.FC = () => {
                             </div>
                         )}
                     </div>
+                    
                 </div>
+
                 <div className='w-full h-[55%]'>
                     {hasResults ? ( 
                         <FoodSearcher alimento={filteredAlimentos} />
@@ -109,36 +102,18 @@ export const ProductApp: React.FC = () => {
                     )}
                 </div>
 
-                
+                <footer>
+                    <a href="">
+                        GitHub
+                    </a>
+
+                    <a href="">
+                        Aircury
+                    </a>
+                </footer>
+
             </div>
 
-            {/* RIGHT BAR KINDA FOOTER */}
-            <div className='hidden lg:w-1/12 mt-20 pr-6'>
-                <div>   
-                    <a href="https://www.aircury.es/" target='_blank'>
-                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" className='h-auto max-h-12 mx-auto' />
-                    </a>
-                </div>
-                <div className='mt-4'>   
-                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
-                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='h-auto max-h-12 mx-auto'/>
-                    </a>
-                </div>
-            </div>
-
-            {/* Bottom bar for mobile screens */}
-            <div className='lg:hidden md:hidden h-12 w-full flex justify-center items-center'>
-                <div className="flex justify-center items-center w-1/2 p-4 h-full">   
-                    <a href="https://www.aircury.es/" target='_blank'> 
-                        <img src="https://th.bing.com/th/id/OIP.Qg_2fCOXKEJKOQyYyzrJJwAAAA?rs=1&pid=ImgDetMain" alt="Aircury LTD" className='h-full max-h-full object-contain' />
-                    </a>
-                </div>
-                <div className="flex justify-center items-center w-1/2 p-4 h-full">   
-                    <a href="https://github.com/ortizzxz/FODMAP-App" target='_blank'>
-                        <img src="/imgs/GitHub_Logo.png" alt="GitHub" className='h-full max-h-full object-contain'/>
-                    </a>
-                </div>
-            </div>
         </div>
     );
 };
