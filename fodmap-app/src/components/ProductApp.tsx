@@ -103,7 +103,7 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 {/* Footer */}
-                <footer className="w-full bg-main text-second text-center py-4 mt-auto">
+                <footer className="w-full bg-main text-second text-center py-1 mt-2 text-sm">
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
