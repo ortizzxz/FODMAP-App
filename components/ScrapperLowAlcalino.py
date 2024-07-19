@@ -5,10 +5,10 @@ def scrape_list_items_between_h2(url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
         "Accept-Language": "en-US,en;q=0.5",
-        "Referer": "https://www.cun.es/",
         "Accept-Encoding": "gzip, deflate",
         "Connection": "keep-alive"
     }
+    
     try:
         # Realizar la solicitud HTTP
         response = requests.get(url, headers=headers)
@@ -28,11 +28,17 @@ def scrape_list_items_between_h2(url):
 
         # Encontrar todos los elementos entre el segundo y el tercer <h2>
         list_items = []
-        current = second_h2.find_next_sibling()
-        while current and current != third_h2:
-            if current.name == 'ul':
-                list_items.append(current.get_text(strip=True))
-            current = current.find_next_sibling()
+        for sibling in second_h2.find_all_next():
+            if sibling == third_h2:
+                break
+            if sibling.name == 'li':
+                # Obtener el texto del elemento <li>
+                text = sibling.get_text(strip=True)
+                # Cortar el texto en el carácter "-" y mantener solo la primera parte
+                cut_text = text.split('-')[0].strip()
+                cut_text = text.split(':')[0].strip()
+                cut_text = text.split(',')[0].strip()
+                list_items.append(cut_text)
 
         return list_items
     except requests.exceptions.RequestException as e:
@@ -43,9 +49,12 @@ def scrape_list_items_between_h2(url):
         return []
 
 # URL del documento
-url = 'https://medlineplus.gov/spanish/ency/patientinstructions/000984.htm'
+url = 'https://alcalino-me.nu/lista-alimentos-fodmap/'
 
 # Llamar a la función y mostrar los resultados
 list_items = scrape_list_items_between_h2(url)
-for index, item in enumerate(list_items):
-    print(f'{index + 1}: {item}')
+if not list_items:
+    print("No se encontraron elementos <li> entre el segundo y tercer <h2>.")
+else:
+    for index, item in enumerate(list_items):
+        print(f'{index + 1}: {item}')
