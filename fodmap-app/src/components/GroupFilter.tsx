@@ -12,7 +12,7 @@ export const GrupoFilter:React.FC<GrupoFilterProps> = ({ setSelectedGroup }) => 
 
     return (
         <div >
-            <select className='w-full rounded-lg mb- h-8  border-1 text-center text-lg  text-main bg-third'
+            <select className='w-full rounded-lg mb- h-8  border-1 text-center text-lg text-main bg-third'
             onChange={handleGroupChange}>
                 <option value="">Todos</option>
                 <option value="carbohidratos">Carbohidratos</option>
