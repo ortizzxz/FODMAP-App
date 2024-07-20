@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # type: ignore
 
 # FUNCION PARA HACER LA SOLICITUD HTTP
 

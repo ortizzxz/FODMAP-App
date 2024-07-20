@@ -1,4 +1,4 @@
-import requests
+import requests # type: ignore
 from bs4 import BeautifulSoup
 
 def scrape_list_items_between_h2(url):
