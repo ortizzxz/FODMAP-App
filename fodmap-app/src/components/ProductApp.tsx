@@ -65,7 +65,7 @@ export const ProductApp: React.FC = () => {
         <div className="h-screen bg-[#272222] flex flex-col font-sans overflow-hidden">
 
             {/* Main Content */}
-            <div className="bg-main m-1 rounded-3xl flex flex-col flex-grow justify-between p-2 h-full overflow-hidden">
+            <div className="bg-main sm:m-0 m-1 rounded-3xl flex flex-col flex-grow justify-between p-2 h-full overflow-hidden">
 
                 <div>
                     <h1 className="text-3xl text-center pb-3 text-second mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
