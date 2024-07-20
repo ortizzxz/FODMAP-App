@@ -65,13 +65,13 @@ export const ProductApp: React.FC = () => {
         <div className="h-screen bg-[#272222] flex flex-col font-sans overflow-hidden">
 
             {/* Main Content */}
-            <div className="bg-main sm:m-0 m-1 rounded-3xl flex flex-col flex-grow justify-between p-2 h-full overflow-hidden">
+            <div className="bg-main sm:m-0 md,lg:m-1 lg,md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
-                    <h1 className="text-3xl text-center pb-3 text-second mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className="text-3xl text-center pb-3 text-second mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
                     
-                    <div className='relative mx-auto w-[30%] rounded-md bg-third'>
-                        <div className='flex p-1'>
+                    <div className='relative mx-auto w-[95%] lg:w-[30%] md:w-[30%]  rounded-md bg-third'>
+                        <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={setSearchTerm}/>
                             </div>
@@ -83,7 +83,7 @@ export const ProductApp: React.FC = () => {
                             </button>
                         </div>
                         {showFilters && (
-                            <div className="bg-third border-1 rounded absolute top-[-120%] left-[100%] w-1/2 ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
+                            <div className="bg-third border-1 rounded absolute lg:top-[-120%] lg:left-[100%] md:top-[-120%] md:left-[100%] w-1/2 ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
                                 <h2 className="text-xl mb-2 text-center custom-text">Grupo de alimento</h2>
                                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
                                 <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
@@ -94,11 +94,11 @@ export const ProductApp: React.FC = () => {
                     
                 </div>
 
-                <div className='w-full flex-grow overflow-auto scrollbar-none'>
+                <div className='w-full flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
                     {hasResults ? ( 
                         <FoodSearcher alimento={filteredAlimentos} />
                     ) : (
-                        <h2 className='text-xl text-second text-center mt-[5%]'>¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...</h2>
+                        <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[5%] md:mt-[5%]'>¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...</h2>
                     )}
                 </div>
 
