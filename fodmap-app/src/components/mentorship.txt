@@ -1,2 +1,5 @@
 ## MENTORSHIP TO DO LIST - UPDATED WEEKLY
 
+- Docker 
+- Scrapping Scripts 
+- Integration 
