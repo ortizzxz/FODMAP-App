@@ -21,6 +21,8 @@ export const ProductApp: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('');
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [hasResults, setHasResults] = useState<boolean>(false); 
+    const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true); 
+
 
     const getFood = async (): Promise<void> => {
         try {
@@ -53,6 +55,13 @@ export const ProductApp: React.FC = () => {
         setHasResults(filteredAlimentos.length > 0);
     }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
 
+    const handleSearchTermChange = (term: string) => {
+        setSearchTerm(term);
+        if (term !== ''){
+            setShowWelcomeMessage(false);
+        }
+    };
+
     const toggleFilters = () => {
         setShowFilters(!showFilters);
     };
@@ -62,7 +71,7 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen bg-[#272222] flex flex-col font-sans overflow-hidden ">
+        <div className="h-screen bg-[#252121] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
             <div className="bg-main lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
@@ -73,7 +82,7 @@ export const ProductApp: React.FC = () => {
                     <div className='relative mx-auto w-[95%] lg:w-[30%] md:w-[30%]  rounded-md bg-third'>
                         <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
-                                <FoodBuscador setSearchTerm={setSearchTerm}/>
+                                <FoodBuscador setSearchTerm={handleSearchTermChange}/>
                             </div>
                             <button 
                                 className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within:bg-[#a59e95] active:bg-[#af9987]'
@@ -95,10 +104,18 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 <div className='w-full flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
-                    {hasResults ? ( 
+                    {showWelcomeMessage && (
+                        <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[20%] md:mt-[20%]'>
+                            ¡Bienvenido! Aquí puedes buscar alimentos FODMAP.
+                        </h2>
+                    )}
+                    {!showWelcomeMessage && !hasResults && (
+                        <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[5%] md:mt-[5%]'>
+                            ¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...
+                        </h2>
+                    )}
+                    {hasResults && (
                         <FoodSearcher alimento={filteredAlimentos} />
-                    ) : (
-                        <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[5%] md:mt-[5%]'>¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...</h2>
                     )}
                 </div>
 
