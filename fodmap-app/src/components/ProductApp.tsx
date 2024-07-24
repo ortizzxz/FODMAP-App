@@ -45,22 +45,23 @@ export const ProductApp: React.FC = () => {
         )
         : [];
 
-    useEffect(() => {
-        getFood();
-    }, []);
-
-    useEffect(() => {
-        setHasResults(filteredAlimentos.length > 0);
-    }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
-
-    const toggleFilters = () => {
-        setShowFilters(!showFilters);
-    };
-
-    const hideFilters = () => {
-        setShowFilters(false);
-    };
-
+        
+        const toggleFilters = () => {
+            setShowFilters(!showFilters);
+        };
+        
+        const hideFilters = () => {
+            setShowFilters(false);
+        };
+        
+        useEffect(() => {
+            getFood();
+        }, []);
+    
+        useEffect(() => {
+            setHasResults(filteredAlimentos.length > 0);
+        }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
+        
     return (
         <div className="h-screen bg-[#272222] flex flex-col font-sans overflow-hidden">
 
