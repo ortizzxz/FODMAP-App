@@ -79,7 +79,7 @@ export const ProductApp: React.FC = () => {
                 <div>
                     <h1 className="text-3xl text-center pb-3 text-second mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
                     
-                    <div className='relative mx-auto w-[95%] lg:w-[30%] md:w-[30%]  rounded-md bg-third'>
+                    <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-third'>
                         <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={handleSearchTermChange}/>
@@ -105,9 +105,16 @@ export const ProductApp: React.FC = () => {
 
                 <div className='w-full flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
                     {showWelcomeMessage && (
-                        <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[20%] md:mt-[20%]'>
-                            ¡Bienvenido! Aquí puedes buscar alimentos FODMAP.
-                        </h2>
+                        <div>
+                            <h2 className='text-xl text-second text-center mt-[20%] lg:mt-[10%] md:mt-[20%]'>
+                                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
+                            </h2>
+                            
+                            <p className='text-xl text-second text-center ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
+                            Esta herramienta ha sido creada de la mano de Aircury S.L. para ayudar a todos aquellos con 
+                            dietas que requieran de la limitación de alimentos FODMAP.
+                            </p> 
+                        </div>
                     )}
                     {!showWelcomeMessage && !hasResults && (
                         <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[5%] md:mt-[5%]'>
