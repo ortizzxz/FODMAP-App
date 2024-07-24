@@ -11,7 +11,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Raleway', 'sans-serif'],
+        sans: ['Libre Baskerville', 'sans-serif'],
       },
       placeholderColor: theme => ({
         'custom-placeholder': theme('colors.main'), // Usando el color 'main' definido arriba

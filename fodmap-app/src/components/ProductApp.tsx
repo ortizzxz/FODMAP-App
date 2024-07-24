@@ -45,28 +45,27 @@ export const ProductApp: React.FC = () => {
         )
         : [];
 
-        
-        const toggleFilters = () => {
-            setShowFilters(!showFilters);
-        };
-        
-        const hideFilters = () => {
-            setShowFilters(false);
-        };
-        
-        useEffect(() => {
-            getFood();
-        }, []);
-    
-        useEffect(() => {
-            setHasResults(filteredAlimentos.length > 0);
-        }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
-        
+    useEffect(() => {
+        getFood();
+    }, []);
+
+    useEffect(() => {
+        setHasResults(filteredAlimentos.length > 0);
+    }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
+
+    const toggleFilters = () => {
+        setShowFilters(!showFilters);
+    };
+
+    const hideFilters = () => {
+        setShowFilters(false);
+    };
+
     return (
-        <div className="h-screen bg-[#272222] flex flex-col font-sans overflow-hidden">
+        <div className="h-screen bg-[#272222] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
-            <div className="bg-main sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+            <div className="bg-main lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
                     <h1 className="text-3xl text-center pb-3 text-second mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
