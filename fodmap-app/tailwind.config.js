@@ -4,8 +4,8 @@ module.exports = {
   ],
   theme: {
     colors: {
-      main: '#191616',
-      second: '#dbdfe5',
+      main: '#191A1A',
+      second: '#E3E3E1',
       third: '#a59e92',
       fourth: '#00bff2'
     },

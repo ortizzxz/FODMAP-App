@@ -71,7 +71,7 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen bg-[#252121] flex flex-col font-sans overflow-hidden ">
+        <div className="h-screen bg-[#202222] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
             <div className="bg-main lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
