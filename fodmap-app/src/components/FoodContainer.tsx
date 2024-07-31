@@ -37,14 +37,20 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     const handleFoodClick = async (food: Alimento) => {
         setSelectedFood(food);
         try {
-            const details = await searchFood(food.nombre);
-            console.log('API Response:', details); // Agrega este log para ver la respuesta
+          const details = await searchFood(food.nombre);
+          console.log('API Response:', details);
+          if (details && details.foods && details.foods.food && details.foods.food.length > 0) {
             setFoodDetails(details);
             setModalIsOpen(true);
+          } else {
+            console.error('Invalid API response structure');
+            // Handle the error, maybe show a message to the user
+          }
         } catch (error) {
-            console.error('Error fetching food details:', error);
+          console.error('Error fetching food details:', error);
+          // Handle the error, maybe show a message to the user
         }
-    };
+      };
     
 
     const closeModal = () => {
