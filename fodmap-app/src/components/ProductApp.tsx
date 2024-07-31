@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { findAll } from '../services/foodService';
 import { FoodSearcher } from './FoodContainer';
+import { FoodDetails } from './FoodDetails';
 import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
 import React from 'react';
 import '../styles/backgroundCustomColor.css';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // Asegúrate de que el modal tenga un elemento de app raíz
 
 interface Alimento {
     nombre: string;
@@ -22,6 +26,8 @@ export const ProductApp: React.FC = () => {
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [hasResults, setHasResults] = useState<boolean>(false); 
     const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true); 
+    const [selectedFood, setSelectedFood] = useState<Alimento | null>(null); // Para manejar el alimento seleccionado
+
 
 
     const getFood = async (): Promise<void> => {
@@ -68,6 +74,14 @@ export const ProductApp: React.FC = () => {
 
     const hideFilters = () => {
         setShowFilters(false);
+    };
+
+    const handleFoodClick = (alimento: Alimento) => {
+        setSelectedFood(alimento);
+    };
+
+    const closeModal = () => {
+        setSelectedFood(null);
     };
 
     return (
@@ -122,7 +136,7 @@ export const ProductApp: React.FC = () => {
                         </h2>
                     )}
                     {hasResults && (
-                        <FoodSearcher alimento={filteredAlimentos} />
+                        <FoodSearcher alimento={filteredAlimentos} onFoodClick={handleFoodClick}  />
                     )}
                 </div>
 
@@ -137,7 +151,23 @@ export const ProductApp: React.FC = () => {
                 </footer>
 
             </div>
-
+                    
+        {/* Modal */}
+            {selectedFood && (
+                <Modal
+                    isOpen={!!selectedFood}
+                    onRequestClose={closeModal}
+                    contentLabel="Food Details"
+                    className="Modal"
+                    overlayClassName="Overlay"
+                >
+                    <h2 className="text-xl mb-2 text-center custom-text">Detalles del Alimento</h2>
+                    <FoodDetails alimento={selectedFood} />
+                    <button onClick={closeModal} className="mt-4 bg-red-500 text-white p-2 rounded">
+                        Cerrar
+                    </button>
+                </Modal>
+            )}
         </div>
     );
 };
