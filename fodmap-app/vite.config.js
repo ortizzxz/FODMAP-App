@@ -22,8 +22,8 @@ export default defineConfig({
       '/api': {
         target: 'https://platform.fatsecret.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
 });

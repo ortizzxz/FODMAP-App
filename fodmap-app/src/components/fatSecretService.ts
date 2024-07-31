@@ -1,14 +1,13 @@
 import axios from 'axios';
-import crypto from 'crypto';
-import qs from 'qs';
+import { HmacSHA1, enc, lib } from 'crypto-js';
 
-const BASE_URL = 'https://platform.fatsecret.com/rest/server.api';
+const BASE_URL = '/api/rest/server.api';
 const CLIENT_ID = '4d13ceb5a7f84a2582ef74a9cde073e3';
 const CLIENT_SECRET = '5a9ac5f9e7dc452a920909ed5b08e293';
 
 // Función para generar un nonce
 const generateNonce = () => {
-  return crypto.randomBytes(16).toString('hex');
+  return lib.WordArray.random(16).toString();
 };
 
 // Función para generar la firma OAuth
@@ -16,7 +15,7 @@ const generateOAuthSignature = (params: Record<string, string>, method: string, 
   const sortedParams = Object.keys(params).sort().map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join('&');
   const baseString = `${method.toUpperCase()}&${encodeURIComponent(url)}&${encodeURIComponent(sortedParams)}`;
   const signingKey = `${encodeURIComponent(consumerSecret)}&`;
-  return crypto.createHmac('sha1', signingKey).update(baseString).digest('base64');
+  return HmacSHA1(baseString, signingKey).toString(enc.Base64);
 };
 
 // Función para obtener el token de autenticación (si es necesario)
@@ -31,7 +30,7 @@ export const getAuthToken = async () => {
       oauth_version: '1.0',
       format: 'json'
     };
-    (params as any )['oauth_signature'] = generateOAuthSignature(params, 'GET', BASE_URL, CLIENT_SECRET);
+    (params as any)['oauth_signature'] = generateOAuthSignature(params, 'GET', BASE_URL, CLIENT_SECRET);
     const response = await axios.get(BASE_URL, { params });
     return response.data;
   } catch (error) {
@@ -43,7 +42,7 @@ export const getAuthToken = async () => {
 // Función para buscar alimentos
 export const searchFood = async (query: string) => {
   try {
-    const params = {
+    const params: Record<string, string> = {
       method: 'foods.search',
       search_expression: query,
       format: 'json',
@@ -53,7 +52,7 @@ export const searchFood = async (query: string) => {
       oauth_nonce: generateNonce(),
       oauth_version: '1.0'
     };
-    ( params as any)['oauth_signature'] = generateOAuthSignature(params, 'GET', BASE_URL, CLIENT_SECRET);
+    params['oauth_signature'] = generateOAuthSignature(params, 'GET', BASE_URL, CLIENT_SECRET);
     const response = await axios.get(BASE_URL, { params });
     return response.data;
   } catch (error) {
