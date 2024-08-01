@@ -4,6 +4,7 @@ import { searchFood } from './fatSecretService';
 import Modal from 'react-modal';
 import { FoodDetails } from './FoodDetails';
 import '../styles/scrollbarCustom.css';
+import '../styles/modal.css';
 
 interface NutritionalInfo {
   energy?: {
@@ -28,10 +29,12 @@ interface FoodSearcherProps {
   alimento: Alimento[];
 }
 
+Modal.setAppElement('#root'); // Asegúrate de que esto esté configurado para evitar problemas de accesibilidad
+
 export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
   const [selectedFood, setSelectedFood] = useState<Alimento | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [foodDetails, setFoodDetails] = useState<FoodDetailResponse | null>(null);
+  const [foodDetails, setFoodDetails] = useState<any | null>(null);
 
   const handleFoodClick = async (food: Alimento) => {
     setSelectedFood(food);
@@ -39,15 +42,21 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
       const details = await searchFood(food.nombre);
       console.log('API Response:', details);
       if (details && details.foods && details.foods.food) {
-        setFoodDetails(details);
+        const filteredFood = details.foods.food.find((item: any) => item.food_name.toLowerCase() === food.nombre.toLowerCase());
+        if (filteredFood) {
+          setFoodDetails(filteredFood);
+        } else {
+          console.log('No se encontraron detalles para este alimento');
+          setFoodDetails(null);
+        }
         setModalIsOpen(true);
       } else {
         console.log('No se encontraron detalles para este alimento');
-        // Aquí podrías mostrar un mensaje al usuario
+        setFoodDetails(null);
       }
     } catch (error) {
       console.error('Error fetching food details:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
+      setFoodDetails(null);
     }
   };
 
@@ -74,28 +83,18 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Food Details Modal"
-        className="modal"
-        overlayClassName="modal-overlay"
+        className="modal-content" // Asegúrate de tener estilos adecuados para el modal
+        overlayClassName="modal-overlay" // Asegúrate de tener estilos adecuados para el overlay
       >
         <button onClick={closeModal}>Cerrar</button>
-        {selectedFood && (
+        {selectedFood && foodDetails && (
           <div>
-            <h2>{selectedFood.nombre}</h2>
-            {foodDetails && foodDetails.foods && foodDetails.foods.food.length > 0 && (
-              <div>
-                <h3>Información Nutricional:</h3>
-                {foodDetails.foods.food.map((food, index) => (
-                  <div key={index}>
-                    <p>Nombre: {food.food_name}</p>
-                    <p>Descripción: {food.food_description}</p>
-                    <p>Calorías: {food.nutrients?.energy?.kcal || 'N/A'}</p>
-                    <p>Proteínas: {food.nutrients?.protein || 'N/A'}</p>
-                    <p>Grasas: {food.nutrients?.fat || 'N/A'}</p>
-                    <p>Carbohidratos: {food.nutrients?.carbohydrate || 'N/A'}</p>
-                  </div>
-                ))}
-              </div>
-            )}
+            <h2 className='text-xl text-center'>{selectedFood.nombre}</h2>
+            <div>
+              <h3>Información Nutricional:</h3>
+              <p>Nombre: {foodDetails.food_name}</p>
+              <p>Descripción: {foodDetails.food_description}</p>
+            </div>
           </div>
         )}
       </Modal>
