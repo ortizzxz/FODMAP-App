@@ -136,7 +136,7 @@ export const ProductApp: React.FC = () => {
                         </h2>
                     )}
                     {hasResults && (
-                        <FoodSearcher alimento={filteredAlimentos} onFoodClick={handleFoodClick}  />
+                        <FoodSearcher alimento={filteredAlimentos}  />
                     )}
                 </div>
 

@@ -23,6 +23,11 @@ export default defineConfig({
         target: 'https://platform.fatsecret.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      '/oauth': {
+        target: 'https://oauth.fatsecret.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/oauth/, '')
       }
     }
   },
