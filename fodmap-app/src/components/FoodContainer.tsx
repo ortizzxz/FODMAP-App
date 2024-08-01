@@ -18,6 +18,8 @@ interface FoodDetailResponse {
   foods: {
     food: {
       nutrients?: NutritionalInfo;
+      food_name: string;
+      food_description: string;
     }[];
   };
 }
@@ -36,10 +38,16 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     try {
       const details = await searchFood(food.nombre);
       console.log('API Response:', details);
-      setFoodDetails(details);
-      setModalIsOpen(true);
+      if (details && details.foods && details.foods.food) {
+        setFoodDetails(details);
+        setModalIsOpen(true);
+      } else {
+        console.log('No se encontraron detalles para este alimento');
+        // Aquí podrías mostrar un mensaje al usuario
+      }
     } catch (error) {
       console.error('Error fetching food details:', error);
+      // Aquí podrías mostrar un mensaje de error al usuario
     }
   };
 
@@ -73,13 +81,19 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         {selectedFood && (
           <div>
             <h2>{selectedFood.nombre}</h2>
-            {foodDetails && foodDetails.foods.food[0] && (
+            {foodDetails && foodDetails.foods && foodDetails.foods.food.length > 0 && (
               <div>
                 <h3>Información Nutricional:</h3>
-                <p>Calorías: {foodDetails.foods.food[0].nutrients?.energy?.kcal || 'N/A'}</p>
-                <p>Proteínas: {foodDetails.foods.food[0].nutrients?.protein || 'N/A'}</p>
-                <p>Grasas: {foodDetails.foods.food[0].nutrients?.fat || 'N/A'}</p>
-                <p>Carbohidratos: {foodDetails.foods.food[0].nutrients?.carbohydrate || 'N/A'}</p>
+                {foodDetails.foods.food.map((food, index) => (
+                  <div key={index}>
+                    <p>Nombre: {food.food_name}</p>
+                    <p>Descripción: {food.food_description}</p>
+                    <p>Calorías: {food.nutrients?.energy?.kcal || 'N/A'}</p>
+                    <p>Proteínas: {food.nutrients?.protein || 'N/A'}</p>
+                    <p>Grasas: {food.nutrients?.fat || 'N/A'}</p>
+                    <p>Carbohidratos: {food.nutrients?.carbohydrate || 'N/A'}</p>
+                  </div>
+                ))}
               </div>
             )}
           </div>
