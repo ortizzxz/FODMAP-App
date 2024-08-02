@@ -1,20 +1,12 @@
 import React from "react";
-import classNames from "classnames";
-import '../styles/backgroundCustomColor.css'
+import { Alimento } from "./types";
+import '../styles/backgroundCustomColor.css';
 
-// Interfaz Alimento
-interface Alimento {
-    nombre: string;
-    indice: string;
-}
-
-// Interfaz FoodBuscadorProps
-interface FoodBuscadorProps {
+interface FoodDetailsProps {
     alimento: Alimento;
-    className?: string; // -> esto para que no dé error en FoodSearcher
 }
 
-export const FoodDetails: React.FC<FoodBuscadorProps> = ({ alimento, className }) => {
+export const FoodDetails: React.FC<FoodDetailsProps> = ({ alimento }) => {
 
     const capitalizeFirstLetter = (string: string): string => {
         return string.charAt(0).toUpperCase() + string.slice(1);
