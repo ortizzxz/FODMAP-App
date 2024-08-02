@@ -1,28 +1,20 @@
 import React, { useState } from 'react';
 import { Alimento } from './types';
-import { searchFood } from './fatSecretService';
+import { searchFood, translateText } from './fatSecretService';
 import Modal from 'react-modal';
-import { FoodDetails } from './FoodDetails';
 import '../styles/scrollbarCustom.css';
-import { translateText
-
- } from './fatSecretService';
-interface NutritionalInfo {
-  energy?: {
-    kcal?: string;
-  };
-  protein?: string;
-  fat?: string;
-  carbohydrate?: string;
-}
 
 interface FoodDetailResponse {
-  foods: {
-    food: {
-      nutrients?: NutritionalInfo;
-      food_name: string;
-      food_description: string;
-    }[];
+  food_name: string;
+  food_description: string;
+  servings?: {
+    serving?: {
+      serving_description: string;
+      calories: string;
+      protein: string;
+      fat: string;
+      carbohydrate: string;
+    }
   };
 }
 
@@ -35,7 +27,7 @@ Modal.setAppElement('#root'); // Asegúrate de que esto esté configurado para e
 export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
   const [selectedFood, setSelectedFood] = useState<Alimento | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [foodDetails, setFoodDetails] = useState<any | null>(null);
+  const [foodDetails, setFoodDetails] = useState<FoodDetailResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,25 +41,16 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
       console.log('Translated name:', translatedName);
       const details = await searchFood(translatedName);
       console.log('API Response in component:', details);
-      if (details && details.foods && details.foods.food && details.foods.food.length > 0) {
-        const filteredFood = details.foods.food[0];
-        setFoodDetails(filteredFood);
-      } else {
-        setError('No se encontraron detalles para este alimento');
-        setFoodDetails(null);
-      }
+      setFoodDetails(details);
     } catch (error) {
       console.error('Error fetching food details:', error);
-      setError('Error al buscar detalles del alimento');
+      setError(error instanceof Error ? error.message : 'Error al buscar detalles del alimento');
       setFoodDetails(null);
     } finally {
       setIsLoading(false);
       setModalIsOpen(true);
     }
   };
-  
-
-  
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -85,7 +68,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
             onClick={() => handleFoodClick(food)}
             className="flex justify-center cursor-pointer"
           >
-            <FoodDetails alimento={food} />
+            <div>{food.nombre}</div>
           </div>
         ))}
       </div>
@@ -99,17 +82,23 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         <button onClick={closeModal}>Cerrar</button>
         {isLoading && <p>Cargando...</p>}
         {error && <p className="error">{error}</p>}
-        {selectedFood && foodDetails && !isLoading && !error && (
+        {foodDetails && !isLoading && !error && (
           <div>
-            <h2>{selectedFood.nombre}</h2>
+            <h2>{foodDetails.food_name}</h2>
+            <p>{foodDetails.food_description}</p>
             <div>
               <h3>Información Nutricional:</h3>
-              <p>Nombre: {foodDetails.food_name}</p>
-              <p>Descripción: {foodDetails.food_description}</p>
-              <p>Calorías: {foodDetails.nutrients?.energy?.kcal || 'N/A'}</p>
-              <p>Proteínas: {foodDetails.nutrients?.protein || 'N/A'}</p>
-              <p>Grasas: {foodDetails.nutrients?.fat || 'N/A'}</p>
-              <p>Carbohidratos: {foodDetails.nutrients?.carbohydrate || 'N/A'}</p>
+              {foodDetails.servings?.serving ? (
+                <div>
+                  <p>Tamaño de porción: {foodDetails.servings.serving.serving_description}</p>
+                  <p>Calorías: {foodDetails.servings.serving.calories}</p>
+                  <p>Proteínas: {foodDetails.servings.serving.protein}g</p>
+                  <p>Grasas: {foodDetails.servings.serving.fat}g</p>
+                  <p>Carbohidratos: {foodDetails.servings.serving.carbohydrate}g</p>
+                </div>
+              ) : (
+                <p>No hay información nutricional disponible.</p>
+              )}
             </div>
           </div>
         )}

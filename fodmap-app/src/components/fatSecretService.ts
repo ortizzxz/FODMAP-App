@@ -16,7 +16,9 @@ export const translateText = async (text: string, targetLanguage: string): Promi
 
 export const searchFood = async (query: string): Promise<any> => {
   try {
+    console.log('Sending search request:', query);
     const response = await axios.post('/api/search', { query });
+    console.log('Search response:', response.data);
     return response.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
@@ -27,3 +29,6 @@ export const searchFood = async (query: string): Promise<any> => {
     throw error;
   }
 };
+
+  
+  
