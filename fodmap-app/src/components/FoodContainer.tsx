@@ -3,6 +3,7 @@ import { Alimento } from './types';
 import { searchFood, translateText } from './fatSecretService';
 import Modal from 'react-modal';
 import '../styles/scrollbarCustom.css';
+import '../styles/modal.css'
 
 interface FoodDetailResponse {
   food_name: string;
@@ -84,7 +85,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         {error && <p className="error">{error}</p>}
         {foodDetails && !isLoading && !error && (
           <div>
-            <h2>{foodDetails.food_name}</h2>
+            <h2 className='text-2xl text-center'>{foodDetails.food_name}</h2>
             <p>{foodDetails.food_description}</p>
             <div>
               <h3>Información Nutricional:</h3>
@@ -92,9 +93,9 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
                 <div>
                   <p>Tamaño de porción: {foodDetails.servings.serving.serving_description}</p>
                   <p>Calorías: {foodDetails.servings.serving.calories}</p>
-                  <p>Proteínas: {foodDetails.servings.serving.protein}g</p>
-                  <p>Grasas: {foodDetails.servings.serving.fat}g</p>
-                  <p>Carbohidratos: {foodDetails.servings.serving.carbohydrate}g</p>
+                  <p>Proteínas: {foodDetails.servings.serving.protein} g</p>
+                  <p>Grasas: {foodDetails.servings.serving.fat} g</p>
+                  <p>Carbohidratos: {foodDetails.servings.serving.carbohydrate} g</p>
                 </div>
               ) : (
                 <p>No hay información nutricional disponible.</p>
