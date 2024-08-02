@@ -1,24 +1,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  define: {
-    'import.meta.env': process.env
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
-  build: {
-    rollupOptions: {
-      input: '/src/main.tsx',
-    },
-  },
   server: {
     proxy: {
+      '/api/translate': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/translate/, '/translate')
+      },
+      '/api/search': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/search/, '/search')
+      },
       '/api': {
         target: 'https://platform.fatsecret.com',
         changeOrigin: true,
@@ -30,5 +26,5 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/oauth/, '')
       }
     }
-  },
+  }
 });
