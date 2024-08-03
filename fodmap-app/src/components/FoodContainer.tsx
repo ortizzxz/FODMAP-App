@@ -25,6 +25,10 @@ interface FoodSearcherProps {
 
 Modal.setAppElement('#root'); // Asegúrate de que esto esté configurado para evitar problemas de accesibilidad
 
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
   const [selectedFood, setSelectedFood] = useState<Alimento | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -67,10 +71,10 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className=" justify-center cursor-pointer border-1 border-second bg-third rounded-md w-full p-4 m-2 text-center shadow-xl"
+            className=" justify-center cursor-pointer border-1 border-second bg-third rounded-md w-[95%] p-4 m-2 text-center shadow-xl"
           >
-            <div>{food.nombre}  </div>
-            <div>Indice FODMAP:{food.indice}</div>
+            <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>
+            <div className='text-lg'>Indice FODMAP: {capitalizeFirstLetter(food.indice)}</div>
           </div>
         ))}
       </div>
@@ -78,10 +82,10 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Food Details Modal"
-        className="modal-content"
+        className="modal-content flex justify-center items-center"
         overlayClassName="modal-overlay"
       >
-        <button onClick={closeModal}>Cerrar</button>
+        <button onClick={closeModal} className="w-[50%] mb-4 px-4 py-2 bg-third text-main rounded-md hover:border-main hover:bg-opacity-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-second focus:ring-opacity-50">Cerrar</button>
         {isLoading && <p>Cargando...</p>}
         {error && <p className="error">{error}</p>}
         {foodDetails && !isLoading && !error && (
