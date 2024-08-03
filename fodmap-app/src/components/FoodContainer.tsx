@@ -85,9 +85,9 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         className="modal-content flex justify-center items-center"
         overlayClassName="modal-overlay"
       >
-        <button onClick={closeModal} className="w-[50%] mb-4 px-4 py-2 bg-third text-main rounded-md hover:border-main hover:bg-opacity-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-second focus:ring-opacity-50">Cerrar</button>
+        <button onClick={closeModal} className="w-[50%] mb-2 px-4 py-2 bg-third text-main rounded-md hover:border-main hover:bg-opacity-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-second focus:ring-opacity-50">Cerrar</button>
         {isLoading && <p>Cargando...</p>}
-        {error && <p className="error">{error}</p>}
+        {error && <p className="error text-lg text-center">Servidor en mantenimiento. <br /> Inténtelo nuevamente más tarde.</p>}
         {foodDetails && !isLoading && !error && (
           <div>
             <h2>{foodDetails.food_name}</h2>
