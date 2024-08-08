@@ -82,7 +82,7 @@ app.post('/search', async (req, res) => {
         method: 'foods.search',
         search_expression: query,
         format: 'json',
-        max_results: 50  // Aumenta esto para obtener más resultados
+        max_results: 1  // Aumenta esto para obtener más resultados
       },
       headers: {
         'Authorization': `Bearer ${token}`
