@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Alimento } from './types';
-import { searchFood, translateText } from './fatSecretService';
+import { searchFood, translateText, searchImage } from './fatSecretService';
 import Modal from 'react-modal';
 import '../styles/scrollbarCustom.css';
-import '../styles/modal.css'
+import '../styles/modal.css';
 
 interface FoodDetailResponse {
   food_name: string;
@@ -15,8 +15,9 @@ interface FoodDetailResponse {
       protein: string;
       fat: string;
       carbohydrate: string;
-    }
+    };
   };
+  imageUrl?: string; // Añadido para la imagen
 }
 
 interface FoodSearcherProps {
@@ -40,16 +41,29 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(food);
     setIsLoading(true);
     setError(null);
+  
     try {
-      console.log('Searching for:', food.nombre);
       const translatedName = await translateText(food.nombre, 'en');
-      console.log('Translated name:', translatedName);
-      const details = await searchFood(translatedName);
-      console.log('API Response in component:', details);
-      setFoodDetails(details);
+  
+      const [details, image] = await Promise.all([
+        searchFood(translatedName).catch((error) => {
+          console.error('Error fetching food details:', error);
+          return null;
+        }),
+        searchImage(translatedName).catch((error) => {
+          console.error('Error fetching image:', error);
+          return null;
+        })
+      ]);
+  
+      setFoodDetails({
+        food_name: food.nombre, // Usa el nombre original en español
+        food_description: details ? details.foods.food.food_description : 'No hay información nutricional disponible.',
+        servings: details ? details.foods.food.servings?.serving : undefined,
+        imageUrl: image ? image.webformatURL : undefined
+      });
     } catch (error) {
-      console.error('Error fetching food details:', error);
-      setError(error instanceof Error ? error.message : 'Error al buscar detalles del alimento');
+      setError(error instanceof Error ? error.message : 'Error al procesar la solicitud');
       setFoodDetails(null);
     } finally {
       setIsLoading(false);
@@ -71,8 +85,9 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className=" justify-center cursor-pointer border-1 border-second bg-third rounded-md w-[95%] p-4 m-2 text-center shadow-xl"
+            className="justify-center cursor-pointer border-1 border-second bg-third rounded-md w-[95%] p-4 m-2 text-center shadow-xl"
           >
+            {food.previewImageUrl && <img src={food.previewImageUrl} alt={food.nombre} className="w-full h-32 object-cover" />}
             <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>
             <div className='text-lg'>Indice FODMAP: {capitalizeFirstLetter(food.indice)}</div>
           </div>
@@ -90,22 +105,9 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         {error && <p className="error text-lg text-center">Servidor en mantenimiento. <br /> Inténtelo nuevamente más tarde.</p>}
         {foodDetails && !isLoading && !error && (
           <div>
-            <h2>{foodDetails.food_name}</h2>
+            {foodDetails.imageUrl && <img src={foodDetails.imageUrl} alt={foodDetails.food_name} />}
+            <h2 className='text-xl text-center'>{foodDetails.food_name}</h2>
             <p>{foodDetails.food_description}</p>
-            <div>
-              <h3>Información Nutricional:</h3>
-              {foodDetails.servings?.serving ? (
-                <div>
-                  <p>Tamaño de porción: {foodDetails.servings.serving.serving_description}</p>
-                  <p>Calorías: {foodDetails.servings.serving.calories}</p>
-                  <p>Proteínas: {foodDetails.servings.serving.protein}g</p>
-                  <p>Grasas: {foodDetails.servings.serving.fat}g</p>
-                  <p>Carbohidratos: {foodDetails.servings.serving.carbohydrate}g</p>
-                </div>
-              ) : (
-                <p>No hay información nutricional disponible.</p>
-              )}
-            </div>
           </div>
         )}
       </Modal>

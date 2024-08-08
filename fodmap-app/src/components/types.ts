@@ -4,4 +4,5 @@ export interface Alimento {
     tipo: string;
     grupo: string;
     indice: string;
+    previewImageUrl?: string;
 }
