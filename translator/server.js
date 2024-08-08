@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// FatSecret API configuration
+// FatSecret API 
 let accessToken = null;
 let tokenExpiration = 0;
 
@@ -68,6 +68,8 @@ app.post('/translate', async (req, res) => {
   }
 });
 
+// Searching
+
 app.post('/search', async (req, res) => {
   try {
     const token = await getAccessToken();
@@ -80,53 +82,52 @@ app.post('/search', async (req, res) => {
         method: 'foods.search',
         search_expression: query,
         format: 'json',
-        max_results: 1 // Limitar los resultados a 1
+        max_results: 50  // Aumenta esto para obtener más resultados
       },
       headers: {
         'Authorization': `Bearer ${token}`
       }
     });
 
-    if (response.data.foods && response.data.foods.food) {
-      const foods = Array.isArray(response.data.foods.food) 
-        ? response.data.foods.food 
-        : [response.data.foods.food];
+    console.log('FatSecret API Response:', JSON.stringify(response.data, null, 2));
+    console.log('FatSecret API Status:', response.status);
+    console.log('FatSecret API Headers:', response.headers);
 
-      // Buscar una coincidencia exacta
-      const exactMatch = foods.find(food => food.food_name.toLowerCase() === query.toLowerCase());
+    res.json(response.data);
 
-      if (exactMatch) {
-        // Obtener detalles nutricionales del alimento exacto
-        const detailsResponse = await axios.post('https://platform.fatsecret.com/rest/server.api', null, {
-          params: {
-            method: 'food.get.v2',
-              food_id: exactMatch.food_id,
-            format: 'json'
-          },
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        const foodDetails = detailsResponse.data.food;
-        res.json(foodDetails);
-      } else {
-        res.status(404).json({ error: 'No exact match found' });
-      }
-    } else {
-      res.status(404).json({ error: 'No foods found' });
-    }
   } catch (error) {
     console.error('Error searching food:', error.response ? error.response.data : error.message);
-    res.status(500).json({ error: 'Error searching food', details: error.response ? error.response.data : error.message });
+    console.error('Error details:', error.response ? error.response : error);
+    res.status(500).json({ 
+      error: 'Error searching food', 
+      details: error.response ? error.response.data : error.message,
+      stack: error.stack
+    });
   }
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+// Image searching - PIXABAY 
+app.post('/image-search', async (req, res) => {
+  try {
+    const { query } = req.body;
+    const response = await axios.get('https://pixabay.com/api/', {
+      params: {
+        key: process.env.PIXABAY_API_KEY,
+        q: query,
+        image_type: 'photo',
+        category: 'food',
+        per_page: 1
+      }
+    });
+
+    res.json(response.data.hits[0]);
+  } catch (error) {
+    console.error('Error fetching image:', error.response ? error.response.data : error.message);
+    res.status(500).json({ error: 'Error fetching image' });
+  }
 });
+
+
 
 // Start the server
 app.listen(port, () => {
