@@ -27,7 +27,7 @@ Summer of Code es un programa de becas otorgado por la empresa [@Aircury](https:
 - Spring Framework
 - Python
 - MySQL
-- 
+
 ### API Integrations 
 
 - Google Cloud Translation API
