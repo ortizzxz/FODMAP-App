@@ -85,13 +85,13 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen bg-[#202222] flex flex-col font-sans overflow-hidden ">
+        <div className="h-screen bg-[#AAAE75] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
-            <div className="bg-main lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+            <div className="bg-[#CBD6A5] lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
-                    <h1 className="text-3xl text-center pb-3 text-second mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className="text-3xl text-center pb-3 text-[#485726] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
                     
                     <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-third'>
                         <div className='flex p-1 '>
@@ -141,7 +141,7 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 {/* Footer */}
-                <footer className="w-full bg-main text-second text-center py-1 mt-2 text-sm">
+                <footer className="w-full bg-[#CBD6A5] text-second text-center py-1 mt-2 text-sm">
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
