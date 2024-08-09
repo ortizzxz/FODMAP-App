@@ -45,26 +45,29 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     try {
       const translatedName = await translateText(food.nombre, 'en');
   
-      const [details, image] = await Promise.all([
-        searchFood(translatedName).catch((error) => {
-          console.error('Error fetching food details:', error);
-          return null;
-        }),
-        searchImage(translatedName).catch((error) => {
-          console.error('Error fetching image:', error);
-          return null;
-        })
-      ]);
+      // Realiza las solicitudes de manera independiente
+      const detailsPromise = searchFood(translatedName).catch((error) => {
+        console.error('Error fetching food details:', error);
+        return null; // Retorna null si falla
+      });
+  
+      const imagePromise = searchImage(translatedName).catch((error) => {
+        console.error('Error fetching image:', error);
+        return null; // Retorna null si falla
+      });
+  
+      const details = await detailsPromise;
+      const image = await imagePromise;
   
       setFoodDetails({
         food_name: food.nombre, // Usa el nombre original en español
-        food_description: details ? details.foods.food.food_description : 'No hay información nutricional disponible.',
-        servings: details ? details.foods.food.servings?.serving : undefined,
+        food_description: details && details.foods && details.foods.food ? details.foods.food.food_description : 'No hay información nutricional disponible.',
+        servings: details && details.foods && details.foods.food ? details.foods.food.servings?.serving : undefined,
         imageUrl: image ? image.webformatURL : undefined
       });
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Error al procesar la solicitud');
-      setFoodDetails(null);
+      console.error('Error processing request:', error);
+      setError('Error al procesar la solicitud');
     } finally {
       setIsLoading(false);
       setModalIsOpen(true);
