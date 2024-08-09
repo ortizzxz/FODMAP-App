@@ -12,7 +12,7 @@ export const FoodBuscador: React.FC<FoodBuscadorProps>  = ({ setSearchTerm }) =>
     return (
         <div className='w-full pr-2 justify-center items-center'>
             <input
-            className='w-full rounded-md h-14 bg-third p-2 text-lg placeholder-custom-placeholder'
+            className='w-full rounded-md h-14 bg-[#cfffca] p-2 text-lg placeholder-custom-placeholder'
             type="text" 
             placeholder="Buscar alimento..." 
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}

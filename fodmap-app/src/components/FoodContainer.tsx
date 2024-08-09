@@ -41,24 +41,23 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(food);
     setIsLoading(true);
     setError(null);
-  
+
     try {
       const translatedName = await translateText(food.nombre, 'en');
-  
       // Realiza las solicitudes de manera independiente
       const detailsPromise = searchFood(translatedName).catch((error) => {
         console.error('Error fetching food details:', error);
         return null; // Retorna null si falla
       });
-  
+      
       const imagePromise = searchImage(translatedName).catch((error) => {
         console.error('Error fetching image:', error);
         return null; // Retorna null si falla
       });
-  
+      
       const details = await detailsPromise;
       const image = await imagePromise;
-  
+      
       setFoodDetails({
         food_name: food.nombre, // Usa el nombre original en español
         food_description: details && details.foods && details.foods.food ? details.foods.food.food_description : 'No hay información nutricional disponible.',
@@ -88,7 +87,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className="justify-center cursor-pointer border-1 border-second bg-third rounded-md w-[95%] p-4 m-2 text-center shadow-xl"
+            className="justify-center text-[#54652d] cursor-pointer border-1 border-[#485726] bg-[#cfffca] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
           >
             {food.previewImageUrl && <img src={food.previewImageUrl} alt={food.nombre} className="w-full h-32 object-cover" />}
             <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>
@@ -100,17 +99,26 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Food Details Modal"
-        className="modal-content flex justify-center items-center"
+        className="modal-content flex flex-col justify-center items-center p-4"
         overlayClassName="modal-overlay"
       >
-        <button onClick={closeModal} className="w-[50%] mb-2 px-4 py-2 bg-third text-main rounded-md hover:border-main hover:bg-opacity-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-second focus:ring-opacity-50">Cerrar</button>
+        <button onClick={closeModal} className="w-[70%] mb-2 px-4 py-2 font-[500] bg-[#b5ce88] text-main rounded-md hover:border-main hover:bg-opacity-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-second focus:ring-opacity-50">
+          Cerrar
+        </button>
         {isLoading && <p>Cargando...</p>}
         {error && <p className="error text-lg text-center">Servidor en mantenimiento. <br /> Inténtelo nuevamente más tarde.</p>}
         {foodDetails && !isLoading && !error && (
-          <div>
-            {foodDetails.imageUrl && <img src={foodDetails.imageUrl} alt={foodDetails.food_name} />}
-            <h2 className='text-xl text-center'>{foodDetails.food_name}</h2>
-            <p>{foodDetails.food_description}</p>
+          <div className="flex flex-col items-center">
+            {foodDetails.imageUrl && (
+              <img
+                src={foodDetails.imageUrl}
+                alt={foodDetails.food_name}
+                className="block max-w-full max-h-80 h-auto rounded-lg shadow-md mb-2" 
+              />
+            )}
+            <h2 className='text-2xl text-center font-[500] text-[#54652d] '>{foodDetails.food_name}</h2>
+            <h2 className='text-xl text-centeñr font-[500] text-[#54652d]'>Indice FODMAP: {capitalizeFirstLetter(selectedFood?.indice || '')}</h2>
+            <p className='text-center text-lg'>{foodDetails.food_description}</p>
           </div>
         )}
       </Modal>
