@@ -4,14 +4,14 @@ module.exports = {
   ],
   theme: {
     colors: {
-      main: '#191A1A',
+      main: '#54652a',
       second: '#E3E3E1',
       third: '#a59e92',
       fourth: '#00bff2'
     },
     extend: {
       fontFamily: {
-        sans: ['Libre Baskerville', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
       },
       placeholderColor: theme => ({
         'custom-placeholder': theme('colors.main'), //colors -> main 

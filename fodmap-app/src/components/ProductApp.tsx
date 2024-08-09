@@ -85,15 +85,15 @@ export const ProductApp: React.FC = () => {
     };
 
     return (
-        <div className="h-screen bg-[#AAAE75] flex flex-col font-sans overflow-hidden ">
+        <div className="h-screen bg-[#cfffca] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
-            <div className="bg-[#CBD6A5] lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+            <div className="bg-[#b5ce88] lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
-                    <h1 className="text-3xl text-center pb-3 text-[#485726] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className="text-3xl font-medium text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
                     
-                    <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-third'>
+                    <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-[#cfffca]'>
                         <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={handleSearchTermChange}/>
@@ -119,20 +119,22 @@ export const ProductApp: React.FC = () => {
 
                 <div className='w-full flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
                     {showWelcomeMessage && (
-                        <div>
-                            <h2 className='text-xl text-second text-center mt-[20%] lg:mt-[10%] md:mt-[20%]'>
+                        <div className='text-[#54652d] text-center font-medium'>
+
+                            <h2 className='text-xl mt-[20%] lg:mt-[10%] md:mt-[20%]'>
                                 ¡Bienvenido al primer buscador de alimentos FODMAP en español!
                             </h2>
                             
-                            <p className='text-xl text-second text-center ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
+                            <p className='text-xl ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
                             Esta herramienta ha sido creada de la mano de Aircury S.L. para ayudar a todos aquellos con 
                             dietas que requieran de la limitación de alimentos FODMAP.
-                            </p> 
+                            </p>
+                             
                         </div>
                     )}
                     {!showWelcomeMessage && !hasResults && (
-                        <h2 className='text-xl text-second text-center mt-[40%] lg:mt-[5%] md:mt-[5%]'>
-                            ¡Vaya! - no se han hallado resultados. <br /> Prueba a escribir en el buscador...
+                        <h2 className='text-2xl text-[#54652d] text-center mt-[40%] lg:mt-[10%] md:mt-[5%]'>
+                            ¡Vaya! - no se han hallado resultados.
                         </h2>
                     )}
                     {hasResults && (
@@ -141,7 +143,7 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 {/* Footer */}
-                <footer className="w-full bg-[#CBD6A5] text-second text-center py-1 mt-2 text-sm">
+                <footer className="w-full bg-[#b5ce88] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
@@ -151,23 +153,6 @@ export const ProductApp: React.FC = () => {
                 </footer>
 
             </div>
-                    
-        {/* Modal */}
-            {selectedFood && (
-                <Modal
-                    isOpen={!!selectedFood}
-                    onRequestClose={closeModal}
-                    contentLabel="Food Details"
-                    className="Modal"
-                    overlayClassName="Overlay"
-                >
-                    <h2 className="text-xl mb-2 text-center custom-text">Detalles del Alimento</h2>
-                    <FoodDetails alimento={selectedFood} />
-                    <button onClick={closeModal} className="mt-4 bg-red-500 text-white p-2 rounded">
-                        Cerrar
-                    </button>
-                </Modal>
-            )}
         </div>
     );
 };
