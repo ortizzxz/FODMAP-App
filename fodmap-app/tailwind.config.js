@@ -14,7 +14,7 @@ module.exports = {
         sans: ['Libre Baskerville', 'sans-serif'],
       },
       placeholderColor: theme => ({
-        'custom-placeholder': theme('colors.main'), // Usando el color 'main' definido arriba
+        'custom-placeholder': theme('colors.main'), //colors -> main 
       }),
     },
   },
