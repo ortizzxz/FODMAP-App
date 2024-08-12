@@ -1,14 +1,23 @@
 import axios, { AxiosError } from 'axios';
 
+const translationCache = new Map();
+
 export const translateText = async (text: string, targetLanguage: string): Promise<string> => {
+  const cacheKey = `${text}-${targetLanguage}`;
+  if (translationCache.has(cacheKey)) {
+    return translationCache.get(cacheKey);
+  }
+
   console.log(`Iniciando traducción: texto="${text}", idioma destino="${targetLanguage}"`);
   try {
     console.time('Tiempo de traducción');
     const response = await axios.post('/api/translate', { text, targetLanguage });
     console.timeEnd('Tiempo de traducción');
     
-    console.log('Respuesta de traducción:', response.data);
-    return response.data.translatedText;
+    const translatedText = response.data.translatedText;
+    translationCache.set(cacheKey, translatedText);
+    console.log('Respuesta de traducción:', translatedText);
+    return translatedText;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
