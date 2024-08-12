@@ -77,13 +77,6 @@ export const ProductApp: React.FC = () => {
         setShowFilters(false);
     };
 
-    const handleFoodClick = (alimento: Alimento) => {
-        setSelectedFood(alimento);
-    };
-
-    const closeModal = () => {
-        setSelectedFood(null);
-    };
 
     useEffect(() => {
         const handleBeforeUnload = () => {
@@ -98,10 +91,10 @@ export const ProductApp: React.FC = () => {
       }, []);
 
     return (
-        <div className="h-screen bg-[#88976c] flex flex-col font-sans overflow-hidden ">
+        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
-            <div className="bg-[#a2b879] lg:w-[70%]  sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+            <div className="bg-[#eeeded] lg:w-[70%] border-1 border-[#54652d] sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
                     <h1 className="text-3xl font-medium text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
@@ -156,7 +149,7 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 {/* Footer */}
-                <footer className="w-full bg-[#a2b879] text-[#54652d] text-center text-md py-1 mt-2">
+                <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
