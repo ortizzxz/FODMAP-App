@@ -36,6 +36,12 @@ export const translateText = async (text: string, targetLanguage: string): Promi
   }
 };
 
+// Función para limpiar el caché de traducciones
+export const clearTranslationCache = () => {
+  translationCache.clear();
+  console.log('Cache de traducciones limpiado.');
+};
+
 export const searchFood = async (query: string): Promise<any> => {
   console.log(`Iniciando búsqueda de comida: query="${query}"`);
   try {
@@ -65,20 +71,32 @@ export const searchFood = async (query: string): Promise<any> => {
     console.trace('Traza de la pila del error:');
     throw error;
   }
-}
+};
 
 // search image stock 
 export const searchImage = async (query: string): Promise<any> => {
   try {
     const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
+    console.log(`Realizando consulta a Pixabay con: "${query}"`); // Log para verificar la consulta
+
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
         key: apiKey,
-        q: encodeURIComponent(query),  
+        q: encodeURIComponent(query),  // Usa el nombre del alimento directamente
         image_type: 'photo',
+        per_page: 5,
       }
     });
-    return response.data.hits[0];
+
+    console.log('Resultados de Pixabay:', response.data.hits);
+
+    const hits = response.data.hits;
+    if (hits.length > 0) {
+      return hits[0]; // Devuelve el primer resultado
+    } else {
+      console.warn(`No se encontraron imágenes para la consulta: ${query}`);
+      return null;
+    }
   } catch (error) {
     console.error('Error fetching image:', error);
     throw error;

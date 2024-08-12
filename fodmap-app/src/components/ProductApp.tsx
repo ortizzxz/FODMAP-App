@@ -5,6 +5,7 @@ import { FoodDetails } from './FoodDetails';
 import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
+import { clearTranslationCache } from './fatSecretService';
 import React from 'react';
 import '../styles/backgroundCustomColor.css';
 import Modal from 'react-modal';
@@ -83,6 +84,18 @@ export const ProductApp: React.FC = () => {
     const closeModal = () => {
         setSelectedFood(null);
     };
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+          clearTranslationCache();
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+          window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+      }, []);
 
     return (
         <div className="h-screen bg-[#88976c] flex flex-col font-sans overflow-hidden ">

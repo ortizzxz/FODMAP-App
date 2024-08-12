@@ -58,14 +58,14 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
       const image = await imagePromise;
       
       if (image) {
-        food.previewImageUrl = image.webformatURL; // assign an url to the object to fetch it later on the preview display
+        food.previewImageUrl = image.webformatURL; // assign an url to the object to fetch it later on the preview 
       }
       
       setFoodDetails({
         food_name: food.nombre,
         food_description: details?.foods?.food?.food_description || 'No hay información nutricional disponible.',
         servings: details?.foods?.food?.servings?.serving,
-        imageUrl: image?.webformatURL
+        imageUrl: food.previewImageUrl 
       });
     } catch (error) {
       console.error('Error processing request:', error);
@@ -82,6 +82,25 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(null);
     setError(null);
   };
+
+  // so we can preload the image when the component loads 
+  useEffect(() => {
+    const fetchImages = async () => {
+      for (let food of alimento) {
+        try {
+          const image = await searchImage(food.nombre); // original name without having to translate
+          console.log(food.nombre);
+          if (image) {
+            food.previewImageUrl = image.webformatURL;
+          }
+        } catch (error) {
+          console.error(`Error fetching image for ${food.nombre}:`, error);
+        }
+      }
+    };
+
+    fetchImages();
+  }, [alimento]);
 
   return (
     <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
