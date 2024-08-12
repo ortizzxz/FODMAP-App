@@ -24,7 +24,7 @@ interface FoodSearcherProps {
   alimento: Alimento[];
 }
 
-Modal.setAppElement('#root'); // Asegúrate de que esto esté configurado para evitar problemas de accesibilidad
+Modal.setAppElement('#root'); 
 
 const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
