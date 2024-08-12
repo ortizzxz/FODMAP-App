@@ -6,6 +6,8 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000;
 
+axios.defaults.withCredentials = true; // Esto permite que Axios envíe cookies con las solicitudes
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -72,6 +74,7 @@ app.post('/translate', async (req, res) => {
 
 app.post('/search', async (req, res) => {
   try {
+    
     const token = await getAccessToken();
     const { query } = req.body;
 

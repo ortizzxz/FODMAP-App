@@ -82,25 +82,8 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(null);
     setError(null);
   };
+  
 
-  // so we can preload the image when the component loads 
-  useEffect(() => {
-    const fetchImages = async () => {
-      for (let food of alimento) {
-        try {
-          const image = await searchImage(food.nombre); // original name without having to translate
-          console.log(food.nombre);
-          if (image) {
-            food.previewImageUrl = image.webformatURL;
-          }
-        } catch (error) {
-          console.error(`Error fetching image for ${food.nombre}:`, error);
-        }
-      }
-    };
-
-    fetchImages();
-  }, [alimento]);
 
   return (
     <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
@@ -109,9 +92,8 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className="justify-center text-[#54652d] cursor-pointer border-1 border-[#cee696] bg-[#abbd89] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
+            className="justify-center  cursor-pointer border-1 border-[#cee696] bg-[#abbd89] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
           >
-            {food.previewImageUrl && <img src={food.previewImageUrl} alt={food.nombre} className="w-full h-32 object-cover" />}
             <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>   
             <div className='text-lg'>Indice FODMAP: {capitalizeFirstLetter(food.indice)}</div>
           </div>

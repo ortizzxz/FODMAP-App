@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
 const translationCache = new Map();
+axios.defaults.withCredentials = true; //  permite que Axios envíe cookies con las solicitudes
 
 export const translateText = async (text: string, targetLanguage: string): Promise<string> => {
   const cacheKey = `${text}-${targetLanguage}`;
