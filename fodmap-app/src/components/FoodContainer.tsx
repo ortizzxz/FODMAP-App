@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alimento } from './types';
 import { searchFood, translateText, searchImage } from './fatSecretService';
 import Modal from 'react-modal';
@@ -17,7 +17,7 @@ interface FoodDetailResponse {
       carbohydrate: string;
     };
   };
-  imageUrl?: string; // Añadido para la imagen
+  imageUrl?: string;  
 }
 
 interface FoodSearcherProps {
@@ -58,7 +58,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
       const image = await imagePromise;
       
       if (image) {
-        food.previewImageUrl = image.webformatURL; // Asigna la URL de la imagen al objeto Alimento
+        food.previewImageUrl = image.webformatURL; // assign an url to the object to fetch it later on the preview display
       }
       
       setFoodDetails({
@@ -82,6 +82,25 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(null);
     setError(null);
   };
+
+  // so we can preload the image when the component loads 
+  useEffect(() => {
+    const fetchImages = async () => {
+      for (let food of alimento) {
+        try {
+          const translatedName = await translateText(food.nombre, 'en');
+          const image = await searchImage(translatedName);
+          if (image) {
+            food.previewImageUrl = image.webformatURL;
+          }
+        } catch (error) {
+          console.error(`Error fetching image for ${food.nombre}:`, error);
+        }
+      }
+    };
+
+    fetchImages();
+  }, [alimento]);
 
   return (
     <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
