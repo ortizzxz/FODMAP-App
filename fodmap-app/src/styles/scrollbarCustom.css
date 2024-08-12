@@ -7,6 +7,8 @@
   }
   
   .scroll-container::-webkit-scrollbar-track {
-    background-color: #191616; /* Color de fondo de la barra de desplazamiento */
+    background-color: #a2b879; /* Color de fondo de la barra de desplazamiento */
     margin-top: 10px;
   }
+
+  

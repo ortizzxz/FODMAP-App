@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alimento } from './types';
 import { searchFood, translateText, searchImage } from './fatSecretService';
 import Modal from 'react-modal';
@@ -41,28 +41,31 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(food);
     setIsLoading(true);
     setError(null);
-
+  
     try {
       const translatedName = await translateText(food.nombre, 'en');
-      // Realiza las solicitudes de manera independiente
       const detailsPromise = searchFood(translatedName).catch((error) => {
         console.error('Error fetching food details:', error);
-        return null; // Retorna null si falla
+        return null;
       });
       
       const imagePromise = searchImage(translatedName).catch((error) => {
         console.error('Error fetching image:', error);
-        return null; // Retorna null si falla
+        return null;
       });
       
       const details = await detailsPromise;
       const image = await imagePromise;
       
+      if (image) {
+        food.previewImageUrl = image.webformatURL; // assign an url to the object to fetch it later on the preview display
+      }
+      
       setFoodDetails({
-        food_name: food.nombre, // Usa el nombre original en español
-        food_description: details && details.foods && details.foods.food ? details.foods.food.food_description : 'No hay información nutricional disponible.',
-        servings: details && details.foods && details.foods.food ? details.foods.food.servings?.serving : undefined,
-        imageUrl: image ? image.webformatURL : undefined
+        food_name: food.nombre,
+        food_description: details?.foods?.food?.food_description || 'No hay información nutricional disponible.',
+        servings: details?.foods?.food?.servings?.serving,
+        imageUrl: image?.webformatURL
       });
     } catch (error) {
       console.error('Error processing request:', error);
@@ -81,16 +84,16 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
   };
 
   return (
-    <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container">
+    <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-4 overflow-auto">
         {alimento.map((food) => (
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className="justify-center text-[#54652d] cursor-pointer border-1 border-[#485726] bg-[#cfffca] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
+            className="justify-center text-[#54652d] cursor-pointer border-1 border-[#cee696] bg-[#abbd89] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
           >
             {food.previewImageUrl && <img src={food.previewImageUrl} alt={food.nombre} className="w-full h-32 object-cover" />}
-            <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>
+            <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>   
             <div className='text-lg'>Indice FODMAP: {capitalizeFirstLetter(food.indice)}</div>
           </div>
         ))}
