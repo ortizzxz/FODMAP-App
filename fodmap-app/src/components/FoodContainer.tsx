@@ -17,7 +17,7 @@ interface FoodDetailResponse {
       carbohydrate: string;
     };
   };
-  imageUrl?: string;  
+  imageUrl?: string; // Añadido para la imagen
 }
 
 interface FoodSearcherProps {
@@ -82,25 +82,6 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setSelectedFood(null);
     setError(null);
   };
-
-  // so we can preload the image when the component loads 
-  useEffect(() => {
-    const fetchImages = async () => {
-      for (let food of alimento) {
-        try {
-          const translatedName = await translateText(food.nombre, 'en');
-          const image = await searchImage(translatedName);
-          if (image) {
-            food.previewImageUrl = image.webformatURL;
-          }
-        } catch (error) {
-          console.error(`Error fetching image for ${food.nombre}:`, error);
-        }
-      }
-    };
-
-    fetchImages();
-  }, [alimento]);
 
   return (
     <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
