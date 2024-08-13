@@ -25,8 +25,8 @@ export const ProductApp: React.FC = () => {
     const [selectedGroup, setSelectedGroup] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('');
     const [showFilters, setShowFilters] = useState<boolean>(false);
-    const [hasResults, setHasResults] = useState<boolean>(false); 
-    const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true); 
+    const [hasResults, setHasResults] = useState<boolean>(false);
+    const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true);
     const [selectedFood, setSelectedFood] = useState<Alimento | null>(null); // Para manejar el alimento seleccionado
 
 
@@ -64,7 +64,7 @@ export const ProductApp: React.FC = () => {
 
     const handleSearchTermChange = (term: string) => {
         setSearchTerm(term);
-        if (term !== ''){
+        if (term !== '') {
             setShowWelcomeMessage(false);
         }
     };
@@ -80,15 +80,15 @@ export const ProductApp: React.FC = () => {
 
     useEffect(() => {
         const handleBeforeUnload = () => {
-          clearTranslationCache();
+            clearTranslationCache();
         };
-    
+
         window.addEventListener('beforeunload', handleBeforeUnload);
-    
+
         return () => {
-          window.removeEventListener('beforeunload', handleBeforeUnload);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-      }, []);
+    }, []);
 
     return (
         <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden ">
@@ -98,13 +98,13 @@ export const ProductApp: React.FC = () => {
 
                 <div>
                     <h1 className="text-3xl font-medium text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
-                    
+
                     <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-[#88976c]'>
                         <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
-                                <FoodBuscador setSearchTerm={handleSearchTermChange}/>
+                                <FoodBuscador setSearchTerm={handleSearchTermChange} />
                             </div>
-                            <button 
+                            <button
                                 className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within:bg-[#a59e95] active:bg-[#af9987]'
                                 onClick={toggleFilters}
                             >
@@ -112,15 +112,25 @@ export const ProductApp: React.FC = () => {
                             </button>
                         </div>
                         {showFilters && (
-                            <div className="bg-third border-1 rounded absolute lg:top-[-120%] lg:left-[100%] md:top-[-120%] md:left-[100%] w-1/2 ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
-                                <h2 className="text-xl mb-2 text-center custom-text">Grupo de alimento</h2>
-                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
-                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
-                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-                            </div>
-                        )}
+    <div className="bg-[#88976c] border-1 rounded absolute lg:top-[80%] lg:left-[-2%] md:top-[-120%] md:left-[100%] w-full
+                    ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
+        
+        <div className="flex items-center justify-between mb-2">
+            <h2 className="text-xl text-center custom-text flex-grow">Grupo de alimento</h2>
+            <button 
+            onClick={hideFilters} 
+            className='w-8 h-8 text-center border-1 border-black hover:bg-[#e1e0e0] transition-colors duration-500 ml-2'>
+                X
+            </button>
+        </div>
+        
+        <GrupoFilter setSelectedGroup={setSelectedGroup} />
+        <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
+        <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+    </div>
+)}
                     </div>
-                    
+
                 </div>
 
                 <div className='w-full flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
@@ -130,12 +140,12 @@ export const ProductApp: React.FC = () => {
                             <h2 className='text-xl mt-[20%] lg:mt-[10%] md:mt-[20%]'>
                                 ¡Bienvenido al primer buscador de alimentos FODMAP en español!
                             </h2>
-                            
+
                             <p className='text-xl ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
-                            Esta herramienta ha sido creada de la mano de Aircury S.L. para ayudar a todos aquellos con 
-                            dietas que requieran de la limitación de alimentos FODMAP.
+                                Esta herramienta ha sido creada de la mano de Aircury S.L. para ayudar a todos aquellos con
+                                dietas que requieran de la limitación de alimentos FODMAP.
                             </p>
-                             
+
                         </div>
                     )}
                     {!showWelcomeMessage && !hasResults && (
@@ -144,7 +154,7 @@ export const ProductApp: React.FC = () => {
                         </h2>
                     )}
                     {hasResults && (
-                        <FoodSearcher alimento={filteredAlimentos}  />
+                        <FoodSearcher alimento={filteredAlimentos} />
                     )}
                 </div>
 

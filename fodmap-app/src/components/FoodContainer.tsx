@@ -17,7 +17,7 @@ interface FoodDetailResponse {
       carbohydrate: string;
     };
   };
-  imageUrl?: string; // Añadido para la imagen
+  imageUrl?: string; // added for the img 
 }
 
 interface FoodSearcherProps {
