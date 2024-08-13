@@ -94,7 +94,7 @@ export const ProductApp: React.FC = () => {
         <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden ">
 
             {/* Main Content */}
-            <div className="bg-[#eeeded] lg:w-[70%] border-1 border-[#54652d] sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+            <div className="bg-[#eeeded] lg:w-[70%] lg:border-1 md:border-1 border-[#54652d] sm:m-0 lg:m-1 md:m-1 lg:rounded-3xl mx-auto md:rounded-3xl flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
                     <h1 className="text-3xl font-medium text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
