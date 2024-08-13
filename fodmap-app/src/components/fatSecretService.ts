@@ -77,12 +77,12 @@ export const searchFood = async (query: string): Promise<any> => {
 export const searchImage = async (query: string): Promise<any> => {
   try {
     const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
-    console.log(`Realizando consulta a Pixabay con: "${query}"`); // Log para verificar la consulta
+    console.log(`Realizando consulta a Pixabay con: "${query}"`); // Log so we can check the query 
 
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
         key: apiKey,
-        q: encodeURIComponent(query),  // Usa el nombre del alimento directamente
+        q: encodeURIComponent(query),  // no need to translate de food to send it to pixabay so we save a translation 
         image_type: 'photo',
         per_page: 5,
       }
