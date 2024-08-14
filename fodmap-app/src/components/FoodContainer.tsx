@@ -92,7 +92,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className="justify-center  cursor-pointer border-1 border-[#cee696] bg-[#abbd89] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
+            className="justify-center  cursor-pointer border-2 border-[#cee696] bg-[#EAEFE0] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
           >
             <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>   
             <div className='text-lg'>Indice FODMAP: {capitalizeFirstLetter(food.indice)}</div>

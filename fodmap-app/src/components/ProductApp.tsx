@@ -97,7 +97,7 @@ export const ProductApp: React.FC = () => {
             <div className="bg-[#eeeded] lg:w-[70%]  border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
-                    <h1 className="text-3xl font-medium text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
+                    <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
 
                     <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-[#88976c]'>
                         <div className='flex p-1 '>
@@ -112,23 +112,23 @@ export const ProductApp: React.FC = () => {
                             </button>
                         </div>
                         {showFilters && (
-    <div className="bg-[#88976c] border-1 rounded absolute lg:top-[80%] lg:left-[-2%] md:top-[-120%] md:left-[100%] w-full
+                            <div className="bg-[#88976c] border-1 rounded absolute lg:top-[80%] lg:left-[-2%] md:top-[-120%] md:left-[100%] w-full
                     ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
-        
-        <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl text-center custom-text flex-grow">Grupo de alimento</h2>
-            <button 
-            onClick={hideFilters} 
-            className='w-8 h-8 text-center border-1 border-black hover:bg-[#e1e0e0] transition-colors duration-500 ml-2'>
-                X
-            </button>
-        </div>
-        
-        <GrupoFilter setSelectedGroup={setSelectedGroup} />
-        <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
-        <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-    </div>
-)}
+
+                                <div className="flex items-center justify-between mb-2">
+                                    <h2 className="text-xl text-center custom-text flex-grow">Grupo de alimento</h2>
+                                    <button
+                                        onClick={hideFilters}
+                                        className='w-8 h-8 text-center border-1 border-black hover:bg-[#e1e0e0] transition-colors duration-500 ml-2'>
+                                        X
+                                    </button>
+                                </div>
+
+                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
+                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                            </div>
+                        )}
                     </div>
 
                 </div>
