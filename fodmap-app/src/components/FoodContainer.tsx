@@ -83,7 +83,19 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setError(null);
   };
   
-
+  // function to get border color changed based on the fodmap indice 
+  const getBorderByIndex = (indice: string) => {
+    switch(indice.toLowerCase()){
+      case 'alto': 
+        return 'border-[#ff0000]'
+      case 'medio': 
+        return 'border-[#fbff16]'
+      case 'bajo': 
+        return 'border-[#1bff41]'
+      default: 
+        return 'border-[#cee696]'
+    }
+  };
 
   return (
     <div className="h-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
@@ -92,7 +104,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
           <div
             key={food.nombre}
             onClick={() => handleFoodClick(food)}
-            className="justify-center  cursor-pointer border-2 border-[#cee696] bg-[#EAEFE0] rounded-md w-[95%] p-4 m-2 text-center shadow-md"
+            className={`justify-center cursor-pointer border-2 bg-[#EAEFE0] rounded-md w-[95%] p-4 m-2 text-center shadow-md ${getBorderByIndex(food.indice)}`}
           >
             <div className='text-xl'>{capitalizeFirstLetter(food.nombre)}</div>   
             <div className='text-lg'>Indice FODMAP: {capitalizeFirstLetter(food.indice)}</div>
