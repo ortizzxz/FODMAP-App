@@ -2,10 +2,7 @@ services:
   - type: web
     name: fodmap-backend
     env: java
-    buildCommand: 
-      java -version
-      echo $JAVA_HOME
-      ./mvnw clean install
+    buildCommand: ./mvnw clean install
     startCommand: java -jar target/*.jar
     envVars:
       - key: DB_URL
@@ -14,6 +11,8 @@ services:
         value: ortizzxz
       - key: DB_PASSWORD
         value: B6xSPnPvRVmXVvaszYayMgqU9y6oonkW
+      - key: JAVA_HOME
+        value: /usr/lib/jvm/java-21-openjdk
     plan: free  # or the desired plan
     region: frankfurt  # or the preferred region
     runtime: java21

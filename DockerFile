@@ -1,32 +1,32 @@
-# Etapa 1: Construcción
-FROM node:18 AS build
+# Etapa 1: Construcción de la aplicación Java
+FROM eclipse-temurin:21-jdk AS build
 
 # Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar package.json y package-lock.json al directorio de trabajo
-COPY package*.json ./
+# Copiar el archivo pom.xml y descargar las dependencias necesarias
+COPY pom.xml .
 
-# Instalar las dependencias
-RUN npm install
+# Descargar las dependencias (caché de capas)
+RUN ./mvnw dependency:go-offline -B
 
-# Copiar el resto del código de la aplicación al directorio de trabajo
-COPY . .
+# Copiar el resto del código de la aplicación
+COPY src ./src
 
-# Construir la aplicación
-RUN npm run build
+# Compilar la aplicación
+RUN ./mvnw clean install -DskipTests
 
-# Etapa 2: Servidor NGINX
-FROM nginx:stable-alpine
+# Etapa 2: Generar imagen liviana para ejecución
+FROM eclipse-temurin:21-jre-alpine
 
-# Copiar los archivos de construcción desde la etapa 1 al directorio de NGINX
-COPY --from=build /app/build /usr/share/nginx/html
+# Establecer el directorio de trabajo
+WORKDIR /app
 
-# Copiar el archivo de configuración de NGINX
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copiar el JAR generado desde la etapa de construcción
+COPY --from=build /app/target/*.jar app.jar
 
-# Exponer el puerto en el que NGINX correrá
-EXPOSE 80
+# Exponer el puerto en el que correrá la aplicación
+EXPOSE 9898
 
-# Comando para ejecutar NGINX
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para ejecutar la aplicación
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
