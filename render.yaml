@@ -2,7 +2,7 @@ services:
   - type: web
     name: fodmap-backend
     env: java
-    buildCommand: mvn clean install
+    buildCommand: ./mvnw clean install
     startCommand: java -jar target/*.jar
     envVars:
       - key: DB_URL
