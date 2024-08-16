@@ -9,3 +9,6 @@ COPY target/fodmap-backend-0.0.1-SNAPSHOT.jar /app/fodmap-backend-0.0.1-SNAPSHOT
 
 # Comando para ejecutar el archivo JAR
 CMD ["java", "-jar", "/app/fodmap-backend-0.0.1-SNAPSHOT.jar"]
+
+# Exponer el puerto 8080
+EXPOSE 8080
