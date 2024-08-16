@@ -14,3 +14,4 @@ services:
     plan: free  # or the desired plan
     region: frankfurt  # or the preferred region
     runtime: java21
+    rootDir: ./backend/fodmap-backend  # This is the key line to fix the directory issue
