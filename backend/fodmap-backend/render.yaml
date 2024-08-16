@@ -2,8 +2,15 @@ services:
   - type: web
     name: fodmap-backend
     env: java
-    region: frankfurt
-    branch: main
-    buildCommand: ./mvnw clean install
-    startCommand: java -jar target/your-application.jar
-    rootDir: backend/fodmap-backend
+    buildCommand: mvn clean install
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: DB_URL
+        value: jdbc:mysql://your-mysql-host:3306/your-database-name
+      - key: DB_USERNAME
+        value: your-username
+      - key: DB_PASSWORD
+        value: your-password
+    plan: free  # or the desired plan
+    region: frankfurt  # or the preferred region
+    runtime: java21
