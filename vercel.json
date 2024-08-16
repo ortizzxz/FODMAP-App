@@ -1,8 +1,5 @@
 {
     "version": 2,
-    "projects": {
-      "source": "fodmap-app"
-    },
     "builds": [
       {
         "src": "fodmap-app/package.json",
