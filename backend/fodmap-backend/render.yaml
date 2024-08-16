@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: fodmap-backend
+    env: java
+    region: frankfurt
+    branch: main
+    buildCommand: ./mvnw clean install
+    startCommand: java -jar target/your-application.jar
+    rootDir: backend/fodmap-backend
