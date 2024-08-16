@@ -6,11 +6,11 @@ services:
     startCommand: java -jar target/*.jar
     envVars:
       - key: DB_URL
-        value: jdbc:mysql://localhost:9000/foodmap
+        value: postgresql://ortizzxz:B6xSPnPvRVmXVvaszYayMgqU9y6oonkW@dpg-cqvneprtq21c7384jvjg-a/fodmap
       - key: DB_USERNAME
-        value: root
+        value: ortizzxz
       - key: DB_PASSWORD
-        value: admin
+        value: B6xSPnPvRVmXVvaszYayMgqU9y6oonkW
     plan: free  # or the desired plan
     region: frankfurt  # or the preferred region
     runtime: java21
