@@ -10,6 +10,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/translate/, '/translate')
       },
+      '/api/health': {
+        target: process.env.VITE_API_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/health/, '/health')
+      },
       '/api/search': {
         target: process.env.VITE_API_URL,
         changeOrigin: true,
