@@ -1,8 +1,6 @@
 package com.jesus.fodmapapp.fodmap_backend.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,8 +9,7 @@ import jakarta.persistence.Table;
 public class Alimento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String nombre;
+    private String nombre; // Ahora es solo un campo String sin @GeneratedValue
 
     private String tipo;
     private String grupo;
@@ -42,6 +39,4 @@ public class Alimento {
     public void setIndice(String indice) {
         this.indice = indice;
     }
-
-    
 }
