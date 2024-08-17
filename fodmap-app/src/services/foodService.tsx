@@ -26,16 +26,14 @@ export const listProduct = (): null => {
 };
     
 // tipiado para especificar que la funcion retorna una promesa de un axio response de un alimento o nulo  
-export const findAll = async (): Promise< AxiosResponse<EmbeddedAlimento> | null > => { 
-    
+export const findAll = async (): Promise<Alimento[] | null> => { 
     try {
-        const response = await axios.get<EmbeddedAlimento>(URL);
-        return response;    
+        const response = await axios.get<EmbeddedAlimento>(`${URL}/alimento`);
+        return response.data._embedded.alimentoes;    
     } catch (error) {
-        console.log(error);
+        console.error('Error fetching alimentos:', error);
+        return null;
     }
-
-    return null;
-}; 
+};
 
 // INSTALAR TYPES PARA AXIOS -> npm install @types/axios
