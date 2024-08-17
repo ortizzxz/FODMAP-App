@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const URL = 'http://localhost:9898/alimento'
+const URL = 'https://fodmap-app.onrender.com'
 
 // vamos a definir una interfaz para el tipo de dato que espero recibir desde el backend 
 interface Alimento {
