@@ -6,12 +6,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/translate': {
-        target: 'http://localhost:3000',
+        target: 'https://fodmap-app-1.onrender.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/translate/, '/translate')
       },
       '/api/search': {
-        target: 'http://localhost:3000',
+        target: 'https://fodmap-app-1.onrender.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/search/, '/search')
       },
