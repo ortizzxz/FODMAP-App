@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.jesus.fodmapapp.fodmap_backend.entities.Alimento;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "https://www.tufodmap.com", "https://tufodmap.com"})
 @RepositoryRestResource(path = "alimento")
 public interface AlimentoRepository extends CrudRepository<Alimento, String>{
 
