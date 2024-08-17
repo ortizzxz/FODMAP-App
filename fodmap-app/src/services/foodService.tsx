@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const URL = 'https://fodmap-app.onrender.com'
+const URL = 'https://fodmap-app.onrender.com/alimento'
 
 // vamos a definir una interfaz para el tipo de dato que espero recibir desde el backend 
 interface Alimento {
@@ -26,14 +26,16 @@ export const listProduct = (): null => {
 };
     
 // tipiado para especificar que la funcion retorna una promesa de un axio response de un alimento o nulo  
-export const findAll = async (): Promise<Alimento[] | null> => { 
+export const findAll = async (): Promise< AxiosResponse<EmbeddedAlimento> | null > => { 
+    
     try {
-        const response = await axios.get<EmbeddedAlimento>(`${URL}/alimento`);
-        return response.data._embedded.alimentoes;    
+        const response = await axios.get<EmbeddedAlimento>(URL);
+        return response;    
     } catch (error) {
-        console.error('Error fetching alimentos:', error);
-        return null;
+        console.log(error);
     }
-};
+
+    return null;
+}; 
 
 // INSTALAR TYPES PARA AXIOS -> npm install @types/axios
