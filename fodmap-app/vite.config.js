@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, preprocessCSS } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -6,12 +6,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/translate': {
-        target: 'https://fodmap-app-1.onrender.com',
+        target: proccess.env.VITE_API_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/translate/, '/translate')
       },
       '/api/search': {
-        target: 'https://fodmap-app-1.onrender.com',
+        target: process.env.VITE_API_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/search/, '/search')
       },

@@ -1,8 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
 const translationCache = new Map();
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const translateText = async (text: string, targetLanguage: string): Promise<string> => {
+
   const cacheKey = `${text}-${targetLanguage}`;
   if (translationCache.has(cacheKey)) {
     return translationCache.get(cacheKey);
@@ -11,7 +13,7 @@ export const translateText = async (text: string, targetLanguage: string): Promi
   console.log(`Iniciando traducción: texto="${text}", idioma destino="${targetLanguage}"`);
   try {
     console.time('Tiempo de traducción');
-    const response = await axios.post('/api/translate', { text, targetLanguage });
+    const response = await axios.post(`${apiUrl}/translate`, { text, targetLanguage });
     console.timeEnd('Tiempo de traducción');
     
     const translatedText = response.data.translatedText;
@@ -46,7 +48,7 @@ export const searchFood = async (query: string): Promise<any> => {
   console.log(`Iniciando búsqueda de comida: query="${query}"`);
   try {
     console.time('Tiempo de búsqueda');
-    const response = await axios.post('/api/search', { query });
+    const response = await axios.post(`${apiUrl}/search`, { query });
     console.timeEnd('Tiempo de búsqueda');
     
     console.log('Respuesta de búsqueda:', {
