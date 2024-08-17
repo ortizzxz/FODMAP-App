@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/translate': {
-        target: proccess.env.VITE_API_URL,
+        target: process.env.VITE_API_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/translate/, '/translate')
       },
