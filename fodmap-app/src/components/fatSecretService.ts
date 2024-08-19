@@ -13,7 +13,8 @@ export const translateText = async (text: string, targetLanguage: string): Promi
   console.log(`Iniciando traducción: texto="${text}", idioma destino="${targetLanguage}"`);
   try {
     console.time('Tiempo de traducción');
-    const response = await axios.post(`${apiUrl}/translate`, { text, targetLanguage });
+    const tagText = `<food><vegetable>${text}</vegetable></food>`;
+    const response = await axios.post(`${apiUrl}/translate`, { tagText, targetLanguage });
     console.timeEnd('Tiempo de traducción');
     
     const translatedText = response.data.translatedText;
