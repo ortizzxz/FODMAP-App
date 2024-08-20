@@ -87,11 +87,11 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
   const getBorderByIndex = (indice: string) => {
     switch(indice.toLowerCase()){
       case 'alto': 
-        return 'border-[#ff0000]'
+        return 'border-[#ff4c4c]'
       case 'medio': 
-        return 'border-[#fbff16]'
+        return 'border-[#f8fa7a]'
       case 'bajo': 
-        return 'border-[#1bff41]'
+        return 'border-[#7bfc90]'
       default: 
         return 'border-[#cee696]'
     }
