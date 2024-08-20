@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/alimento")
-@CrossOrigin(origins = {"https://www.tufodmap.com/", "https://fodmap-app.vercel.app/", "https://fodmap-app-ortizzxzs-projects.vercel.app/", "https://fodmap-app-git-main-ortizzxzs-projects.vercel.app/"})
+@RequestMapping({"/alimento"})
+@CrossOrigin(origins = {"http://localhost:5173",
+                "https://www.tufodmap.com", 
+                "https://fodmap-app.onrender.com/alimento",
+                "https://fodmap-app.onrender.com",
+                "https://fodmap-app.vercel.app", 
+                "https://fodmap-app-ortizzxzs-projects.vercel.app", 
+                "https://fodmap-app-git-main-ortizzxzs-projects.vercel.app"})
 public class AlimentoController {
 
     private static final Logger logger = LoggerFactory.getLogger(AlimentoController.class);
@@ -52,5 +58,4 @@ public class AlimentoController {
                 });
     }
 
-    // Puedes añadir más métodos según sea necesario
 }
