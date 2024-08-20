@@ -15,7 +15,7 @@ export const FoodBuscador: React.FC<FoodBuscadorProps>  = ({ setSearchTerm }) =>
             className='w-full rounded-md h-14 bg-[#88976c] p-2 text-lg placeholder-custom-placeholder'
             type="text" 
             placeholder="Buscar alimento..." 
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value.normalize("NFC"))}
             />
         </div>
     );
