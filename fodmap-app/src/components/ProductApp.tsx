@@ -146,17 +146,19 @@ export const ProductApp: React.FC = () => {
 
                 <div className='w-[80%] flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
                     {showWelcomeMessage && (
-                        <div className='text-[#54652d] text-center font-medium'>
+                        <div className='flex-grow flex items-center justify-center'>
+                            <div className='text-[#54652d] text-center font-medium'>
 
-                            <h2 className='text-xl mt-[20%] lg:mt-[10%] md:mt-[20%]'>
-                                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
-                            </h2>
+                                <h2 className='text-xl mt-[20%] lg:mt-[10%] md:mt-[20%]'>
+                                    ¡Bienvenido al primer buscador de alimentos FODMAP en español!
+                                </h2>
 
-                            <p className='text-xl ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
-                                Esta herramienta ha para ayudar a todos aquellos con
-                                dietas que requieran de la limitación de alimentos FODMAP.
-                            </p>
+                                <p className='text-xl ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
+                                    Esta herramienta ha para ayudar a todos aquellos con
+                                    dietas que requieran de la limitación de alimentos FODMAP.
+                                </p>
 
+                            </div>
                         </div>
                     )}
                     {!showWelcomeMessage && !hasResults && (
