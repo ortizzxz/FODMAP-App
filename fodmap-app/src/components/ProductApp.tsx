@@ -43,7 +43,18 @@ export const ProductApp: React.FC = () => {
     };
 
     const normalizeString = (str: string) => {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        // Reemplazar los caracteres acentuados manualmente
+        return str
+            .replace(/[áàäâã]/g, "a")
+            .replace(/[éèëê]/g, "e")
+            .replace(/[íìïî]/g, "i")
+            .replace(/[óòöôõ]/g, "o")
+            .replace(/[úùüû]/g, "u")
+            .replace(/[ÁÀÄÂÃ]/g, "A")
+            .replace(/[ÉÈËÊ]/g, "E")
+            .replace(/[ÍÌÏÎ]/g, "I")
+            .replace(/[ÓÒÖÔÕ]/g, "O")
+            .replace(/[ÚÙÜÛ]/g, "U");
     };
 
     const filteredAlimentos = searchTerm
