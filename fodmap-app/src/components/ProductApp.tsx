@@ -144,7 +144,7 @@ export const ProductApp: React.FC = () => {
 
                 </div>
 
-                <div className='w-full flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
+                <div className='w-[80%] flex-grow overflow-auto scrollbar-none' onClick={hideFilters}>
                     {showWelcomeMessage && (
                         <div className='text-[#54652d] text-center font-medium'>
 
@@ -153,7 +153,7 @@ export const ProductApp: React.FC = () => {
                             </h2>
 
                             <p className='text-xl ml-1 mr-2 mt-[20%] lg:mt-[5%] md:mt-[5%]'>
-                                Esta herramienta ha sido creada de la mano de Aircury S.L. para ayudar a todos aquellos con
+                                Esta herramienta ha para ayudar a todos aquellos con
                                 dietas que requieran de la limitación de alimentos FODMAP.
                             </p>
 
