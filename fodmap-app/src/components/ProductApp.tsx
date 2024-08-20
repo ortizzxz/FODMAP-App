@@ -145,9 +145,9 @@ export const ProductApp: React.FC = () => {
 
                 </div>
 
-                <div className='w-[80%] flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
+                <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
                     {showWelcomeMessage && (
-                        <div className='text-[#54652d] text-center font-medium max-w-2xl'>
+                        <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
                             <h2 className='text-xl mb-4'>
                                 ¡Bienvenido al primer buscador de alimentos FODMAP en español!
                             </h2>
