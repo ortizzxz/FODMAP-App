@@ -145,27 +145,26 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 <div className='w-[80%] flex-grow flex items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
-                    {showWelcomeMessage && (
-                        <div className='text-[#54652d] text-center font-medium max-w-2xl'>
-                            <h2 className='text-xl mb-8'>
-                                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
-                            </h2>
-
-                            <p className='text-xl'>
-                                Esta herramienta ha sido creada para ayudar a todos aquellos con
-                                dietas que requieran de la limitación de alimentos FODMAP.
-                            </p>
-                        </div>
-                    )}
-                    {!showWelcomeMessage && !hasResults && (
-                        <h2 className='text-2xl text-[#54652d] text-center'>
-                            ¡Vaya! - no se han hallado resultados.
-                        </h2>
-                    )}
-                    {hasResults && (
-                        <FoodSearcher alimento={filteredAlimentos} />
-                    )}
-                </div>
+    {showWelcomeMessage && (
+        <div className='text-[#54652d] text-center font-medium max-w-2xl'>
+            <h2 className='text-xl mb-4'>
+                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
+            </h2>
+            <p className='text-xl'>
+                Esta herramienta ha sido creada para ayudar a todos aquellos con
+                dietas que requieran de la limitación de alimentos FODMAP.
+            </p>
+        </div>
+    )}
+    {!showWelcomeMessage && !hasResults && (
+        <h2 className='text-2xl text-[#54652d] text-center'>
+            ¡Vaya! - no se han hallado resultados.
+        </h2>
+    )}
+    {hasResults && (
+        <FoodSearcher alimento={filteredAlimentos} />
+    )}
+</div>
 
                 {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
