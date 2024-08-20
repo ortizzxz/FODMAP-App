@@ -10,14 +10,12 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(@NonNull CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:5173",
-                                        "https://www.tufodmap.com", 
+            .allowedOrigins("https://www.tufodmap.com/", 
                                         "https://fodmap-app.onrender.com/alimento",
                                         "https://fodmap-app.onrender.com",
-                                        "https://fodmap-app.vercel.app", 
-                                        "https://fodmap-app-ortizzxzs-projects.vercel.app", 
-                                        "https://fodmap-app-git-main-ortizzxzs-projects.vercel.app"
-                                        )
+                                        "https://fodmap-app.vercel.app/", 
+                                        "https://fodmap-app-ortizzxzs-projects.vercel.app/", 
+                                        "https://fodmap-app-git-main-ortizzxzs-projects.vercel.app/")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
             .allowCredentials(true);
