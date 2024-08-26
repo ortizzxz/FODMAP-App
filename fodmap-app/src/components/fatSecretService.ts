@@ -86,10 +86,10 @@ export const searchImage = async (query: string): Promise<any> => {
         key: apiKey,
         q: encodeURIComponent(query),
         image_type: 'photo',
-        per_page: 20, // Aumentamos el número de resultados para tener más opciones
-        category: 'food', // Filtramos por la categoría de comida
-        safesearch: true, // Aseguramos resultados apropiados
-        order: 'popular', // Ordenamos por popularidad
+        per_page: 5, 
+        category: 'food', // filter by category
+        safesearch: true, // proper results
+        order: 'popular', 
       }
     });
 
@@ -97,17 +97,20 @@ export const searchImage = async (query: string): Promise<any> => {
 
     const hits = response.data.hits;
     if (hits.length > 0) {
-      // Función para calcular la relevancia de una imagen
+      // const to figure out relevance of a pic
       const calculateRelevance = (hit: any) => {
         const tags = hit.tags.toLowerCase().split(', ');
-        const relevantTags = ['vegetables', 'food', 'raw', 'nutrition', 'foodstuff', 'agriculture', 'plants', 'fruit'];
+
+        const relevantTags = ['vegetables', 'food', 'raw', 'nutrition',
+                              'foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans'];
+
         return relevantTags.reduce((count, tag) => tags.includes(tag) ? count + 1 : count, 0);
       };
 
-      // Ordenamos los hits por relevancia
+      // sorting hits by relevance
       const sortedHits = hits.sort((a: any, b:any) => calculateRelevance(b) - calculateRelevance(a));
 
-      return sortedHits[0]; // Devolvemos la imagen más relevante
+      return sortedHits[0]; // return more relevant img
     } else {
       console.warn(`No se encontraron imágenes para la consulta: ${query}`);
       return null;
