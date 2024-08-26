@@ -79,14 +79,17 @@ export const searchFood = async (query: string): Promise<any> => {
 export const searchImage = async (query: string): Promise<any> => {
   try {
     const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
-    console.log(`Realizando consulta a Pixabay con: "${query}"`); // Log so we can check the query 
+    console.log(`Realizando consulta a Pixabay con: "${query}"`);
 
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
         key: apiKey,
-        q: encodeURIComponent(query),  // no need to translate de food to send it to pixabay so we save a translation 
+        q: encodeURIComponent(query),
         image_type: 'photo',
-        per_page: 5,
+        per_page: 20, // Aumentamos el número de resultados para tener más opciones
+        category: 'food', // Filtramos por la categoría de comida
+        safesearch: true, // Aseguramos resultados apropiados
+        order: 'popular', // Ordenamos por popularidad
       }
     });
 
@@ -94,7 +97,17 @@ export const searchImage = async (query: string): Promise<any> => {
 
     const hits = response.data.hits;
     if (hits.length > 0) {
-      return hits[0]; // Devuelve el primer resultado
+      // Función para calcular la relevancia de una imagen
+      const calculateRelevance = (hit: any) => {
+        const tags = hit.tags.toLowerCase().split(', ');
+        const relevantTags = ['vegetables', 'food', 'raw', 'nutrition', 'foodstuff', 'agriculture', 'plants', 'fruit'];
+        return relevantTags.reduce((count, tag) => tags.includes(tag) ? count + 1 : count, 0);
+      };
+
+      // Ordenamos los hits por relevancia
+      const sortedHits = hits.sort((a: any, b:any) => calculateRelevance(b) - calculateRelevance(a));
+
+      return sortedHits[0]; // Devolvemos la imagen más relevante
     } else {
       console.warn(`No se encontraron imágenes para la consulta: ${query}`);
       return null;
@@ -104,4 +117,3 @@ export const searchImage = async (query: string): Promise<any> => {
     throw error;
   }
 };
-
