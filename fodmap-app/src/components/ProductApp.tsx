@@ -28,6 +28,7 @@ export const ProductApp: React.FC = () => {
     const [hasResults, setHasResults] = useState<boolean>(false);
     const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true);
     const [selectedFood, setSelectedFood] = useState<Alimento | null>(null); // Para manejar el alimento seleccionado
+    const [hasSearched, setHasSearched] = useState(false);
 
 
 
@@ -75,6 +76,7 @@ export const ProductApp: React.FC = () => {
 
     const handleSearchTermChange = (term: string) => {
         setSearchTerm(term);
+        setHasSearched(true);
         if (term !== '') {
             setShowWelcomeMessage(false);
         }
@@ -109,8 +111,7 @@ export const ProductApp: React.FC = () => {
             mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
 
                 <div>
-                    <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Búsqueda de Alimentos FODMAP</h1>
-
+                    <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
                     <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-[#88976c]'>
                         <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
@@ -164,6 +165,11 @@ export const ProductApp: React.FC = () => {
                     )}
                     {hasResults && (
                         <FoodSearcher alimento={filteredAlimentos} />
+                    )}
+                    {!hasResults && !searchTerm && hasSearched &&(
+                        <h2 className='text-2xl text-[#54652d] text-center'>
+                            Prueba a escribir algo en el buscador...
+                        </h2>
                     )}
                 </div>
 
