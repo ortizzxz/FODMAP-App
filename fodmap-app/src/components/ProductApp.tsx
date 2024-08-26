@@ -158,7 +158,7 @@ export const ProductApp: React.FC = () => {
                             </p>
                         </div>
                     )}
-                    {!showWelcomeMessage && !hasResults && (
+                    {!showWelcomeMessage && !hasResults && searchTerm &&(
                         <h2 className='text-2xl text-[#54652d] text-center'>
                             ¡Vaya! - no se han hallado resultados.
                         </h2>
