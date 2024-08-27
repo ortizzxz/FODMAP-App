@@ -107,61 +107,63 @@ export const ProductApp: React.FC = () => {
             lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
                 <div>
                     <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
-                    <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%] rounded-md bg-[#88976c]'>
+                    <div className='relative mx-auto w-[95%] lg:w-[60%] md:w-[30%] rounded-md bg-[#88976c]'>
                         <div className='flex p-1'>
-                            <div className='w-3/4 flex' onClick={hideFilters}>
+                            <div className='w-4/5 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={handleSearchTermChange} />
                             </div>
                             <button
-                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within:bg-[#a59e95] active:bg-[#af9987]'
+                                className='w-1/5 text-main text-lg transition duration-100 hover:border-main focus:border-main
+                                flex items-center justify-center relative overflow-hidden
+                                active:translate-y-[2px] active:shadow-inner'
                                 onClick={toggleFilters}
                             >
-                                Filtros
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
                             </button>
                         </div>
                         {showFilters && (
-                            <div className="bg-[#88976c] border-1 rounded absolute lg:top-[80%] lg:left-[-2%] md:top-[-120%] md:left-[100%] w-full
-                    ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
-                                <div className="flex items-center justify-between mb-2">
-                                    <h2 className="text-xl text-center custom-text flex-grow">Grupo de alimento</h2>
-                                    <button
-                                        onClick={hideFilters}
-                                        className='w-8 h-8 text-center border-1 border-black hover:bg-[#e1e0e0] transition-colors duration-500 ml-2'>
-                                        X
-                                    </button>
+
+                            <div className='flex justify-between space-x-2 w-full bg-[#eeeded]'>
+                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                    <GrupoFilter setSelectedGroup={setSelectedGroup} />
                                 </div>
-                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
-                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
-                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Índice FODMAP</h2>
-                                <IndexFilter setSelectedIndice={setSelectedIndice} />
+
+                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                    <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                                </div>
+
+                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                    <IndexFilter setSelectedIndice={setSelectedIndice} />
+                                </div>
                             </div>
                         )}
                     </div>
                 </div>
 
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
-                <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
-    {!hasSearched ? (
-        <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
-            <h2 className='text-xl mb-4'>
-                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
-            </h2>
-            <p className='text-xl'>
-                Esta herramienta ha sido creada para ayudar a todos aquellos con
-                dietas que requieran de la limitación de alimentos FODMAP.
-            </p>
-        </div>
-    ) : hasResults ? (
-        <FoodSearcher alimento={filteredAlimentos} />
-    ) : (
-        <h2 className='text-2xl text-[#54652d] text-center'>
-            {searchTerm || selectedGroup || selectedCategory || selectedIndice
-                ? '¡Vaya! - no se han hallado resultados.'
-                : 'Prueba a escribir algo en el buscador...'}
-        </h2>
-    )}
-</div>
+                    <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
+                        {!hasSearched ? (
+                            <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
+                                <h2 className='text-xl mb-4'>
+                                    ¡Bienvenido al primer buscador de alimentos FODMAP en español!
+                                </h2>
+                                <p className='text-xl'>
+                                    Esta herramienta ha sido creada para ayudar a todos aquellos con
+                                    dietas que requieran de la limitación de alimentos FODMAP.
+                                </p>
+                            </div>
+                        ) : hasResults ? (
+                            <FoodSearcher alimento={filteredAlimentos} />
+                        ) : (
+                            <h2 className='text-2xl text-[#54652d] text-center'>
+                                {searchTerm || selectedGroup || selectedCategory || selectedIndice
+                                    ? '¡Vaya! - no se han hallado resultados.'
+                                    : 'Prueba a escribir algo en el buscador...'}
+                            </h2>
+                        )}
+                    </div>
                 </div>
 
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
