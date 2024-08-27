@@ -112,35 +112,38 @@ export const ProductApp: React.FC = () => {
 
                 <div>
                     <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
-                    <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%]  rounded-md bg-[#88976c]'>
+
+                    <div className='relative mx-auto w-[95%] lg:w-[50%] md:w-[30%]  rounded-md bg-[#88976c]'>
                         <div className='flex p-1 '>
                             <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={handleSearchTermChange} />
                             </div>
                             <button
-                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within:bg-[#a59e95] active:bg-[#af9987]'
+                                className='w-1/4 text-main text-lg transition duration-100 hover:border-main focus:border-main
+                                flex items-center justify-center relative overflow-hidden
+                                active:translate-y-[2px] active:shadow-inner'
                                 onClick={toggleFilters}
                             >
-                                Filtros
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
                             </button>
                         </div>
                         {showFilters && (
-                            <div className="bg-[#88976c] border-1 rounded absolute lg:top-[80%] lg:left-[-2%] md:top-[-120%] md:left-[100%] w-full
-                    ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
 
-                                <div className="flex items-center justify-between mb-2">
-                                    <h2 className="text-xl text-center custom-text flex-grow">Grupo de alimento</h2>
-                                    <button
-                                        onClick={hideFilters}
-                                        className='w-8 h-8 text-center border-1 border-black hover:bg-[#e1e0e0] transition-colors duration-500 ml-2'>
-                                        X
-                                    </button>
-                                </div>
-
+                            <div className='flex justify-between space-x-2 w-full bg-[#eeeded]'>
+                            <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
                                 <GrupoFilter setSelectedGroup={setSelectedGroup} />
-                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
+                            </div>
+                            
+                            <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
                                 <CategoriaFilter setSelectedCategory={setSelectedCategory} />
                             </div>
+                            
+                            <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                            </div>
+                        </div>
                         )}
                     </div>
 
@@ -158,7 +161,7 @@ export const ProductApp: React.FC = () => {
                             </p>
                         </div>
                     )}
-                    {!showWelcomeMessage && !hasResults && searchTerm &&(
+                    {!showWelcomeMessage && !hasResults && searchTerm && (
                         <h2 className='text-2xl text-[#54652d] text-center'>
                             ¡Vaya! - no se han hallado resultados.
                         </h2>
@@ -166,7 +169,7 @@ export const ProductApp: React.FC = () => {
                     {hasResults && (
                         <FoodSearcher alimento={filteredAlimentos} />
                     )}
-                    {!hasResults && !searchTerm && hasSearched &&(
+                    {!hasResults && !searchTerm && hasSearched && (
                         <h2 className='text-2xl text-[#54652d] text-center'>
                             Prueba a escribir algo en el buscador...
                         </h2>
