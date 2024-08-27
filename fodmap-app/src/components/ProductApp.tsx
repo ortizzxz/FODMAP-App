@@ -61,12 +61,13 @@ export const ProductApp: React.FC = () => {
 
     const filterAlimentos = useCallback(() => {
         return alimentos.filter((alimento) => {
+            const searchMatch = !searchTerm || normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase()));
             const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
             const categoryMatch = !selectedCategory || alimento.tipo === selectedCategory;
             const indiceMatch = !selectedIndice || alimento.indice === selectedIndice;
-            return groupMatch && categoryMatch && indiceMatch;
+            return searchMatch && groupMatch && categoryMatch && indiceMatch;
         });
-    }, [alimentos, selectedGroup, selectedCategory, selectedIndice]);
+    }, [alimentos, searchTerm, selectedGroup, selectedCategory, selectedIndice]);
 
     const filteredAlimentos = useMemo(() => filterAlimentos(), [filterAlimentos]);
 
@@ -81,15 +82,14 @@ export const ProductApp: React.FC = () => {
 
     useEffect(() => {
         setHasResults(filteredAlimentos.length > 0);
-    }, [searchTerm, selectedGroup, selectedCategory, alimentos]);
+    }, [filteredAlimentos]);
 
-    const handleSearchTermChange = (term: string) => {
-        setSearchTerm(term);
-        setHasSearched(true);
-        if (term !== '') {
+    useEffect(() => {
+        if (searchTerm || selectedGroup || selectedCategory || selectedIndice) {
+            setHasSearched(true);
             setShowWelcomeMessage(false);
         }
-    };
+    }, [searchTerm, selectedGroup, selectedCategory, selectedIndice]);
 
     const toggleFilters = () => {
         setShowFilters(!showFilters);
@@ -111,6 +111,11 @@ export const ProductApp: React.FC = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
+    
+    useEffect(() => {
+        console.log('Filtros actualizados:', { searchTerm, selectedGroup, selectedCategory, selectedIndice });
+        console.log('Alimentos filtrados:', filteredAlimentos);
+    }, [searchTerm, selectedGroup, selectedCategory, selectedIndice, filteredAlimentos]);
 
     return (
         <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden ">
