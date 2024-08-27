@@ -13,9 +13,10 @@ export const CategoriaFilter:React.FC<CategoriaFilterProps> = ({ setSelectedCate
     return (
         <div >
             <select className='w-full rounded-lg h-8  border-1 text-center text-lg   bg-[#eeeded]'
-            
-            onChange={handleCategoryChange}>
-                <option value="">Categoría</option>
+            onChange={handleCategoryChange}
+            defaultValue="">
+                <option value="" disabled hidden>Categoría</option>
+                <option value="">Todas</option>
                 <option value="legumbres hortalizas">Legumbres y Hortalizas</option>
                 <option value="frutas">Frutas</option>
                 <option value="cereales">Cereales</option>
