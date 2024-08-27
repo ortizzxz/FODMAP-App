@@ -27,7 +27,7 @@ export const ProductApp: React.FC = () => {
     const [hasResults, setHasResults] = useState<boolean>(false);
     const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true);
     const [hasSearched, setHasSearched] = useState(false);
-    
+
     const [selectedGroup, setSelectedGroup] = useState<string>('');
     const [selectedIndice, setSelectedIndice] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -61,7 +61,7 @@ export const ProductApp: React.FC = () => {
 
     const filterAlimentos = useCallback(() => {
         if (!searchTerm && !selectedGroup && !selectedCategory && !selectedIndice) {
-            return []; // Retorna un array vacío si no hay términos de búsqueda ni filtros seleccionados
+            return []; // empty if not filters or string search
         }
         return alimentos.filter((alimento) => {
             const searchMatch = !searchTerm || normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase()));
@@ -93,16 +93,6 @@ export const ProductApp: React.FC = () => {
         if (term !== '') {
             setShowWelcomeMessage(false);
         }
-        
-        const filtered = alimentos.filter((alimento) => {
-            const searchMatch = normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(term.toLowerCase()));
-            const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
-            const categoryMatch = !selectedCategory || alimento.tipo === selectedCategory;
-            const indiceMatch = !selectedIndice || alimento.indice === selectedIndice;
-            return searchMatch && groupMatch && categoryMatch && indiceMatch;
-        });
-        
-        setHasResults(filtered.length > 0);
     };
 
     const toggleFilters = () => {
@@ -125,7 +115,7 @@ export const ProductApp: React.FC = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, []);
-    
+
     return (
         <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden">
 
@@ -155,25 +145,25 @@ export const ProductApp: React.FC = () => {
                         {showFilters && (
 
                             <div className='flex justify-between space-x-2 w-full bg-[#eeeded]'>
-                            <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                    <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                </div>
+
+                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                    <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                                </div>
+
+                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
+                                    <IndexFilter setSelectedIndice={setSelectedIndice} />
+                                </div>
                             </div>
-                            
-                            <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-                            </div>
-                            
-                            <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                <IndexFilter setSelectedIndice={setSelectedIndice}/>
-                            </div>
-                        </div>
                         )}
                     </div>
 
                 </div>
 
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
-                    {showWelcomeMessage && (
+                    {showWelcomeMessage ? (
                         <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
                             <h2 className='text-xl mb-4'>
                                 ¡Bienvenido al primer buscador de alimentos FODMAP en español!
@@ -183,10 +173,7 @@ export const ProductApp: React.FC = () => {
                                 dietas que requieran de la limitación de alimentos FODMAP.
                             </p>
                         </div>
-                    )}
-                    {!showWelcomeMessage && (
-                <>
-                    {hasResults ? (
+                    ) : hasResults ? (
                         <FoodSearcher alimento={filteredAlimentos} />
                     ) : (
                         <h2 className='text-2xl text-[#54652d] text-center'>
@@ -195,9 +182,7 @@ export const ProductApp: React.FC = () => {
                                 : 'Prueba a escribir algo en el buscador...'}
                         </h2>
                     )}
-                </>
-            )}
-        </div>
+                </div>
 
                 {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
