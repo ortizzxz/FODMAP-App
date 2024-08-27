@@ -5,6 +5,7 @@ import { FoodDetails } from './FoodDetails';
 import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
+import { IndexFilter } from './IndexFilters';
 import { clearTranslationCache } from './fatSecretService';
 import React from 'react';
 import '../styles/backgroundCustomColor.css';
@@ -27,7 +28,7 @@ export const ProductApp: React.FC = () => {
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [hasResults, setHasResults] = useState<boolean>(false);
     const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true);
-    const [selectedFood, setSelectedFood] = useState<Alimento | null>(null); // Para manejar el alimento seleccionado
+    const [selectedIndice, setSelectedIndice] = useState('');
     const [hasSearched, setHasSearched] = useState(false);
 
 
@@ -62,6 +63,7 @@ export const ProductApp: React.FC = () => {
         ? alimentos.filter(alimento =>
             normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
             (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
+            (!selectedIndice || alimento.indice === selectedIndice) &&
             (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
         )
         : [];
@@ -141,7 +143,7 @@ export const ProductApp: React.FC = () => {
                             </div>
                             
                             <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                                <IndexFilter setSelectedIndice={setSelectedIndice}/>
                             </div>
                         </div>
                         )}
