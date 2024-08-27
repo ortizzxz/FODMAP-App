@@ -60,6 +60,9 @@ export const ProductApp: React.FC = () => {
     };
 
     const filterAlimentos = useCallback(() => {
+        if (!searchTerm && !selectedGroup && !selectedCategory && !selectedIndice) {
+            return []; // Retorna un array vacío si no hay términos de búsqueda ni filtros seleccionados
+        }
         return alimentos.filter((alimento) => {
             const searchMatch = !searchTerm || normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase()));
             const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
@@ -181,20 +184,20 @@ export const ProductApp: React.FC = () => {
                             </p>
                         </div>
                     )}
-                    {!showWelcomeMessage && !hasResults && searchTerm && (
-                        <h2 className='text-2xl text-[#54652d] text-center'>
-                            ¡Vaya! - no se han hallado resultados.
-                        </h2>
-                    )}
-                    {hasResults && (
+                    {!showWelcomeMessage && (
+                <>
+                    {hasResults ? (
                         <FoodSearcher alimento={filteredAlimentos} />
-                    )}
-                    {!hasResults && !searchTerm && hasSearched && (
+                    ) : (
                         <h2 className='text-2xl text-[#54652d] text-center'>
-                            Prueba a escribir algo en el buscador...
+                            {searchTerm || selectedGroup || selectedCategory || selectedIndice
+                                ? '¡Vaya! - no se han hallado resultados.'
+                                : 'Prueba a escribir algo en el buscador...'}
                         </h2>
                     )}
-                </div>
+                </>
+            )}
+        </div>
 
                 {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
