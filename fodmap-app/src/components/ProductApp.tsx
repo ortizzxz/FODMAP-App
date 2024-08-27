@@ -101,7 +101,7 @@ export const ProductApp: React.FC = () => {
         
         setHasResults(filtered.length > 0);
     };
-    
+
     const toggleFilters = () => {
         setShowFilters(!showFilters);
     };
@@ -123,13 +123,8 @@ export const ProductApp: React.FC = () => {
         };
     }, []);
     
-    useEffect(() => {
-        console.log('Filtros actualizados:', { searchTerm, selectedGroup, selectedCategory, selectedIndice });
-        console.log('Alimentos filtrados:', filteredAlimentos);
-    }, [searchTerm, selectedGroup, selectedCategory, selectedIndice, filteredAlimentos]);
-
     return (
-        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden ">
+        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden">
 
             {/* Main Content */}
             <div className="bg-[#eeeded] lg:w-[70%]  border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
