@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { findAll } from '../services/foodService';
 import { FoodSearcher } from './FoodContainer';
 import { FoodDetails } from './FoodDetails';
@@ -23,14 +23,14 @@ interface Alimento {
 export const ProductApp: React.FC = () => {
     const [alimentos, setAlimentos] = useState<Alimento[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [selectedGroup, setSelectedGroup] = useState<string>('');
-    const [selectedCategory, setSelectedCategory] = useState<string>('');
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [hasResults, setHasResults] = useState<boolean>(false);
     const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true);
-    const [selectedIndice, setSelectedIndice] = useState('');
     const [hasSearched, setHasSearched] = useState(false);
-
+    
+    const [selectedGroup, setSelectedGroup] = useState<string>('');
+    const [selectedIndice, setSelectedIndice] = useState<string>('');
+    const [selectedCategory, setSelectedCategory] = useState<string>('');
 
 
     const getFood = async (): Promise<void> => {
@@ -59,18 +59,25 @@ export const ProductApp: React.FC = () => {
             .replace(/[ÚÙÜÛ]/g, "U");
     };
 
-    const filteredAlimentos = searchTerm
-        ? alimentos.filter(alimento =>
-            normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase())) &&
-            (selectedGroup === '' || alimento.grupo.toLowerCase() === selectedGroup.toLowerCase()) &&
-            (!selectedIndice || alimento.indice === selectedIndice) &&
-            (selectedCategory === '' || alimento.tipo.toLowerCase().includes(selectedCategory.toLowerCase()) || selectedCategory.toLowerCase().includes(alimento.tipo.toLowerCase()))
-        )
-        : [];
+    const filterAlimentos = useCallback(() => {
+        return alimentos.filter((alimento) => {
+            const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
+            const categoryMatch = !selectedCategory || alimento.tipo === selectedCategory;
+            const indiceMatch = !selectedIndice || alimento.indice === selectedIndice;
+            return groupMatch && categoryMatch && indiceMatch;
+        });
+    }, [alimentos, selectedGroup, selectedCategory, selectedIndice]);
+
+    const filteredAlimentos = useMemo(() => filterAlimentos(), [filterAlimentos]);
 
     useEffect(() => {
         getFood();
     }, []);
+
+    useEffect(() => {
+        setHasSearched(true);
+        setShowWelcomeMessage(false);
+    }, [selectedGroup, selectedCategory, selectedIndice]);
 
     useEffect(() => {
         setHasResults(filteredAlimentos.length > 0);
