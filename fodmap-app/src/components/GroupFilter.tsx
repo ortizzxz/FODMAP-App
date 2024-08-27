@@ -18,7 +18,7 @@ export const GrupoFilter:React.FC<GrupoFilterProps> = ({ setSelectedGroup }) => 
                 defaultValue=""
             >
                 <option value="" disabled hidden>Grupo</option>
-                <option value="todas">Todas</option>
+                <option value="">Todas</option>
                 <option value="carbohidratos">Carbohidratos</option>
                 <option value="proteina">Proteínas</option>
                 <option value="grasas">Grasas</option>

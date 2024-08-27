@@ -17,7 +17,7 @@ export const IndexFilter: React.FC<IndexFilterProps> = ({ setSelectedIndice }) =
                 defaultValue=""
             >
                 <option value="" disabled hidden>Índice</option>
-                <option value="tdos">Todos</option>
+                <option value="">Todos</option>
                 <option value="bajo">Bajo</option>
                 <option value="medio">Medio</option>
                 <option value="alto">Alto</option>
