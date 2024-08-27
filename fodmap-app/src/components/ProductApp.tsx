@@ -84,13 +84,24 @@ export const ProductApp: React.FC = () => {
         setHasResults(filteredAlimentos.length > 0);
     }, [filteredAlimentos]);
 
-    useEffect(() => {
-        if (searchTerm || selectedGroup || selectedCategory || selectedIndice) {
-            setHasSearched(true);
+    const handleSearchTermChange = (term: string) => {
+        setSearchTerm(term);
+        setHasSearched(true);
+        if (term !== '') {
             setShowWelcomeMessage(false);
         }
-    }, [searchTerm, selectedGroup, selectedCategory, selectedIndice]);
-
+        
+        const filtered = alimentos.filter((alimento) => {
+            const searchMatch = normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(term.toLowerCase()));
+            const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
+            const categoryMatch = !selectedCategory || alimento.tipo === selectedCategory;
+            const indiceMatch = !selectedIndice || alimento.indice === selectedIndice;
+            return searchMatch && groupMatch && categoryMatch && indiceMatch;
+        });
+        
+        setHasResults(filtered.length > 0);
+    };
+    
     const toggleFilters = () => {
         setShowFilters(!showFilters);
     };
