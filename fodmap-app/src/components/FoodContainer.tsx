@@ -129,7 +129,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
               <img
                 src={foodDetails.imageUrl}
                 alt={foodDetails.food_name}
-                className="block min-w-full w-full max-h-80 h-auto rounded-lg shadow-md mb-2" 
+                className="block min-w-full w-full max-w-full max-h-80 h-auto rounded-lg shadow-md mb-2" 
               />
             )}
             <h2 className='text-2xl text-center font-[500] text-[#54652d] '>{foodDetails.food_name}</h2>
