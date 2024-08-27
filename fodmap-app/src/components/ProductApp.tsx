@@ -57,12 +57,13 @@ export const ProductApp: React.FC = () => {
 
     const filterAlimentos = useCallback(() => {
         return alimentos.filter((alimento) => {
+            const searchMatch = !searchTerm || normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase()));
             const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
             const categoryMatch = !selectedCategory || alimento.tipo === selectedCategory;
             const indiceMatch = !selectedIndice || alimento.indice === selectedIndice;
-            return groupMatch && categoryMatch && indiceMatch;
+            return searchMatch && groupMatch && categoryMatch && indiceMatch;
         });
-    }, [alimentos, selectedGroup, selectedCategory, selectedIndice]);
+    }, [alimentos, searchTerm, selectedGroup, selectedCategory, selectedIndice]);
 
     const filteredAlimentos = useMemo(() => filterAlimentos(), [filterAlimentos]);
 
@@ -79,8 +80,6 @@ export const ProductApp: React.FC = () => {
         setHasSearched(true);
         if (term !== '') {
             setShowWelcomeMessage(false);
-        } else {
-            setShowWelcomeMessage(true); // Mostrar el mensaje de bienvenida si el campo está vacío
         }
     };
 
@@ -142,25 +141,27 @@ export const ProductApp: React.FC = () => {
                 </div>
 
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
-                    {showWelcomeMessage ? (
-                        <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
-                            <h2 className='text-xl mb-4'>
-                                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
-                            </h2>
-                            <p className='text-xl'>
-                                Esta herramienta ha sido creada para ayudar a todos aquellos con
-                                dietas que requieran de la limitación de alimentos FODMAP.
-                            </p>
-                        </div>
-                    ) : hasResults ? (
-                        <FoodSearcher alimento={filteredAlimentos} />
-                    ) : (
-                        <h2 className='text-2xl text-[#54652d] text-center'>
-                            {searchTerm || selectedGroup || selectedCategory || selectedIndice
-                                ? '¡Vaya! - no se han hallado resultados.'
-                                : 'Prueba a escribir algo en el buscador...'}
-                        </h2>
-                    )}
+                <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
+    {!hasSearched ? (
+        <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
+            <h2 className='text-xl mb-4'>
+                ¡Bienvenido al primer buscador de alimentos FODMAP en español!
+            </h2>
+            <p className='text-xl'>
+                Esta herramienta ha sido creada para ayudar a todos aquellos con
+                dietas que requieran de la limitación de alimentos FODMAP.
+            </p>
+        </div>
+    ) : hasResults ? (
+        <FoodSearcher alimento={filteredAlimentos} />
+    ) : (
+        <h2 className='text-2xl text-[#54652d] text-center'>
+            {searchTerm || selectedGroup || selectedCategory || selectedIndice
+                ? '¡Vaya! - no se han hallado resultados.'
+                : 'Prueba a escribir algo en el buscador...'}
+        </h2>
+    )}
+</div>
                 </div>
 
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
