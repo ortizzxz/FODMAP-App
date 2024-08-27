@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { findAll } from '../services/foodService';
 import { FoodSearcher } from './FoodContainer';
-import { FoodDetails } from './FoodDetails';
 import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
@@ -11,7 +10,7 @@ import React from 'react';
 import '../styles/backgroundCustomColor.css';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root'); // Asegúrate de que el modal tenga un elemento de app raíz
+Modal.setAppElement('#root');
 
 interface Alimento {
     nombre: string;
@@ -22,18 +21,16 @@ interface Alimento {
 
 export const ProductApp: React.FC = () => {
     const [alimentos, setAlimentos] = useState<Alimento[]>([]);
-    const [searchTerm, setSearchTerm] = useState<string>('');
-    const [showFilters, setShowFilters] = useState<boolean>(false);
-    const [hasResults, setHasResults] = useState<boolean>(false);
-    const [showWelcomeMessage, setShowWelcomeMessage] = useState<boolean>(true);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showFilters, setShowFilters] = useState(false);
+    const [hasResults, setHasResults] = useState(false);
+    const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
     const [hasSearched, setHasSearched] = useState(false);
+    const [selectedGroup, setSelectedGroup] = useState('');
+    const [selectedIndice, setSelectedIndice] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
 
-    const [selectedGroup, setSelectedGroup] = useState<string>('');
-    const [selectedIndice, setSelectedIndice] = useState<string>('');
-    const [selectedCategory, setSelectedCategory] = useState<string>('');
-
-
-    const getFood = async (): Promise<void> => {
+    const getFood = async () => {
         try {
             const result = await findAll();
             if (result && result.data._embedded) {
@@ -45,7 +42,6 @@ export const ProductApp: React.FC = () => {
     };
 
     const normalizeString = (str: string) => {
-        // Reemplazar los caracteres acentuados manualmente
         return str
             .replace(/[áàäâã]/g, "a")
             .replace(/[éèëê]/g, "e")
@@ -60,28 +56,19 @@ export const ProductApp: React.FC = () => {
     };
 
     const filterAlimentos = useCallback(() => {
-        if (!searchTerm && !selectedGroup && !selectedCategory && !selectedIndice) {
-            return []; // empty if not filters or string search
-        }
         return alimentos.filter((alimento) => {
-            const searchMatch = !searchTerm || normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase()));
             const groupMatch = !selectedGroup || alimento.grupo === selectedGroup;
             const categoryMatch = !selectedCategory || alimento.tipo === selectedCategory;
             const indiceMatch = !selectedIndice || alimento.indice === selectedIndice;
-            return searchMatch && groupMatch && categoryMatch && indiceMatch;
+            return groupMatch && categoryMatch && indiceMatch;
         });
-    }, [alimentos, searchTerm, selectedGroup, selectedCategory, selectedIndice]);
+    }, [alimentos, selectedGroup, selectedCategory, selectedIndice]);
 
     const filteredAlimentos = useMemo(() => filterAlimentos(), [filterAlimentos]);
 
     useEffect(() => {
         getFood();
     }, []);
-
-    useEffect(() => {
-        setHasSearched(true);
-        setShowWelcomeMessage(false);
-    }, [selectedGroup, selectedCategory, selectedIndice]);
 
     useEffect(() => {
         setHasResults(filteredAlimentos.length > 0);
@@ -92,6 +79,8 @@ export const ProductApp: React.FC = () => {
         setHasSearched(true);
         if (term !== '') {
             setShowWelcomeMessage(false);
+        } else {
+            setShowWelcomeMessage(true); // Mostrar el mensaje de bienvenida si el campo está vacío
         }
     };
 
@@ -103,14 +92,11 @@ export const ProductApp: React.FC = () => {
         setShowFilters(false);
     };
 
-
     useEffect(() => {
         const handleBeforeUnload = () => {
             clearTranslationCache();
         };
-
         window.addEventListener('beforeunload', handleBeforeUnload);
-
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
@@ -118,48 +104,41 @@ export const ProductApp: React.FC = () => {
 
     return (
         <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden">
-
-            {/* Main Content */}
-            <div className="bg-[#eeeded] lg:w-[70%]  border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
+            <div className="bg-[#eeeded] lg:w-[70%] border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
             lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
-
                 <div>
                     <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
-
-                    <div className='relative mx-auto w-[95%] lg:w-[50%] md:w-[30%]  rounded-md bg-[#88976c]'>
-                        <div className='flex p-1 '>
+                    <div className='relative mx-auto w-[95%] lg:w-[40%] md:w-[30%] rounded-md bg-[#88976c]'>
+                        <div className='flex p-1'>
                             <div className='w-3/4 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={handleSearchTermChange} />
                             </div>
                             <button
-                                className='w-1/4 text-main text-lg transition duration-100 hover:border-main focus:border-main
-                                flex items-center justify-center relative overflow-hidden
-                                active:translate-y-[2px] active:shadow-inner'
+                                className='w-1/4 text-main text-lg transition duration-300 hover:border-main focus:border-main focus-within:bg-[#a59e95] active:bg-[#af9987]'
                                 onClick={toggleFilters}
                             >
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
+                                Filtros
                             </button>
                         </div>
                         {showFilters && (
-
-                            <div className='flex justify-between space-x-2 w-full bg-[#eeeded]'>
-                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                    <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                            <div className="bg-[#88976c] border-1 rounded absolute lg:top-[80%] lg:left-[-2%] md:top-[-120%] md:left-[100%] w-full
+                    ml-2 mt-2 p-4 shadow-lg transition-transform duration-1000 transform scale-100">
+                                <div className="flex items-center justify-between mb-2">
+                                    <h2 className="text-xl text-center custom-text flex-grow">Grupo de alimento</h2>
+                                    <button
+                                        onClick={hideFilters}
+                                        className='w-8 h-8 text-center border-1 border-black hover:bg-[#e1e0e0] transition-colors duration-500 ml-2'>
+                                        X
+                                    </button>
                                 </div>
-
-                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                    <CategoriaFilter setSelectedCategory={setSelectedCategory} />
-                                </div>
-
-                                <div className='flex-1 mt-1 bg-[#88976c] rounded-md p-2'>
-                                    <IndexFilter setSelectedIndice={setSelectedIndice} />
-                                </div>
+                                <GrupoFilter setSelectedGroup={setSelectedGroup} />
+                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Categoría</h2>
+                                <CategoriaFilter setSelectedCategory={setSelectedCategory} />
+                                <h2 className="text-xl mt-4 mb-2 text-center custom-text">Índice FODMAP</h2>
+                                <IndexFilter setSelectedIndice={setSelectedIndice} />
                             </div>
                         )}
                     </div>
-
                 </div>
 
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
@@ -184,7 +163,6 @@ export const ProductApp: React.FC = () => {
                     )}
                 </div>
 
-                {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
@@ -193,7 +171,6 @@ export const ProductApp: React.FC = () => {
                         Aircury
                     </a>
                 </footer>
-
             </div>
         </div>
     );
