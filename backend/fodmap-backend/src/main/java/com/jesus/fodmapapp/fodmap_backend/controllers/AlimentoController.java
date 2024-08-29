@@ -36,13 +36,6 @@ public class AlimentoController {
                 .body(alimentos);
     }
 
-    @GetMapping("/prueba")
-    public ResponseEntity<String> prueba() {
-        String ejemplo = "Limón";
-        return ResponseEntity.ok(ejemplo);
-    }
-
-
     @GetMapping("/{id}")
     public ResponseEntity<Alimento> getAlimentoById(@PathVariable String id) {
         logger.info("Buscando alimento con id: {}", id);
