@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import defaultImage from '../assets/defaultImage.jpg';
 
 const translationCache = new Map();
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -120,6 +121,6 @@ export const searchImage = async (query: string): Promise<any> => {
 //defaultImage function 
 const getDefaultImage = () => {
   return{
-    webformatURL: '..assets/defaultImage.jpg'
+    webformatURL: defaultImage
   };
 };
