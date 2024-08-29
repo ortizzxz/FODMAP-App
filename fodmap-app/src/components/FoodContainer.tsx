@@ -5,6 +5,9 @@ import Modal from 'react-modal';
 import '../styles/scrollbarCustom.css';
 import '../styles/modal.css';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 interface FoodDetailResponse {
   food_name: string;
   food_description: string;
@@ -126,12 +129,14 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         {foodDetails && !isLoading && !error && (
           <div className="flex flex-col items-center">
             {foodDetails.imageUrl && (
-              <img
-                src={foodDetails.imageUrl}
-                alt={foodDetails.food_name}
-                className="block min-w-full w-full max-w-full max-h-80 h-auto
-                rounded-lg shadow-md mb-2" 
-              />
+              <div className='w-full h-80 bg-gray-300 roudned-lg shadow-md mb-2'>
+                <LazyLoadImage
+                  src={foodDetails.imageUrl}
+                  alt={foodDetails.food_name}
+                  effect="blur"
+                  className="block min-w-full w-full max-w-full max-h-80 h-auto rounded-lg" 
+                />
+              </div>
             )}
             <h2 className='text-2xl text-center font-[500] text-[#54652d] '>{foodDetails.food_name}</h2>
             <h2 className='text-xl text-centeñr font-[500] text-[#54652d]'>Indice FODMAP: {capitalizeFirstLetter(selectedFood?.indice || '')}</h2>
