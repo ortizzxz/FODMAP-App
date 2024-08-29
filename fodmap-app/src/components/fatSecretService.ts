@@ -94,29 +94,38 @@ export const searchImage = async (query: string): Promise<any> => {
     });
 
     console.log('Resultados de Pixabay:', response.data.hits);
-
     const hits = response.data.hits;
+
     if (hits.length > 0) {
       // const to figure out relevance of a pic
-      const calculateRelevance = (hit: any) => {
+      const hasRelevantTag = (hit: any) => {
         const tags = hit.tags.toLowerCase().split(', ');
-
-        const relevantTags = ['vegetables', 'food', 'raw', 'nutrition',
-                              'foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans'];
-
-        return relevantTags.reduce((count, tag) => tags.includes(tag) ? count + 1 : count, 0);
+        const relevantTags = ['vegetables', 'food', 'raw', 'nutrition','foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans'];
+        return relevantTags.some(tag => tags.include(tag));
       };
 
-      // sorting hits by relevance
-      const sortedHits = hits.sort((a: any, b:any) => calculateRelevance(b) - calculateRelevance(a));
+      //search img with relevant tag
+      const relevantImage = hits.find(hasRelevantTag);
 
-      return sortedHits[0]; // return more relevant img
+      if(relevantImage){
+        return relevantImage;
+      }else{
+        return getDefaultImage();
+      }
+      
     } else {
       console.warn(`No se encontraron imágenes para la consulta: ${query}`);
-      return null;
+      return getDefaultImage();
     }
   } catch (error) {
     console.error('Error fetching image:', error);
-    throw error;
+    return getDefaultImage();
   }
+};
+
+//defaultImage function 
+const getDefaultImage = () => {
+  return{
+    webformatURL: '..assets/defaultImage.jpg'
+  };
 };
