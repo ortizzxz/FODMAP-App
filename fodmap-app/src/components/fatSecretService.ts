@@ -77,7 +77,7 @@ export const searchFood = async (query: string): Promise<any> => {
 };
 
 // search image stock 
-const relevantTags = new Set(['vegetables', 'vegetable', 'condiment', 'food', 'raw', 'nutrition', 'foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans']);
+const relevantTags = new Set(['vegetables', 'vegetable', 'condiment', 'kitchen', 'cooking', 'cook', 'food', 'raw', 'nutrition', 'foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans']);
 
 export const searchImage = async (query: string): Promise<any> => {
   try {
@@ -90,9 +90,6 @@ export const searchImage = async (query: string): Promise<any> => {
         q: encodeURIComponent(query),
         image_type: 'photo',
         per_page: 5, 
-        category: 'food',
-        safesearch: true,
-        order: 'popular', 
       }
     });
 
