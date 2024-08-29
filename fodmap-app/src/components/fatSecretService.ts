@@ -76,6 +76,8 @@ export const searchFood = async (query: string): Promise<any> => {
 };
 
 // search image stock 
+const relevantTags = new Set(['vegetables', 'food', 'raw', 'nutrition', 'foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans']);
+
 export const searchImage = async (query: string): Promise<any> => {
   try {
     const apiKey = import.meta.env.VITE_PIXABAY_API_KEY;
@@ -87,8 +89,8 @@ export const searchImage = async (query: string): Promise<any> => {
         q: encodeURIComponent(query),
         image_type: 'photo',
         per_page: 5, 
-        category: 'food', // filter by category
-        safesearch: true, // proper results
+        category: 'food',
+        safesearch: true,
         order: 'popular', 
       }
     });
@@ -97,22 +99,14 @@ export const searchImage = async (query: string): Promise<any> => {
     const hits = response.data.hits;
 
     if (hits.length > 0) {
-      // const to figure out relevance of a pic
       const hasRelevantTag = (hit: any) => {
         const tags = hit.tags.toLowerCase().split(', ');
-        const relevantTags = ['vegetables', 'food', 'raw', 'nutrition','foodstuff', 'agriculture', 'plants', 'fruit', 'cultivation', 'beans'];
-        return relevantTags.some(tag => tags.include(tag));
+        return tags.some((tag: string) => relevantTags.has(tag));
       };
 
-      //search img with relevant tag
       const relevantImage = hits.find(hasRelevantTag);
 
-      if(relevantImage){
-        return relevantImage;
-      }else{
-        return getDefaultImage();
-      }
-      
+      return relevantImage || getDefaultImage();
     } else {
       console.warn(`No se encontraron imágenes para la consulta: ${query}`);
       return getDefaultImage();
