@@ -16,7 +16,7 @@ Este proyecto fue escogido como finalista de Aircury Summer Of Code 2024.
 
 Summer of Code es un programa de becas otorgado por la empresa [@Aircury](https://github.com/aircury) dónde se escogen las 3 mejores ideas propuestas por estudiantes de alguna titulación de Software. 
 
-## Branches 🪴
+## 🪴 Branches 
 ### main branch
 Es la rama principal del repositorio en donde irán todas las feat y fix apropiadas para el deployment.
 ### local branch
@@ -33,13 +33,23 @@ Es la rama para probar el proyecto en local con las configuraciones necesarias c
 
 - Spring Framework
 - Python
-- MySQL
+- PostgreSQL (MySQL on the v1)
 
 ### API Integrations 
 
 - Google Cloud Translation API
 - FatSecret Platform API
 - Pixabay API
+
+## 🌐 Deployment
+### FrontEnd
+- The FrontEnd (React) is deployed on Vercel. (Free plan).
+
+### BackEnd
+- Both Spring and Node BackEnd (For the connection with the DataBase, and API's BackEnd) are deployed on Render. For Java (more Resource Consuming I'm using a paid plan, for Node the Free Plan)
+
+### Database
+- The DB (PostgreSQL) is deployed on Render to minimize latency since the BackEnd is also deployed on Render.
 ## 🧑‍💻 Team 
 
 ### Author
