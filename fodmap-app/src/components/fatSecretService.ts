@@ -90,6 +90,9 @@ export const searchImage = async (query: string): Promise<any> => {
         q: encodeURIComponent(query),
         image_type: 'photo',
         per_page: 5, 
+        category: 'food',
+        safesearch: true,
+        order: 'popular', 
       }
     });
 
