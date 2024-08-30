@@ -12,7 +12,7 @@ El objetivo principal de la aplicación es brindar orientación respecto a los n
 
 ## 🏆 Awards 
 
-Este proyecto fue escogido como finalista de Aircury Summer Of Code 2024. 
+Este proyecto fue escogido como ganador de Aircury Summer Of Code 2024. 
 
 Summer of Code es un programa de becas otorgado por la empresa [@Aircury](https://github.com/aircury) dónde se escogen las 3 mejores ideas propuestas por estudiantes de alguna titulación de Software. 
 
