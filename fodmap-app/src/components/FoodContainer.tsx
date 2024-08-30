@@ -129,7 +129,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         {foodDetails && !isLoading && !error && (
           <div className="flex flex-col items-center">
             {foodDetails.imageUrl && (
-              <div className='w-full h-80 bg-gray-300 '>
+              <div className='w-full h-80 bg-gray-300 flex justify-center items-center'>
                 <LazyLoadImage
                   src={foodDetails.imageUrl}
                   alt={foodDetails.food_name}
