@@ -50,6 +50,12 @@ Es la rama para probar el proyecto en local con las configuraciones necesarias c
 
 ### Database
 - The DB (PostgreSQL) is deployed on Render to minimize latency since the BackEnd is also deployed on Render.
+
+## 🎯 Future Expectations 
+- Integration of [ElasticSearch](https://www.elastic.co/es/elasticsearch)
+- A recipe section for low FODMAP meals
+- More to come...
+  
 ## 🧑‍💻 Team 
 
 ### Author
