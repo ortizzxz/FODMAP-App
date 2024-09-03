@@ -5,6 +5,7 @@ import { FoodBuscador } from './FoodSearcherBar';
 import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
 import { IndexFilter } from './IndexFilters';
+import RecipesSection from './RecipesSection';
 import { clearTranslationCache } from './fatSecretService';
 import React from 'react';
 import '../styles/backgroundCustomColor.css';
@@ -29,6 +30,11 @@ export const ProductApp: React.FC = () => {
     const [selectedGroup, setSelectedGroup] = useState('');
     const [selectedIndice, setSelectedIndice] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [showRecipeSection, setShowRecipeSection] = useState(false);
+
+    const toggleRecipeSection = () => {
+        setShowRecipeSection(!showRecipeSection);
+    };
 
     const getFood = async () => {
         try {
@@ -103,10 +109,28 @@ export const ProductApp: React.FC = () => {
 
     return (
         <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden">
+            
+            {/*MAIN DIV*/}
             <div className="bg-[#eeeded] lg:w-[70%] border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
             lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
                 <div>
-                    <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
+                    
+                    {/*HEADER*/}
+                    <div className='flex justify-center mt-[10%] lg:mt-[5%] md:mt-[5%]'>
+                        <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mr-4">
+                            {showRecipeSection ? 'Recetario TuFODMAP' : 'Buscador TuFODMAP'}
+                        </h1>
+                        
+                        <button 
+                            onClick={toggleRecipeSection}
+                            className='lg:block hidden b-1 border-main text-center w-fit  h-fit p-1 justify-center text-xl text-black
+                                       hover:bg-[#e1e0e0] hover:border-main active:translate-y-[2px] active:shadow-inner'>
+                                {showRecipeSection ? 'Buscador' : 'Recetario'}
+                        </button>
+                    </div>
+
+                    {/*SEARCHING BAR*/}
+                    {!showRecipeSection && ( 
                     <div className='relative mx-auto w-[95%] lg:w-[60%] md:w-[30%] rounded-md bg-[#88976c]'>
                         <div className='flex p-1'>
                             <div className='w-4/5 flex' onClick={hideFilters}>
@@ -123,6 +147,7 @@ export const ProductApp: React.FC = () => {
                                 </svg>
                             </button>
                         </div>
+                        
                         {showFilters && (
 
                             <div className='flex justify-between space-x-2 w-full bg-[#eeeded]'>
@@ -140,8 +165,11 @@ export const ProductApp: React.FC = () => {
                             </div>
                         )}
                     </div>
+                    )}
                 </div>
 
+                {/*LANDING TEXT*/}
+                {!showRecipeSection && ( 
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
                     <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
                         {!hasSearched ? (
@@ -165,6 +193,16 @@ export const ProductApp: React.FC = () => {
                         )}
                     </div>
                 </div>
+                )}
+
+                {showRecipeSection && (
+                    <div className='flex  overflow-auto scrollbar-none'>
+                        <RecipesSection />
+                    </div>
+                )}
+
+
+                {/*RECETARIO*/}
 
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
@@ -175,6 +213,7 @@ export const ProductApp: React.FC = () => {
                     </a>
                 </footer>
             </div>
+        
         </div>
     );
 };
