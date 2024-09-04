@@ -9,19 +9,24 @@ const recipes = [
   ];
 
 const RecipesSection: React.FC = () => {
-
+/*md:h-[90%] md:w-[90%] lg:h-[70%]  max-w-sm w-full rounded-lg p-24 shadow-md 
+text-center text-xl flex flex-col  border-main border-1*/ 
 
     return (
-        <div className="h-full w-full overflow-auto mt-[2%] ml-2 mr-1 scroll-container ">
-            <div className='grid grid-cols-2 gap-4'>
+        <div className="h-full w-full overflow-auto mt-[2%]  mr-1 scroll-container"> 
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-0 justify-items-center'>
                 {recipes.map((recipe) => (
-                    <div key={recipe.id} className="m-2 rounded-lg p-24 shadow-md text-center text- text-xl border-main border-1">
-                        <h1>{recipe.title}</h1>
+                    <div key={recipe.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-80 w-full max-w-sm">
+                        <div className="flex-grow">
+                            <img src="src/assets/defaultImage.jpg" alt="Imagen receta" className="h-full w-full object-cover"/>
+                        </div>
+                        <h1 className="text-lg text-center font-semibold">{recipe.title}</h1>
                     </div>
                 ))}
             </div>
         </div>
     );
-};
+
+}
 
 export default RecipesSection;
