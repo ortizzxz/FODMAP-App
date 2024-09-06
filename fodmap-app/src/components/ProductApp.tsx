@@ -10,14 +10,16 @@ import { IndexFilter } from './IndexFilters';
 import { clearTranslationCache } from './fatSecretService';
 
 
+{/* Interface for the 'alimento' object with its params received from the backend */}
 interface Alimento {
     nombre: string;
     tipo: string;
     grupo: string;
     indice: string;
-}
+} 
 
 export const ProductApp: React.FC = () => {
+
     const [alimentos, setAlimentos] = useState<Alimento[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilters, setShowFilters] = useState(false);
@@ -27,6 +29,7 @@ export const ProductApp: React.FC = () => {
     const [selectedIndice, setSelectedIndice] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
 
+    {/* async function to get the food from the backEnd */}
     const getFood = async () => {
         try {
             const result = await findAll();
@@ -38,6 +41,7 @@ export const ProductApp: React.FC = () => {
         }
     };
 
+    {/* we didnt use the normalize("NFD").replace because of the ñ character so we manually added the ´'s characters */}
     const normalizeString = (str: string) => {
         return str
             .replace(/[áàäâã]/g, "a")
@@ -96,16 +100,22 @@ export const ProductApp: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden">
+        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden"> {/* Background styles */}
+
+            {/* Main container */}
             <div className="bg-[#eeeded] lg:w-[70%] border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
             lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+
                 <div>
+                    {/* Title and search bar  */}
                     <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
                     <div className='relative mx-auto w-[95%] lg:w-[60%] md:w-[30%] rounded-md bg-[#88976c]'>
                         <div className='flex p-1'>
                             <div className='w-4/5 flex' onClick={hideFilters}>
                                 <FoodBuscador setSearchTerm={handleSearchTermChange} />
                             </div>
+
+                            {/* Button and SVG*/}
                             <button
                                 className='w-1/5 text-main text-lg transition duration-100 hover:border-main focus:border-main
                                 flex items-center justify-center relative overflow-hidden
@@ -118,6 +128,8 @@ export const ProductApp: React.FC = () => {
                                 </svg>
                             </button>
                         </div>
+
+                        {/* Filters  */}
                         {showFilters && (
 
                             <div className='flex justify-between space-x-2 w-full bg-[#eeeded]'>
@@ -137,9 +149,15 @@ export const ProductApp: React.FC = () => {
                     </div>
                 </div>
 
+                {/* Food Cointainter that either shows Food or a message */}
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
                     <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
                         
+                        {/*Whole logic: Hasn't searched ? Show initial message. Has searched ?  
+                                                                              ( Is searchBar empty ? Try to type sum :
+                                                                                Has results ? Show results of the search : 
+                                                                                Hasn't results ? Show no results found messsage
+                        */} 
                         {!hasSearched ? (
                             <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
                                 <h2 className='text-xl mb-4'>
@@ -150,7 +168,7 @@ export const ProductApp: React.FC = () => {
                                     dietas que requieran de la limitación de alimentos FODMAP.
                                 </p>
                             </div>
-                        ) : searchTerm.trim() === '' ? (
+                        ) : searchTerm.trim() === '' ? ( // .trim() checks for white spaces on the searchTerm. if its all empty equals true
                             <h2 className='text-2xl text-[#54652d] text-center'>Prueba a escribir algo en el buscador...</h2>
                         ) : hasResults ? (
                             <FoodSearcher alimento={filteredAlimentos} />
@@ -160,6 +178,7 @@ export const ProductApp: React.FC = () => {
                     </div>
                 </div>
 
+                {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
