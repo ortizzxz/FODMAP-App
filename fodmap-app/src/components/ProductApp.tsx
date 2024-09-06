@@ -24,7 +24,6 @@ export const ProductApp: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [hasResults, setHasResults] = useState(false);
-    const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
     const [hasSearched, setHasSearched] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState('');
     const [selectedIndice, setSelectedIndice] = useState('');
@@ -78,9 +77,7 @@ export const ProductApp: React.FC = () => {
     const handleSearchTermChange = (term: string) => {
         setSearchTerm(term);
         setHasSearched(true);
-        if (term !== '') {
-            setShowWelcomeMessage(false);
-        }
+        
     };
 
     const toggleFilters = () => {
