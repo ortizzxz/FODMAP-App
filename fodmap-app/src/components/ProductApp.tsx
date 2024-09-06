@@ -7,10 +7,7 @@ import { CategoriaFilter } from './CategoryFilter';
 import { IndexFilter } from './IndexFilters';
 import { clearTranslationCache } from './fatSecretService';
 import React from 'react';
-import '../styles/backgroundCustomColor.css';
-import Modal from 'react-modal';
 
-Modal.setAppElement('#root');
 
 interface Alimento {
     nombre: string;
