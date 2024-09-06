@@ -22,7 +22,6 @@ export const ProductApp: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [hasResults, setHasResults] = useState(false);
-    const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
     const [hasSearched, setHasSearched] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState('');
     const [selectedIndice, setSelectedIndice] = useState('');
@@ -76,9 +75,6 @@ export const ProductApp: React.FC = () => {
     const handleSearchTermChange = (term: string) => {
         setSearchTerm(term);
         setHasSearched(true);
-        if (term !== '') {
-            setShowWelcomeMessage(false);
-        }
     };
 
     const toggleFilters = () => {
@@ -143,6 +139,7 @@ export const ProductApp: React.FC = () => {
 
                 <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
                     <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
+                        
                         {!hasSearched ? (
                             <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
                                 <h2 className='text-xl mb-4'>
@@ -153,14 +150,12 @@ export const ProductApp: React.FC = () => {
                                     dietas que requieran de la limitación de alimentos FODMAP.
                                 </p>
                             </div>
+                        ) : searchTerm.trim() === '' ? (
+                            <h2 className='text-2xl text-[#54652d] text-center'>Prueba a escribir algo en el buscador...</h2>
                         ) : hasResults ? (
                             <FoodSearcher alimento={filteredAlimentos} />
                         ) : (
-                            <h2 className='text-2xl text-[#54652d] text-center'>
-                                {searchTerm || selectedGroup || selectedCategory || selectedIndice
-                                    ? '¡Vaya! - no se han hallado resultados.'
-                                    : 'Prueba a escribir algo en el buscador...'}
-                            </h2>
+                            <h2 className='text-2xl text-[#54652d] text-center'>¡Vaya! No se han hallado resultados.</h2>
                         )}
                     </div>
                 </div>
