@@ -56,6 +56,14 @@ export const ProductApp: React.FC = () => {
             .replace(/[ÚÙÜÛ]/g, "U");
     };
 
+    {/* funcion para filtrar alimentos 
+            searchTerm: food name
+            selectedGroup: food group 
+            selectedCategory: food category
+            selectedIndice: fodmap index
+
+            why callBack? -> cached and only recreated when a depedency changes 
+    */}
     const filterAlimentos = useCallback(() => {
         return alimentos.filter((alimento) => {
             const searchMatch = !searchTerm || normalizeString(alimento.nombre.toLowerCase()).includes(normalizeString(searchTerm.toLowerCase()));
@@ -66,20 +74,25 @@ export const ProductApp: React.FC = () => {
         });
     }, [alimentos, searchTerm, selectedGroup, selectedCategory, selectedIndice]);
 
+    {/* filteredAlimentos use a useMemo to improve performance */}
     const filteredAlimentos = useMemo(() => filterAlimentos(), [filterAlimentos]);
 
+    {/* obtaining intial load of food */}
     useEffect(() => {
         getFood();
     }, []);
 
+    {/* if filteredAlimentos return at least 1 food haveResults equals true */}
     useEffect(() => {
         setHasResults(filteredAlimentos.length > 0);
     }, [filteredAlimentos]);
 
+    {/* searchTermChange*/}
     const handleSearchTermChange = (term: string) => {
         setSearchTerm(term);
         setHasSearched(true);
     };
+
 
     const toggleFilters = () => {
         setShowFilters(!showFilters);
@@ -89,6 +102,7 @@ export const ProductApp: React.FC = () => {
         setShowFilters(false);
     };
 
+    {/* cleaning translation cache beforeUnload */}
     useEffect(() => {
         const handleBeforeUnload = () => {
             clearTranslationCache();
