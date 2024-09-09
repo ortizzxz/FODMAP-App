@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Alimento } from './types';
 import { searchFood, translateText, searchImage } from './fatSecretService';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Modal from 'react-modal';
+
 import '../styles/scrollbarCustom.css';
 import '../styles/modal.css';
-
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
+{/* Interface for the responde of FatSecret API so we can display data based on fetched info */}
 interface FoodDetailResponse {
   food_name: string;
   food_description: string;
@@ -23,16 +24,19 @@ interface FoodDetailResponse {
   imageUrl?: string; // added for the img 
 }
 
+{/* Props for the foodSearcher */}
 interface FoodSearcherProps {
   alimento: Alimento[];
 }
 
 Modal.setAppElement('#root'); 
 
+{/* funciont to Capitalize first letter of an array used on index level of fodmap */}
 const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+{/* Main function */}
 export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
   const [selectedFood, setSelectedFood] = useState<Alimento | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -52,17 +56,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         return null;
       });
       
-      const imagePromise = searchImage(translatedName).catch((error) => {
-        console.error('Error fetching image:', error);
-        return null;
-      });
-      
       const details = await detailsPromise;
-      const image = await imagePromise;
-      
-      if (image) {
-        food.previewImageUrl = image.webformatURL; // assign an url to the object to fetch it later on the preview 
-      }
       
       setFoodDetails({
         food_name: food.nombre,
