@@ -55,8 +55,18 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
         console.error('Error fetching food details:', error);
         return null;
       });
+
+      const imagePromise = searchImage(translatedName).catch((error) => {
+        console.error('Error fetching image:', error);
+        return null;
+      });
       
       const details = await detailsPromise;
+      const image = await imagePromise;
+      
+      if (image) {
+        food.previewImageUrl = image.webformatURL; // assign an url to the object to fetch it later on the preview 
+      }
       
       setFoodDetails({
         food_name: food.nombre,
@@ -80,7 +90,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setError(null);
   };
   
-  // function to get border color changed based on the fodmap indice 
+  {/* function to get border color changed based on the fodmap indice */}
   const getBorderByIndex = (indice: string) => {
     switch(indice.toLowerCase()){
       case 'alto': 
