@@ -120,7 +120,7 @@ export const ProductApp: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-auto"> {/* Background styles */}
+        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans"> {/* Background styles */}
 
             {/* Main container */}
             <div className="bg-[#eeeded] lg:w-[70%] border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
@@ -172,8 +172,8 @@ export const ProductApp: React.FC = () => {
                         </div>
 
                         {/* Food Cointainter that either shows Food or a message */}
-                        <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
-                            <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
+                        <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
+                            <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
 
                                 {/*Whole logic: Hasn't searched ? Show initial message. Has searched ?  
                                                                               ( Is searchBar empty ? Try to type sum :
@@ -201,7 +201,7 @@ export const ProductApp: React.FC = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex-grow overflow-y-auto justify-center w-full overflow-scroll scrollbar-none">
+                    <div className="flex-grow justify-center w-full overflow-scroll scrollbar-none">
                         <div className="lg:p-6 p-1 mt-4 rounded-lg w-full mx-4 flex flex-col items-center font-semibold">
                             <About />
                             <button 
