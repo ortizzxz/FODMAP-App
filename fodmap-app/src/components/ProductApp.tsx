@@ -181,7 +181,7 @@ export const ProductApp: React.FC = () => {
                                                                                 Hasn't results ? Show no results found messsage
                         */}
                                 {!hasSearched ? (
-                                    <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%]'>
+                                    <div className='text-[#54652d] text-center font-medium max-w-2xl w-[80%] mt-8'>
                                         <h2 className='text-xl mb-4'>
                                             ¡Bienvenido al primer buscador de alimentos FODMAP en español!
                                         </h2>
