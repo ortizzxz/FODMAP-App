@@ -202,9 +202,14 @@ export const ProductApp: React.FC = () => {
                     </div>
                 ) : (
                     <div className="flex items-center justify-center w-full overflow-scroll scrollbar-none">
-                        <div className="lg:p-6 p-1 mt-4 rounded-lg w-full mx-4 flex flex-col items-center ">
+                        <div className="lg:p-6 p-1 mt-4 rounded-lg w-full mx-4 flex flex-col items-center font-semibold">
                             <About />
-                            <button onClick={handleAbout} className='w-fit h-10 p-2 object-center bg-[#54652d] text-white rounded hover:bg-[#46532d] border-[#54652d] border-1 hover:border-[#54652d] active:border-[#54652d]  transition duration-300 '>Volver al Buscador</button>
+                            <button 
+                                onClick={handleAbout} 
+                                className='w-fit h-10 p-2 object-center font-medium bg-[#54652d] text-white rounded hover:bg-[#46532d] border-[#54652d] border-1 hover:border-[#54652d] active:border-[#54652d] active:translate-y-[2px] active:shadow-inner transition duration-100 '
+                                aria-label='volver al buscador de alimentos'>
+                                Volver al Buscador
+                                </button>
                         </div>
                     </div>
                 )}
@@ -220,7 +225,7 @@ export const ProductApp: React.FC = () => {
                     </a>
 
                     <button onClick={handleAbout} className="mx-2 hover:text-third border-0 transition duration-300 text-md font-medium">
-                        Acerca de 
+                        {!showAbout ? ('Acerca de')  : ('Buscador')}
                     </button>
                 </footer>
             </div>
