@@ -97,9 +97,8 @@ export const ProductApp: React.FC = () => {
 
     {/* About Us change*/}
     const handleAbout = () => {
-        setShowAbout(true);
+        setShowAbout(!showAbout);
     };
-
 
     const toggleFilters = () => {
         setShowFilters(!showFilters);
@@ -198,6 +197,8 @@ export const ProductApp: React.FC = () => {
                         )}
                     </div>
                 </div>
+                
+                {showAbout && <About />}
                 
                 {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
