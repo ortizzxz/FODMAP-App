@@ -120,11 +120,11 @@ export const ProductApp: React.FC = () => {
     }, []);
 
     return (
-        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-hidden"> {/* Background styles */}
+        <div className="h-screen bg-[#e1e0e0] flex flex-col font-sans overflow-auto"> {/* Background styles */}
 
             {/* Main container */}
             <div className="bg-[#eeeded] lg:w-[70%] border-[#54652d] sm:border-0 lg:border lg:m-1 md:m-1 rounded-none md:rounded-3xl lg:rounded-3xl 
-            lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-hidden">
+            lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-auto scrollbar-none scroll-container">
 
                 {!showAbout ? (
                     <div>
