@@ -172,7 +172,7 @@ export const ProductApp: React.FC = () => {
                         </div>
 
                         {/* Food Cointainter that either shows Food or a message */}
-                        <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
+                        <div className='w-full flex flex-col flex-grow items-center justify-center overflow-y-auto overflow-auto scrollbar-none' onClick={hideFilters}>
                             <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none' onClick={hideFilters}>
 
                                 {/*Whole logic: Hasn't searched ? Show initial message. Has searched ?  
@@ -215,7 +215,7 @@ export const ProductApp: React.FC = () => {
                 )}
 
                 {/* Footer */}
-                <footer className="w-full sticky bottom-0 bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
+                <footer className="w-full sticky bottom-0 bg-[#eeeded]   text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
