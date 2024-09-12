@@ -128,7 +128,7 @@ export const ProductApp: React.FC = () => {
 
                 {!showAbout ? (
                     <div className='flex flex-col h-full'>
-                        <div>
+                        <div className='sticky top-0 z-10'>
                             {/* Title and search bar  */}
                             <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
                             <div className='relative mx-auto w-[95%] lg:w-[60%] md:w-[30%] rounded-md bg-[#88976c]'>
@@ -215,7 +215,7 @@ export const ProductApp: React.FC = () => {
                 )}
 
                 {/* Footer */}
-                <footer className="w-full  text-[#54652d] text-center text-md py-1 mt-2">
+                <footer className="w-full sticky bottom-0 bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
