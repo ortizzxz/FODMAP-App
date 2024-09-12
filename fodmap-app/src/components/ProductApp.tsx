@@ -127,7 +127,7 @@ export const ProductApp: React.FC = () => {
             lg:mx-auto md:mx-auto flex flex-col flex-grow justify-between lg:p-2 md:p-2 h-full overflow-auto scrollbar-none scroll-container">
 
                 {!showAbout ? (
-                    <div>
+                    <div className='flex flex-col h-full'>
                         <div>
                             {/* Title and search bar  */}
                             <h1 className="text-3xl font-bold text-center pb-3 text-[#54652d] mt-[10%] lg:mt-[5%] md:mt-[5%]">Buscador TuFODMAP</h1>
@@ -201,7 +201,7 @@ export const ProductApp: React.FC = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex items-center justify-center w-full overflow-scroll scrollbar-none">
+                    <div className="flex-grow overflow-y-auto justify-center w-full overflow-scroll scrollbar-none">
                         <div className="lg:p-6 p-1 mt-4 rounded-lg w-full mx-4 flex flex-col items-center font-semibold">
                             <About />
                             <button 
