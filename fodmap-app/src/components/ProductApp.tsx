@@ -201,10 +201,10 @@ export const ProductApp: React.FC = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex items-center justify-center ">
-                        <div className="p-1 rounded-lg w-full mx-4">
+                    <div className="flex items-center justify-center w-full overflow-scroll scrollbar-none">
+                        <div className="lg:p-6 p-1 mt-4 rounded-lg w-full mx-4 flex flex-col items-center ">
                             <About />
-                            <button onClick={handleAbout}>Volver al Buscador</button>
+                            <button onClick={handleAbout} className='w-fit h-10 p-2 object-center bg-[#54652d] text-white rounded hover:bg-[#46532d] border-[#54652d] border-1 hover:border-[#54652d] active:border-[#54652d]  transition duration-300 '>Volver al Buscador</button>
                         </div>
                     </div>
                 )}
