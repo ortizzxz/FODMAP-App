@@ -8,6 +8,7 @@ import { GrupoFilter } from './GroupFilter';
 import { CategoriaFilter } from './CategoryFilter';
 import { IndexFilter } from './IndexFilters';
 import { clearTranslationCache } from './fatSecretService';
+import { About } from './About';
 
 
 {/* Interface for the 'alimento' object with its params received from the backend */}
@@ -25,6 +26,7 @@ export const ProductApp: React.FC = () => {
     const [showFilters, setShowFilters] = useState(false);
     const [hasResults, setHasResults] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
+    const [showAbout, setShowAbout] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState('');
     const [selectedIndice, setSelectedIndice] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -91,6 +93,11 @@ export const ProductApp: React.FC = () => {
     const handleSearchTermChange = (term: string) => {
         setSearchTerm(term);
         setHasSearched(true);
+    };
+
+    {/* About Us change*/}
+    const handleAbout = () => {
+        setShowAbout(true);
     };
 
 
@@ -191,7 +198,7 @@ export const ProductApp: React.FC = () => {
                         )}
                     </div>
                 </div>
-
+                
                 {/* Footer */}
                 <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
@@ -199,6 +206,9 @@ export const ProductApp: React.FC = () => {
                     </a>
                     <a href="https://www.aircury.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         Aircury
+                    </a>
+                    <a href="#"  onClick={handleAbout} className='mx-2 hover:text-third transition duration-300'>
+                        Acerca de
                     </a>
                 </footer>
             </div>
