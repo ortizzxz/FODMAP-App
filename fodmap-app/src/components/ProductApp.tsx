@@ -204,6 +204,7 @@ export const ProductApp: React.FC = () => {
                     <div className="flex items-center justify-center ">
                         <div className="p-1 rounded-lg w-full mx-4">
                             <About />
+                            <button onClick={handleAbout}>Volver al Buscador</button>
                         </div>
                     </div>
                 )}
@@ -213,12 +214,14 @@ export const ProductApp: React.FC = () => {
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
+
                     <a href="https://www.aircury.com" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         Aircury
                     </a>
-                    <a href="#" onClick={handleAbout} className='mx-2 hover:text-third transition duration-300'>
-                        {!showAbout ? ( 'Acerca de') : ('Buscador')}
-                    </a>
+
+                    <button onClick={handleAbout} className="mx-2 hover:text-third border-0 transition duration-300 text-md font-medium">
+                        Acerca de 
+                    </button>
                 </footer>
             </div>
         </div>
