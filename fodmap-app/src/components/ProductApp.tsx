@@ -191,11 +191,11 @@ export const ProductApp: React.FC = () => {
                                         </p>
                                     </div>
                                 ) : searchTerm.trim() === '' ? ( // .trim() checks for white spaces on the searchTerm. if its all empty equals true
-                                    <h2 className='text-2xl text-[#54652d] text-center'>Prueba a escribir algo en el buscador...</h2>
+                                    <h2 className='text-2xl text-[#54652d] text-center mt-8'>Prueba a escribir algo en el buscador...</h2>
                                 ) : hasResults ? (
                                     <FoodSearcher alimento={filteredAlimentos} />
                                 ) : (
-                                    <h2 className='text-2xl text-[#54652d] text-center'>¡Vaya! No se han hallado resultados.</h2>
+                                    <h2 className='text-2xl text-[#54652d] text-center mt-8'>¡Vaya! No se han hallado resultados.</h2>
                                 )}
                             </div>
                         </div>
@@ -215,7 +215,7 @@ export const ProductApp: React.FC = () => {
                 )}
 
                 {/* Footer */}
-                <footer className="w-full  text-[#54652d] text-center text-md py-1 mt-1 mb-4">
+                <footer className="w-full  text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
