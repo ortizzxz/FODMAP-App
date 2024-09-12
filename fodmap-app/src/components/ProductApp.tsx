@@ -172,7 +172,7 @@ export const ProductApp: React.FC = () => {
                         </div>
 
                         {/* Food Cointainter that either shows Food or a message */}
-                        <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
+                        <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1 lg:mt-[10%] mt-[50%]' onClick={hideFilters}>
                             <div className='w-full flex flex-col flex-grow items-center justify-center overflow-auto scrollbar-none ml-1' onClick={hideFilters}>
 
                                 {/*Whole logic: Hasn't searched ? Show initial message. Has searched ?  
@@ -202,7 +202,7 @@ export const ProductApp: React.FC = () => {
                     </div>
                 ) : (
                     <div className="flex items-center justify-center ">
-                        <div className="p-6 rounded-lg max-w-2xl w-full mx-4">
+                        <div className="p-1 rounded-lg w-full mx-4">
                             <About />
                         </div>
                     </div>
@@ -217,7 +217,7 @@ export const ProductApp: React.FC = () => {
                         Aircury
                     </a>
                     <a href="#" onClick={handleAbout} className='mx-2 hover:text-third transition duration-300'>
-                        Acerca de
+                        {!showAbout ? ( 'Acerca de') : ('Buscador')}
                     </a>
                 </footer>
             </div>
