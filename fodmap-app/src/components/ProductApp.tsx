@@ -214,8 +214,9 @@ export const ProductApp: React.FC = () => {
                     </div>
                 )}
 
-                {/* Footer */}
-                <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
+            </div>
+            {/* Footer */}
+            <footer className="w-full bg-[#eeeded] text-[#54652d] text-center text-md py-1 mt-2">
                     <a href="https://github.com/ortizzxz/FODMAP-App/" target="_blank" rel="noopener noreferrer" className="mx-2 hover:text-third transition duration-300">
                         GitHub
                     </a>
@@ -228,7 +229,6 @@ export const ProductApp: React.FC = () => {
                         {!showAbout ? ('Acerca de')  : ('Buscador')}
                     </button>
                 </footer>
-            </div>
         </div>
     );
 };
