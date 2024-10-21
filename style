@@ -1,0 +1,234 @@
+[33mcommit 960792748bee8ab3ecbf262079a0fe2d4e8d3e41[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/footer[m[33m, [m[1;31morigin/feature/footer[m[33m)[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Sun Jul 14 13:05:29 2024 +0200
+
+    style: right side bar
+    
+    adding a right bar with aircury logo and github logo and linking them to their respective link
+
+[33mcommit 03e6e8f61bc549c25b073e907c143c416f8d504f[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Sun Jul 14 12:26:38 2024 +0200
+
+    style: fixing height of main container
+    
+    main container's height wasn't fitting the screen size - had to delete some style
+
+[33mcommit 65e7782190600eb438c2a2f40edf302c08720943[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Sat Jul 13 15:02:55 2024 +0200
+
+    config: package-lock.json update
+
+[33mcommit 28e7ac85b4fd151f938d93f0035edff82ab2ae9e[m
+Merge: 126220b 3cf9f2d
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Sat Jul 13 15:01:29 2024 +0200
+
+    Merge pull request #7 from ortizzxz/feature/scale-phones
+    
+    style: adapting scales to mobile screens
+
+[33mcommit 3cf9f2deefaf707465c367f56bcdae6b2415fc0e[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Sat Jul 13 15:00:50 2024 +0200
+
+    style: adapting scales to mobile screens
+    
+    working on different scales specially mobile phones
+
+[33mcommit 126220b7fa5ebddefbfa0b7205bf78cbb013c88e[m
+Merge: d8dac49 1e5ebd2
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Sat Jul 13 13:53:18 2024 +0200
+
+    Merge pull request #6 from ortizzxz/feature/tailwind-on-foodboxes
+    
+    Feature/tailwind on foodboxes
+
+[33mcommit 1e5ebd20a2520c8bb3feb16fa3e926f1282874ac[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Sat Jul 13 13:51:34 2024 +0200
+
+    style: responsivness on large screens
+    
+    working on responsive website on differente screen sizes - still have to work on phone sizes
+
+[33mcommit 7a470a9869d1c5a31ec2d3e3bcbe631f200a39a2[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Sat Jul 13 13:18:56 2024 +0200
+
+    style/install: styling with tailwind and installing classnames
+    
+    installing classnames to utilize customization on certain elements such as the scrollbar on the main box aswell as using tailwind on every class
+
+[33mcommit d8dac49c0d9e9bb4322c4012b3b1916f1873ebf9[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Fri Jul 12 15:07:56 2024 +0200
+
+    style: modification on the old css - not important
+
+[33mcommit 2495f9618c775c271838b7d60732495af134046c[m
+Merge: 6fcdbbd 480ad29
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Fri Jul 12 15:06:17 2024 +0200
+
+    Merge pull request #5 from ortizzxz/feature/tailwind-styling
+    
+    Feature/Refactoring to Tailwind
+
+[33mcommit 480ad29017b728b941643e8b3e9f7eed237f4487[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Fri Jul 12 15:03:53 2024 +0200
+
+    style: main box looking like the wireframe
+
+[33mcommit bdf3213012296f11606c6b2a4e094eb161e28e15[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Fri Jul 12 14:54:26 2024 +0200
+
+    style: filter box already same looking as the old style
+
+[33mcommit 613cba3d8ab6c59b5711f5cb0dd6a2d208b7ae7e[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Fri Jul 12 14:39:25 2024 +0200
+
+    style: working on the main 2 boxes, trying to copy old css into tailwindcss
+
+[33mcommit 6fcdbbda545bc60fa694a8d63fbbbc9b48ca9bb4[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 12:03:33 2024 +0200
+
+    settings: settins.json config to tailwind
+
+[33mcommit 4a69b57860efc35644ac696d1adf4a14a6184c19[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 12:01:28 2024 +0200
+
+    style: tailwind on the index.css
+
+[33mcommit 02862669420c31cfb9e19dd635d4cf9b783dc597[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:55:33 2024 +0200
+
+    config: tailwind config
+
+[33mcommit ff464dd2737bee1e1fcbcefabd015bf08b010dfc[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:54:28 2024 +0200
+
+     install: properly placing the folder on the frontend folder
+
+[33mcommit 1a85340a4821e9010c7382f6da889114df8e8e0a[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:51:40 2024 +0200
+
+    deleting: installed the node modules folder on the wrong place
+
+[33mcommit 383d8d65b74d544f2219a15b85dd4a3a05185e07[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:42:04 2024 +0200
+
+    install: installing tailwind in the proyect
+
+[33mcommit 47cebdaecbc208b4a7af73cfcb678d0325f7ad44[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:37:47 2024 +0200
+
+    refactor: main.jsx
+
+[33mcommit 4cf7d8b6126bd5f2a2e844778b31485f41976db9[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:35:29 2024 +0200
+
+    update: updating the setting.json file
+
+[33mcommit 40c61ecb14786a3cb8438007610107bb8cfc81cf[m
+Merge: 14fbc82 3eb580b
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Thu Jul 11 11:27:40 2024 +0200
+
+    Merge pull request #4 from ortizzxz/feature/refactor-components
+    
+    refactor: converting the remaining components to typescript - java act
+
+[33mcommit 3eb580bafa3141eb3b32cca1c51f308387db84ee[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Thu Jul 11 11:26:31 2024 +0200
+
+    refactor: converting the remaining components to typescript - aswell as updating the java pom file for the latest version
+
+[33mcommit 14fbc8279e3cfbf9836b196878e68a61d0fa44d8[m
+Merge: a9b540a 287cd9d
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Wed Jul 10 15:06:15 2024 +0200
+
+    Merge pull request #3 from ortizzxz/feature/refactoring-components-foodDetail
+    
+    refactor: converting FoodDetails, FoodSearcher from jsx to tsx as well
+
+[33mcommit 287cd9ddca6c2d0774daf667960f2b805ca337e6[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Wed Jul 10 15:04:42 2024 +0200
+
+    refactor: converting FoodDetails, FoodSearcher from jsx to tsx as well as deleteing smelling code from the component
+
+[33mcommit a9b540ab4c2cbad424f37fd14e536c2aec0d55f4[m
+Merge: 3320f39 264b788
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Wed Jul 10 12:08:29 2024 +0200
+
+    Merge pull request #2 from ortizzxz/feature/refactoring-components
+    
+    Feature/refactoring components
+
+[33mcommit 264b788528520df5f584532a75890a92fe9094df[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Wed Jul 10 12:07:31 2024 +0200
+
+    refactor: changing CategoriaFilter from javascript to typerscript, as well as smelling code contained in the file
+
+[33mcommit 3952bb485875ce55b15fb589fb057e63b8dad249[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Wed Jul 10 11:55:53 2024 +0200
+
+    refactor: converting FoodBuscador from jsx to tsx as well as deleteing smelling code from the component
+
+[33mcommit 3320f390d7e677b196227c6d6b6f6305da82e433[m
+Merge: 8d7c1fe e8035d8
+Author: ortizzxz <104193784+ortizzxz@users.noreply.github.com>
+Date:   Wed Jul 10 11:34:05 2024 +0200
+
+    Merge pull request #1 from ortizzxz/feature/refactoring-to-typescript
+    
+    Feature/refactoring the app to typescript
+
+[33mcommit e8035d8bc9cf43779e98ed34aad453a3c170d1c5[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Wed Jul 10 11:32:18 2024 +0200
+
+    refactor: changing foodService from JavaScript to Typescript, aswell as functions contained in the file
+
+[33mcommit d64414cb15577af2e7a67fc2d60f4116c4e0bd9b[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Wed Jul 10 11:15:24 2024 +0200
+
+    refactor: installing typescript dependences
+
+[33mcommit 8d7c1fe6baebeeed83f592c581812ae192efe03a[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Tue Jul 9 12:04:38 2024 +0200
+
+    build: reposting the folder since it has some issues with the git folder
+
+[33mcommit f2710470c3b7c7fb8abb837a88d15bee12de216c[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Tue Jul 9 11:51:50 2024 +0200
+
+    docs: uploading README file for the desgined project
+
+[33mcommit 9f07090503f102915613a62e786f2d75bfd1513a[m
+Author: jesusO <jesusdortiz18@gmail.com>
+Date:   Tue Jul 9 11:12:41 2024 +0200
+
+    upload: uploading both folders to the monorepository to start working on

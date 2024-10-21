@@ -168,7 +168,7 @@ export const ProductApp: React.FC = () => {
                                         </div>
                                     </div>
                                 )}
-                            </div>
+                            </div>  
                         </div>
 
                         {/* Food Cointainter that either shows Food or a message */}

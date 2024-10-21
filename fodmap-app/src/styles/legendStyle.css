@@ -1,0 +1,38 @@
+.legend {
+    margin-top: 20px;
+    overflow-x: hidden; /* Para permitir desplazamiento horizontal si es necesario */
+    white-space: nowrap; /* Evita que los elementos se envuelvan a la siguiente línea */
+    text-align: center; /* Centramos el contenido */
+}
+
+.legend p {
+    font-size: 15px;
+    color: black;
+}
+
+.legend-item {
+    display: inline-flex; /* Mostrar elementos en una sola línea */
+    align-items: center;
+    margin-right: 20px; /* Agregamos espacio entre los elementos */
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.low {
+    background-color: #c1fd9e; /* Verde */
+}
+
+.medium {
+    background-color: #fffd69; /* Amarillo */
+}
+
+.high {
+    background-color: #ff8282; /* Rojo */
+}
+
+
