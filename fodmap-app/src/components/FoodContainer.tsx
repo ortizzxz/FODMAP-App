@@ -50,7 +50,7 @@ export const FoodSearcher: React.FC<FoodSearcherProps> = ({ alimento }) => {
     setError(null);
   
     try {
-      const translatedName = await translateText(food.nombre, 'en');
+      const translatedName = food.nombre;
       const detailsPromise = searchFood(translatedName).catch((error) => {
         console.error('Error fetching food details:', error);
         return null;
