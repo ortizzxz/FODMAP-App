@@ -52,5 +52,4 @@ public class AlimentoController {
                 });
     }
 
-    // Puedes añadir más métodos según sea necesario
 }
